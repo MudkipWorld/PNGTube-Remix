@@ -268,7 +268,7 @@ func _on_file_dialog_files_selected(paths):
 
 
 func _on_confirmation_dialog_confirmed():
-	%Control/_Themes_.theme_settings.path = null
+	Themes.theme_settings.path = null
 	%TopUI/TopBarInput.path = null
 	%TopUI/TopBarInput.last_path = ""
 	clear_sprites()

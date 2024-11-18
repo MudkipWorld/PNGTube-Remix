@@ -11,10 +11,6 @@ extends Node
 @onready var color = %ColorPickerButton
 @onready var vis = %Visible
 @onready var zord = %ZOrderSpinbox
-@onready var checke = %CheckEye
-@onready var checkm = %CheckMouth
-@onready var eyeop = %EyeOpen
-@onready var mouthop = %MouthOpen
 @onready var mc_anim = %MouthClosedAnim
 @onready var mo_anim = %MouthOpenAnim
 @onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
@@ -75,10 +71,6 @@ func held_sprite_is_null():
 	blend.disabled = true
 	clip.disabled = true
 	vis.disabled = true
-	checke.disabled = true
-	checkm.disabled = true
-	eyeop.disabled = true
-	mouthop.disabled = true
 	zord.editable = false
 	%IgnoreBounce.disabled = true
 	%Physics.disabled = true
@@ -165,10 +157,6 @@ func held_sprite_is_true():
 	%RotSpinBox.editable = true
 	
 	vis.disabled = false
-	checke.disabled = false
-	checkm.disabled = false
-	eyeop.disabled = false
-	mouthop.disabled = false
 	zord.editable = true
 	%IgnoreBounce.disabled = false
 	%Physics.disabled = false
@@ -301,11 +289,6 @@ func reinfo():
 	held_sprite_is_true()
 	vis.button_pressed = Global.held_sprite.dictmain.visible
 	
-	checke.button_pressed = Global.held_sprite.dictmain.should_blink
-	eyeop.button_pressed = Global.held_sprite.dictmain.open_eyes
-	
-	checkm.button_pressed = Global.held_sprite.dictmain.should_talk
-	mouthop.button_pressed = Global.held_sprite.dictmain.open_mouth
 	%ShouldRotCheck.button_pressed = Global.held_sprite.dictmain.should_rotate
 	%ZOrderSpinbox.value = Global.held_sprite.dictmain.z_index
 	
@@ -418,25 +401,16 @@ func update_pos_spins():
 	Global.held_sprite.save_state(Global.current_state)
 	
 
-
-
-
-
 func update_offset():
 	%OffsetXSpinBox.value = Global.held_sprite.dictmain.offset.x
 	%OffsetYSpinBox.value = Global.held_sprite.dictmain.offset.y
 	update_pos_spins()
 
 
-
-
-
 func reinfoanim():
 	mc_anim.text = contain.current_mc_anim
 	mo_anim.text = contain.current_mo_anim
-
 #endregion
-
 
 #region misc
 func _on_check_box_toggled(toggled_on):
@@ -511,31 +485,8 @@ func _on_rs_slider_value_changed(value):
 	Global.held_sprite.dictmain.rainbow_speed = value
 	Global.held_sprite.save_state(Global.current_state)
 
-
-
 #endregion
 
-#region Eye and Mouth stuff
-func _on_check_eye_toggled(toggled_on):
-	Global.held_sprite.dictmain.should_blink = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
-
-func _on_eye_open_toggled(toggled_on):
-	Global.held_sprite.dictmain.open_eyes = toggled_on
-	Global.held_sprite.blink()
-	
-	Global.held_sprite.save_state(Global.current_state)
-
-func _on_check_mouth_toggled(toggled_on):
-	Global.held_sprite.dictmain.should_talk = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
-
-func _on_mouth_open_toggled(toggled_on):
-	Global.held_sprite.dictmain.open_mouth = toggled_on
-	Global.held_sprite.check_talk()
-	
-	Global.held_sprite.save_state(Global.current_state)
-#endregion
 
 #region Left Panel
 func _on_animation_frames_slider_value_changed(value):
@@ -794,7 +745,6 @@ func _on_offset_y_spin_box_value_changed(value):
 		Global.held_sprite.get_node("%Sprite2D").position.y = Global.held_sprite.dictmain.offset.y
 		Global.held_sprite.save_state(Global.current_state)
 		update_pos_spins()
-		
 
 
 func _on_offset_x_spin_box_value_changed(value):
@@ -808,15 +758,11 @@ func _on_offset_x_spin_box_value_changed(value):
 		Global.held_sprite.save_state(Global.current_state)
 		update_pos_spins()
 
-
-
 func _on_wa_gravity_x_value_changed(value):
 	if Global.held_sprite.sprite_type == "WiggleApp":
 		Global.held_sprite.dictmain.wiggle_gravity.x = value
 		Global.held_sprite.get_node("%Sprite2D").gravity.x = value
 		Global.held_sprite.save_state(Global.current_state)
-		
-
 
 func _on_wa_gravity_y_value_changed(value):
 	if Global.held_sprite.sprite_type == "WiggleApp":
@@ -824,12 +770,9 @@ func _on_wa_gravity_y_value_changed(value):
 		Global.held_sprite.get_node("%Sprite2D").gravity.y = value
 		Global.held_sprite.save_state(Global.current_state)
 
-
-
 func _on_tip_spin_value_changed(value):
 	Global.held_sprite.dictmain.tip_point = value
 	Global.held_sprite.save_state(Global.current_state)
-
 
 func _on_closed_loop_check_toggled(toggled_on):
 	if Global.held_sprite.sprite_type == "WiggleApp":
@@ -837,13 +780,10 @@ func _on_closed_loop_check_toggled(toggled_on):
 		Global.held_sprite.get_node("%Sprite2D").closed = toggled_on
 		Global.held_sprite.save_state(Global.current_state)
 
-
 func on_wag_speed_changed(value):
 	if Global.held_sprite != null:
 		Global.held_sprite.dictmain.wag_speed = value
 		Global.held_sprite.save_state(Global.current_state)
-
-		
 
 func _on_auto_wag_check_toggled(toggled_on):
 	Global.held_sprite.dictmain.auto_wag = toggled_on
@@ -861,7 +801,6 @@ func _on_auto_wag_check_toggled(toggled_on):
 		
 	Global.held_sprite.save_state(Global.current_state)
 
-
 func _on_flip_sprite_h_toggled(toggled_on: bool) -> void:
 	if Global.held_sprite.sprite_type == "Sprite2D":
 		Global.held_sprite.dictmain.flip_sprite_h = toggled_on
@@ -874,18 +813,14 @@ func _on_flip_sprite_v_toggled(toggled_on: bool) -> void:
 		Global.held_sprite.get_node("%Sprite2D").flip_v = toggled_on
 		Global.held_sprite.save_state(Global.current_state)
 
-
 func _on_name_focus_entered() -> void:
 	Global.spinbox_held = true
-
 
 func _on_name_focus_exited() -> void:
 	Global.spinbox_held = false
 
-
 func _on_color_picker_button_focus_entered() -> void:
 	Global.spinbox_held = true
-
 
 func _on_color_picker_button_focus_exited() -> void:
 	Global.spinbox_held = false

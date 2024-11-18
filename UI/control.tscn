@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ngta1o5yiqxs"]
+[gd_scene load_steps=24 format=3 uid="uid://ngta1o5yiqxs"]
 
 [ext_resource type="StyleBox" uid="uid://2gwilgyuyfv7" path="res://Themes/PurpleTheme/LightPanel.tres" id="2_6cxu6"]
 [ext_resource type="Script" path="res://Scripts/control.gd" id="2_a5rie"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/ZoomResetMainButton.png" id="14_24obs"]
 [ext_resource type="Texture2D" uid="uid://diyx30a4yqalc" path="res://UI/NormalMapButton.png" id="16_l1e6k"]
 [ext_resource type="Texture2D" uid="uid://cxpsf8uoktwrd" path="res://UI/NormalMapDelButton.png" id="17_ex20s"]
+[ext_resource type="Script" path="res://UI/BetterSlider/BetterToggles.gd" id="20_spl3g"]
 [ext_resource type="PackedScene" uid="uid://mldwqrl5tu11" path="res://UI/LayerView/layer_view_bg.tscn" id="25_g04q3"]
 [ext_resource type="Script" path="res://Scripts/Spinboxes.gd" id="26_0wx0w"]
 
@@ -839,6 +840,8 @@ alignment = 1
 [node name="CheckEye" type="CheckButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("20_spl3g")
+value_to_update = "should_blink"
 
 [node name="EyeOpen" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
@@ -848,6 +851,8 @@ size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "Eye Open      "
 alignment = 1
+script = ExtResource("20_spl3g")
+value_to_update = "open_eyes"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -857,6 +862,8 @@ alignment = 1
 [node name="CheckMouth" type="CheckButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("20_spl3g")
+value_to_update = "should_talk"
 
 [node name="MouthOpen" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
@@ -865,6 +872,8 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Mouth Open"
 alignment = 1
+script = ExtResource("20_spl3g")
+value_to_update = "open_mouth"
 
 [node name="Sp4" type="HSeparator" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer"]
 layout_mode = 2

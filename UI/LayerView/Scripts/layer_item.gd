@@ -75,12 +75,12 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 	dragged_item = null
 	var other_item = _get_item_at_pos(at_position)
 	if other_item != null && other_item != newdata:
-		var old_parent = newdata.get_parent()
+		var old_parent = newdata.get_parent().get_parent()
 		
 		print(drop_place)
 		if drop_place == 0:
 			for i in get_all_layeritems(newdata, true):
-				if i == other_item:
+				if i.get_node("%LayerItem") == other_item:
 					return
 			
 			#
@@ -145,16 +145,13 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 				newdata.get_parent().get_parent().move_child(newdata.get_parent(), clamp(other_item.get_parent().get_index() +1, 0, other_item.get_parent().get_index() + 1))
 				newdata.data.sprite_object.get_parent().move_child(newdata.data.sprite_object,newdata.get_parent().get_index())
 		
-		
+		if old_parent.get_children().size() == 0 && old_parent.name == "OtherLayers":
+			old_parent.get_parent().get_parent().get_node("%Intend").hide()
+			old_parent.get_parent().get_parent().get_node("%Collapse").disabled = true
+			old_parent.get_parent().get_parent().get_node("%Collapse").button_pressed = false
+			if old_parent.get_parent().get_parent().has_node("%T"):
+				old_parent.get_parent().get_parent().get_node("%T").hide()
 		drop_place = 0
-		if old_parent.name != "LayerVBox":
-			if old_parent.get_child_count() < 1:
-				old_parent.get_node("%Intend").hide()
-				old_parent.get_node("%Collapse").disabled = true
-				old_parent.get_node("%Collapse").button_pressed = false
-				if old_parent.has_node("%T"):
-					old_parent.get_node("%T").hide()
-				
 
 
 func _get_item_at_pos(_at_position) -> Variant:
