@@ -86,6 +86,14 @@ func choosing_files(id):
 			add_a_lipsync_config()
 		
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("save"):
+		if path != null:
+			SaveAndLoad.save_file(path)
+		else:
+			var main = get_tree().get_root().get_node("Main")
+			main.save_as_file()
+
 func choosing_mode(id):
 	var saved_id = 0
 	match id:

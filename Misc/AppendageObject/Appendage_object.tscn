@@ -44,6 +44,7 @@ unique_name_in_owner = true
 texture_repeat = 1
 
 [node name="Wobble" type="Node2D" parent="Pos"]
+unique_name_in_owner = true
 
 [node name="Dragger" type="Node2D" parent="Pos/Wobble"]
 unique_name_in_owner = true
@@ -58,6 +59,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Origin" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
+unique_name_in_owner = true
 visible = false
 z_index = 4096
 texture = ExtResource("2_sl64r")

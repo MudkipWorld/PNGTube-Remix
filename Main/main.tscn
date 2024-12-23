@@ -63,6 +63,8 @@ script = ExtResource("2_lv028")
 
 [node name="LightSource" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("3_eo07p")]
 visible = false
+light_mask = 7
+visibility_layer = 7
 z_index = 4096
 z_as_relative = false
 shadow_enabled = true

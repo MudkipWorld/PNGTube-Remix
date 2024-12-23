@@ -15,21 +15,20 @@ static var selected_layer : LayerItem
 func deselect() -> void:
 	selected_layer = null
 	%Select.hide()
+	if Global.held_sprite:
+		if Global.held_sprite.has_node("%Origin"):
+			Global.held_sprite.get_node("%Origin").hide()
 
 func _on_focus_entered() -> void:
 	for i in get_tree().get_nodes_in_group("Layers"):
 		i.deselect()
 		
 	%Select.show()
-	if Global.held_sprite != null:
-		if Global.held_sprite.has_node("Pos//Wobble/Squish/Drag/Rotation/Origin"):
-			Global.held_sprite.get_node("Pos//Wobble/Squish/Drag/Rotation/Origin").hide()
 	Global.held_sprite = data.sprite_object
-	if Global.held_sprite.has_node("Pos//Wobble/Squish/Drag/Rotation/Origin"):
-		Global.held_sprite.get_node("Pos//Wobble/Squish/Drag/Rotation/Origin").show()
-		
+	if Global.held_sprite.has_node("%Origin"):
+		Global.held_sprite.get_node("%Origin").show()
+	
 	Global.reinfo.emit()
-	layer_holder.emit_signal("sprite_info")
 	selected_layer = self
 
 
@@ -77,14 +76,14 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 	if other_item != null && other_item != newdata:
 		var old_parent = newdata.get_parent().get_parent()
 		
-		print(drop_place)
+		
+		for i in get_all_layeritems(newdata, true):
+			if i.get_node("%LayerItem") == other_item:
+				return
+		
+		
+	#	print(drop_place)
 		if drop_place == 0:
-			for i in get_all_layeritems(newdata, true):
-				if i.get_node("%LayerItem") == other_item:
-					return
-			
-			#
-			
 			newdata.get_parent().get_parent().remove_child(newdata.get_parent())
 			other_item.get_node("%Intend2").show()
 			newdata.get_node("%Intend2").show()
@@ -101,7 +100,7 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 		if drop_place == 1:
 			if other_item.get_parent().get_parent() != newdata.get_parent().get_parent():
 				if other_item.get_parent().get_parent().name == "LayerVBox":
-					newdata.get_node("%Intend2").hide()
+					newdata.get_node("%Intend").hide()
 					newdata.data.sprite_object.parent_id = 0
 				else:
 					other_item.get_node("%Intend").show()
@@ -112,7 +111,7 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 				other_item.get_parent().get_parent().move_child(newdata.get_parent(), clamp(other_item.get_parent().get_index(), 0, other_item.get_parent().get_index() + 1))
 				
 				newdata.data.sprite_object.get_parent().remove_child(newdata.data.sprite_object)
-				other_item.data.sprite_object.get_node("%Sprite2D").add_child(newdata.data.sprite_object)
+				other_item.data.sprite_object.get_parent().add_child(newdata.data.sprite_object)
 				newdata.data.sprite_object.get_parent().move_child(newdata.data.sprite_object,newdata.get_parent().get_index())
 				
 				
@@ -127,7 +126,8 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 			if other_item.get_parent().get_parent() != newdata.get_parent().get_parent():
 				if other_item.get_parent().get_parent().name == "LayerVBox":
 					newdata.data.sprite_object.parent_id = 0
-					newdata.get_node("%Intend2").hide()
+					newdata.get_node("%Intend").hide()
+					
 				else:
 					other_item.get_node("%Intend").show()
 					newdata.get_node("%Intend2").show()
@@ -137,7 +137,7 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 				other_item.get_parent().get_parent().move_child(newdata.get_parent(), clamp(other_item.get_parent().get_index() + 1, 0, other_item.get_parent().get_index() + 1))
 				
 				newdata.data.sprite_object.get_parent().remove_child(newdata.data.sprite_object)
-				other_item.data.sprite_object.get_node("%Sprite2D").add_child(newdata.data.sprite_object)
+				other_item.data.sprite_object.get_parent().add_child(newdata.data.sprite_object)
 				newdata.data.sprite_object.get_parent().move_child(newdata.data.sprite_object, clamp(newdata.get_parent().get_index(), 0, newdata.data.sprite_object.get_parent().get_child_count() - 1))
 				
 				
@@ -146,7 +146,7 @@ func _drop_data(at_position: Vector2, newdata: Variant) -> void:
 				newdata.data.sprite_object.get_parent().move_child(newdata.data.sprite_object,newdata.get_parent().get_index())
 		
 		if old_parent.get_children().size() == 0 && old_parent.name == "OtherLayers":
-			old_parent.get_parent().get_parent().get_node("%Intend").hide()
+		#	old_parent.get_parent().get_parent().get_node("%Intend").hide()
 			old_parent.get_parent().get_parent().get_node("%Collapse").disabled = true
 			old_parent.get_parent().get_parent().get_node("%Collapse").button_pressed = false
 			if old_parent.get_parent().get_parent().has_node("%T"):
@@ -222,4 +222,14 @@ func _on_visiblity_toggled(toggled_on: bool) -> void:
 		data.sprite_object.dictmain.visible = true
 		data.sprite_object.visible = true
 
-	data.sprite_object.save_state(Global.current_state)
+#	data.sprite_object.save_state(Global.current_state)
+
+func check_indents():
+	if %OtherLayers.get_child_count() > 0:
+		%Intend.show()
+		%Collapse.disabled = false
+		%Collapse.button_pressed = data.sprite_object.is_collapsed
+	if is_instance_valid(get_parent().get_parent()):
+		if get_parent().get_parent().name == "OtherLayers":
+			%Intend.show()
+			%Intend2.show()

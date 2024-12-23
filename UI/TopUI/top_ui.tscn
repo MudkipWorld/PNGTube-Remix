@@ -622,6 +622,7 @@ offset_right = 396.0
 offset_bottom = 525.0
 
 [node name="CreditLabel" type="Label" parent="AboutPopUp/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "PNGTuber Remix by TheMime (MudkipWorld)
 Original PNGTuber+ Code by kaiakairos. Better UI by LeoRson.
@@ -988,7 +989,7 @@ from the original software and improve existing ones."
 unique_name_in_owner = true
 auto_translate_mode = 1
 initial_position = 4
-size = Vector2i(471, 657)
+size = Vector2i(471, 684)
 unresizable = false
 borderless = false
 

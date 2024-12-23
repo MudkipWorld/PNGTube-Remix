@@ -68,6 +68,8 @@ static func deviation(a: LipSyncFingerprint, b: LipSyncFingerprint) -> float:
 	# Calculate sum of squares of error
 	var sum := 0.0
 	for i in BANDS_COUNT:
+		if b == null or a == null:
+			return 0.0
 		var delta: float = b.values[i] - a.values[i]
 		sum += delta * delta
 	

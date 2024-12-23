@@ -441,7 +441,7 @@ func _on_visible_toggled(toggled_on):
 
 func _on_z_order_spinbox_value_changed(value):
 	Global.held_sprite.dictmain.z_index = value
-	Global.held_sprite.z_index = value
+	Global.held_sprite.get_node("%Wobble").z_index = value
 	Global.held_sprite.save_state(Global.current_state)
 
 func _on_color_picker_button_color_changed(newcolor):
@@ -449,7 +449,7 @@ func _on_color_picker_button_color_changed(newcolor):
 		Global.held_sprite.modulate.r = newcolor.r
 		Global.held_sprite.modulate.g = newcolor.g
 		Global.held_sprite.modulate.b = newcolor.b
-		Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").self_modulate.a = newcolor.a
+		Global.held_sprite.get_node("%Sprite2D").self_modulate.a = newcolor.a
 	else:
 		Global.held_sprite.modulate = newcolor
 	
@@ -460,7 +460,7 @@ func _on_color_picker_button_color_changed(newcolor):
 func _on_should_rot_check_toggled(toggled_on):
 	Global.held_sprite.dictmain.should_rotate = toggled_on
 	if not toggled_on:
-		Global.held_sprite.get_node("Pos/Wobble").rotation = 0
+		Global.held_sprite.get_node("%Wobble").rotation = 0
 	
 	Global.held_sprite.save_state(Global.current_state)
 
@@ -644,12 +644,12 @@ func _on_wiggle_physics_check_toggled(toggled_on):
 
 func _on_xoffset_spin_box_value_changed(value):
 	Global.held_sprite.dictmain.wiggle_rot_offset.x = value
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").material.set_shader_parameter("wiggle_rot_offset:x", value)
+	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(value, Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").y))
 	Global.held_sprite.save_state(Global.current_state)
 
 func _on_yoffset_spin_box_value_changed(value):
 	Global.held_sprite.dictmain.wiggle_rot_offset.y = value
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").material.set_shader_parameter("wiggle_rot_offset:y", value)
+	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").x, value))
 	Global.held_sprite.save_state(Global.current_state)
 
 # -------------------------------------------------

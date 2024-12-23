@@ -2,6 +2,7 @@ extends Node
 
 @onready var top_bar = get_tree().get_root().get_node("Main/%TopUI")
 var ui_theme
+var popup = preload("res://UI/TopUI/popup_panel.tscn").instantiate()
 
 
 @warning_ignore("integer_division")
@@ -25,6 +26,26 @@ var ui_theme
 	lipsync_file_path = OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres",
 }
 @onready var os_path = OS.get_executable_path().get_base_dir()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		popup.popup_centered()
+
+
+func save_before_closing():
+	if theme_settings.save_on_exit:
+		if FileAccess.file_exists(theme_settings.path):
+			SaveAndLoad.save_file(theme_settings.path)
+		else:
+			DirAccess.make_dir_absolute(os_path + "/AutoSaves")
+			
+			SaveAndLoad.save_file(OS.get_executable_path().get_base_dir() + "/AutoSaves" + "/" + str(randi()))
+		window_size_changed()
+		save()
+	
+	get_tree().quit()
+
 
 func _exit_tree():
 	if theme_settings.save_on_exit:
@@ -126,7 +147,8 @@ func _ready():
 	get_window().size = theme_settings.screen_size
 	check_ui()
 	top_bar.get_node("%WindowSize").text = "Window Size " + str(theme_settings.screen_size)
-
+	add_child(popup)
+	
 
 func window_size_changed():
 	theme_settings.screen_size = get_window().size

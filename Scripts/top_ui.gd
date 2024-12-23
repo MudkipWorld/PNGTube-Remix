@@ -35,6 +35,9 @@ var speech_delay : float :
 func _ready():
 	sliders_revalue(Global.settings_dict)
 	Global.reinfo.connect(info_held)
+	%CreditLabel.text = "PNGTuber Remix by TheMime (MudkipWorld)
+	Original PNGTuber+ Code by kaiakairos. Better UI by LeoRson.
+	V" + str(ProjectSettings.get_setting("application/config/version"))
 
 func info_held():
 	%DeselectButton.show()

@@ -31,6 +31,8 @@ var anim_texture
 var anim_texture_normal 
 var img_animated : bool = false
 
+
+
 @onready var dictmain : Dictionary = {
 	xFrq = 0,
 	xAmp = 0,
@@ -92,7 +94,7 @@ var img_animated : bool = false
 	max_angular_momentum = 15,
 	damping = 5,
 	comeback_speed = 0.419,
-	
+	follow_mouse_velocity = false,
 	}
 
 var smooth_rot = 0.0
@@ -110,6 +112,9 @@ var is_asset : bool = false
 var was_active_before : bool = true
 var should_disappear : bool = false
 var saved_keys : Array = []
+
+var last_mouse_position : Vector2 = Vector2(0,0)
+var last_dist : Vector2 = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -239,7 +244,7 @@ func _process(delta):
 		
 		
 		movements(delta)
-		follow_mouse()
+		follow_mouse(delta)
 		
 		if dictmain.should_rotate:
 			auto_rotate()
@@ -262,26 +267,13 @@ func static_prev():
 	dragger.global_position = wob.global_position
 	%Sprite2D.curvature = 0
 
-func movements(_delta):
-	# Drag :
-	if dictmain.dragSpeed == 0:
-		%Dragger.global_position = wob.global_position
-		%Drag.global_position = %Dragger.global_position
-	else:
-		%Dragger.global_position = lerp(%Dragger.global_position, wob.global_position,1/dictmain.dragSpeed)
-		%Drag.global_position = %Dragger.global_position
-	
-	# Wobbling : 
-	wob.position.x = sin(Global.tick*dictmain.xFrq)*dictmain.xAmp
-	wob.position.y = sin(Global.tick*dictmain.yFrq)*dictmain.yAmp
-	
-	# Rotational-Drag and Stretch/ Squish Calculations
-	glob = %Drag.global_position
+func movements(delta):
+	glob = %Dragger.global_position
 	if not dictmain.ignore_bounce:
 		glob.y -= contain.bounceChange
-	
-	var length = (glob.y - %Drag.global_position.y)
-	
+	drag(delta)
+	wobble()
+	var length = (glob.y - %Dragger.global_position.y)
 	if dictmain.physics:
 		if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D or get_parent() is CanvasGroup:
 			var c_parent = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
@@ -290,20 +282,34 @@ func movements(_delta):
 			var c_parrent_length2 = (c_parent.glob.x - c_parent.get_node("%Drag").global_position.x)
 			length += c_parrent_length + c_parrent_length2
 	
-	# Rotational-Drag 
+	rotationalDrag(length,delta)
+	stretch(length,delta)
+
+func drag(_delta):
+	if dictmain.dragSpeed == 0:
+		%Dragger.global_position = %Wobble.global_position
+	else:
+		%Dragger.global_position = lerp(%Dragger.global_position,%Wobble.global_position,1/dictmain.dragSpeed)
+		%Drag.global_position = %Dragger.global_position
+
+func wobble():
+	%Wobble.position.x = sin(Global.tick*dictmain.xFrq)*dictmain.xAmp
+	%Wobble.position.y = sin(Global.tick*dictmain.yFrq)*dictmain.yAmp
+
+func rotationalDrag(length,_delta):
 	var yvel = (length * dictmain.rdragStr)
 	
 	#Calculate Max angle
 	
 	yvel = clamp(yvel,dictmain.rLimitMin,dictmain.rLimitMax)
 	
-	%Rotation.rotation = lerp_angle(%Rotation.rotation,deg_to_rad(yvel),0.25)
+	%Sprite2D.rotation = lerp_angle(%Sprite2D.rotation,deg_to_rad(yvel),0.25)
+
+func stretch(length,_delta):
+	var yvel = (length * dictmain.stretchAmount * 0.01)
+	var target = Vector2(1.0-yvel,1.0+yvel)
 	
-	# Stretch/ Squish
-	var syvel = (length * dictmain.stretchAmount * 0.01)
-	var target = Vector2(1.0-syvel,1.0+syvel)
-	
-	sprite.scale = lerp(sprite.scale,target,0.5)
+	%Sprite2D.scale = lerp(%Sprite2D.scale,target,0.5)
 
 
 func follow_wiggle():
@@ -333,13 +339,24 @@ func rainbow():
 		%Pos.modulate.s = 0
 
 
-func follow_mouse():
-	var mouse = get_local_mouse_position()
-	var dir = Vector2.ZERO.direction_to(mouse)
-	var dist = mouse.length()
-	%Pos.position.x = lerp(%Pos.position.x, dir.x * min(dist, dictmain.look_at_mouse_pos), 0.1)
-	%Pos.position.y = lerp(%Pos.position.y, dir.y * min(dist, dictmain.look_at_mouse_pos_y), 0.1)
-
+func follow_mouse(delta):
+	if dictmain.follow_mouse_velocity:
+		var mouse = get_local_mouse_position()
+		var distance = last_mouse_position - mouse
+		if !distance.is_zero_approx():
+			var vel = -(distance/delta)
+			var dir = Vector2.ZERO.direction_to(vel)
+			var dist = vel.length()
+			last_dist = Vector2(dir.x * min(dist, dictmain.look_at_mouse_pos),dir.y * min(dist, dictmain.look_at_mouse_pos_y))
+		%Pos.position.x = lerp(%Pos.position.x, last_dist.x, 0.1)
+		%Pos.position.y = lerp(%Pos.position.y, last_dist.y, 0.1)
+		last_mouse_position = mouse
+	else:
+		var mouse = get_local_mouse_position()
+		var dir = Vector2.ZERO.direction_to(mouse)
+		var dist = mouse.length()
+		%Pos.position.x = lerp(%Pos.position.x, dir.x * min(dist, dictmain.look_at_mouse_pos), 0.1)
+		%Pos.position.y = lerp(%Pos.position.y, dir.y * min(dist, dictmain.look_at_mouse_pos_y), 0.1)
 
 func auto_rotate():
 	$Pos/Wobble.rotate(dictmain.should_rot_speed)
@@ -427,7 +444,7 @@ func get_state(id):
 				if %Sprite2D.texture.normal_texture != null:
 					%Sprite2D.texture.normal_texture.one_shot = dictmain.one_shot
 		
-		z_index = dictmain.z_index
+		%Wobble.z_index = dictmain.z_index
 		modulate = dictmain.colored
 		visible = dictmain.visible
 		scale = dictmain.scale

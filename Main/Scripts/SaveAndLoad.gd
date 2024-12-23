@@ -170,9 +170,12 @@ func load_file(path):
 					InputMap.add_action(str(sprite.sprite_id))
 					InputMap.action_add_event(str(sprite.sprite_id), sprite_obj.saved_event)
 					
+			
 			if sprite.has("img_animated"):
+				pass
 				if sprite.img_animated:
-					var gif_texture : AnimatedTexture = GifManager.animated_texture_from_buffer(sprite.img)
+					pass
+					'''var gif_texture : AnimatedTexture = GifManager.animated_texture_from_buffer(sprite.img)
 					sprite_obj.anim_texture = sprite.img
 					var img_can = CanvasTexture.new()
 					
@@ -188,7 +191,7 @@ func load_file(path):
 							
 							img_can.normal_texture = gif_normal
 							sprite_obj.anim_texture_normal = sprite.normal
-					sprite_obj.get_node("%Sprite2D").texture = img_can
+					sprite_obj.get_node("%Sprite2D").texture = img_can'''
 					
 				else:
 					var img_data

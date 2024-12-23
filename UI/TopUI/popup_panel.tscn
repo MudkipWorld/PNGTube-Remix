@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://1x30v3npumk6"]
+
+[ext_resource type="Script" path="res://Scripts/popup_panel.gd" id="1_wqjpb"]
+
+[node name="PopupPanel" type="PopupPanel"]
+initial_position = 1
+size = Vector2i(308, 200)
+script = ExtResource("1_wqjpb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Did you make sure to save?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "If you clicked quit without making sure
+your work is saved, you will lose your 
+progress (note, this is a placeholder
+sorry for it being ugly)"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

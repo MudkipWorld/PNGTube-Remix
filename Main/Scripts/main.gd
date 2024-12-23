@@ -43,14 +43,14 @@ func save_as_file():
 	%FileDialog.show()
 
 func load_sprites():
-	%FileDialog.filters = ["*.png, *.gif, *.apng", "*.png", "*.jpeg", "*.jpg", "*.svg", "*.gif", "*.apng"]
+	%FileDialog.filters = ["*.png, *.apng", "*.png", "*.jpeg", "*.jpg", "*.svg", "*.apng"]
 	$FileDialog.file_mode = 1
 	current_state = State.LoadSprites
 	%FileDialog.show()
 
 
 func load_append_sprites():
-	%FileDialog.filters = ["*.png, *.gif, *.apng", "*.png", "*.jpeg", "*.jpg", "*.svg", "*.gif", "*.apng"]
+	%FileDialog.filters = ["*.png, *.apng", "*.png", "*.jpeg", "*.jpg", "*.svg", "*.apng"]
 	$FileDialog.file_mode = 1
 	current_state = State.AddAppend
 	%FileDialog.show()
@@ -59,7 +59,7 @@ func load_append_sprites():
 func replacing_sprite():
 	if Global.held_sprite != null:
 		if not Global.held_sprite.dictmain.folder:
-			%FileDialog.filters = ["*.png, *.gif, *.apng", "*.jpeg", "*.jpg", "*.svg", "*.gif", "*.apng"]
+			%FileDialog.filters = ["*.png, *.apng", "*.jpeg", "*.jpg", "*.svg", "*.apng"]
 			$FileDialog.file_mode = 0
 			current_state = State.ReplaceSprite
 			%FileDialog.show()
@@ -92,7 +92,10 @@ func _on_file_dialog_file_selected(path):
 			
 		State.ReplaceSprite:
 			
+			
 			if path.get_extension() == "gif":
+				pass
+				'''
 				var g_file = FileAccess.get_file_as_bytes(path)
 				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
 				var img_can = CanvasTexture.new()
@@ -109,7 +112,7 @@ func _on_file_dialog_file_selected(path):
 				Global.held_sprite.is_apng = false
 				Global.held_sprite.save_state(Global.current_state)
 				Global.held_sprite.treeitem.get_node("%Icon").texture = Global.held_sprite.get_node("%Sprite2D").texture
-				
+				'''
 				
 				
 
@@ -154,6 +157,8 @@ func _on_file_dialog_file_selected(path):
 		State.AddNormal:
 			
 			if path.get_extension() == "gif":
+				pass
+				'''
 				var g_file = FileAccess.get_file_as_bytes(path)
 				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
 				
@@ -162,7 +167,7 @@ func _on_file_dialog_file_selected(path):
 				
 				
 				Global.held_sprite.anim_texture_normal = g_file
-				Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture = gif_tex
+				Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture = gif_tex'''
 			else:
 				var apng_test = AImgIOAPNGImporter.load_from_file(path)
 				if apng_test != ["No frames", null]:
@@ -198,6 +203,8 @@ func _on_file_dialog_files_selected(paths):
 			%SpritesContainer.add_child(sprte_obj)
 
 			if path.get_extension() == "gif":
+				pass
+				'''
 				var g_file = FileAccess.get_file_as_bytes(path)
 				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
 				
@@ -208,7 +215,7 @@ func _on_file_dialog_files_selected(paths):
 				img_can.diffuse_texture = gif_tex
 				sprte_obj.anim_texture = g_file
 				sprte_obj.img_animated = true
-				sprte_obj.get_node("%Sprite2D").texture = img_can
+				sprte_obj.get_node("%Sprite2D").texture = img_can'''
 
 
 			
