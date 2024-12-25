@@ -148,6 +148,7 @@ func _ready():
 	check_ui()
 	top_bar.get_node("%WindowSize").text = "Window Size " + str(theme_settings.screen_size)
 	add_child(popup)
+	popup.hide()
 	
 
 func window_size_changed():

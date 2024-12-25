@@ -228,7 +228,8 @@ func _process(delta):
 		%Sprite2D.material.set_shader_parameter("marshing_ants",true)
 		if dictmain.wiggle:
 			%WiggleOrigin.show()
-			%WiggleOrigin.position = %Sprite2D.material.get_shader_parameter("rotation_offset") * %Sprite2D.texture.get_size()
+			var pos = ( %Sprite2D.material.get_shader_parameter("rotation_offset") * %Sprite2D.texture.get_size())/2
+			%WiggleOrigin.position = Vector2(pos.x, pos.y)
 		else:
 			%WiggleOrigin.hide()
 	else:

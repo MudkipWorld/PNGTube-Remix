@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/popup_panel.gd" id="1_wqjpb"]
 
 [node name="PopupPanel" type="PopupPanel"]
+transparent_bg = true
 initial_position = 1
 size = Vector2i(308, 200)
 visible = true
@@ -14,8 +15,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 304.0
-offset_bottom = 196.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

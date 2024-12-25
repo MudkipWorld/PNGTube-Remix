@@ -59,13 +59,6 @@ z_index = 4096
 z_as_relative = false
 texture = ExtResource("2_lsh2x")
 
-[node name="WiggleOrigin" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(1, 0, 0, 1)
-z_index = 4096
-texture = ExtResource("3_n7qih")
-
 [node name="Sprite2D" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1tqhp")
@@ -87,6 +80,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 stretch_mode = 0
+
+[node name="WiggleOrigin" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation/Sprite2D"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4096
+texture = ExtResource("3_n7qih")
 
 [node name="Blink" type="Timer" parent="."]
 wait_time = 0.2

@@ -537,7 +537,7 @@ func _on_duplicate_button_pressed():
 		contain.add_child(obj)
 		if obj.sprite_type != "Folder":
 			obj.texture = Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture
-			obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture
+			obj.get_node("%Sprite2D").texture = Global.held_sprite.get_node("%Sprite2D").texture
 		obj.sprite_name = "Duplicate" + Global.held_sprite.sprite_name 
 
 		if Global.held_sprite.dictmain.folder:
@@ -614,7 +614,7 @@ func _on_del_normal_button_pressed():
 	if Global.held_sprite != null:
 		if !Global.held_sprite.is_apng:
 			if not Global.held_sprite.dictmain.folder:
-				Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture = null
+				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = null
 #endregion
 
 #region size stuff
