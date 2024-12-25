@@ -15,7 +15,7 @@ var currently_speaking : bool = false
 var treeitem : LayerItem
 var visb
 var sprite_name : String = ""
-@export var states : Array = [{},{},{},{},{},{},{},{},{},{}]
+@export var states : Array = [{}]
 var coord
 var dragging : bool = false
 var of = Vector2(0,0)
@@ -303,7 +303,7 @@ func rotationalDrag(length,_delta):
 	
 	yvel = clamp(yvel,dictmain.rLimitMin,dictmain.rLimitMax)
 	
-	%Sprite2D.rotation = lerp_angle(%Sprite2D.rotation,deg_to_rad(yvel),0.25)
+	%Rotation.rotation = lerp_angle(%Sprite2D.rotation,deg_to_rad(yvel),0.25)
 
 func stretch(length,_delta):
 	var yvel = (length * dictmain.stretchAmount * 0.01)
