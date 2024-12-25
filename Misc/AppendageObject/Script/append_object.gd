@@ -437,15 +437,6 @@ func get_state(id):
 		var dict = states[id]
 		dictmain.merge(dict, true)
 		
-		if img_animated && dictmain.should_reset:
-			%Sprite2D.texture.diffuse_texture.current_frame = 0
-			if %Sprite2D.texture.normal_texture != null:
-				%Sprite2D.texture.normal_texture.current_frame = 0
-				
-			if img_animated:
-				%Sprite2D.texture.diffuse_texture.one_shot = dictmain.one_shot
-				if %Sprite2D.texture.normal_texture != null:
-					%Sprite2D.texture.normal_texture.one_shot = dictmain.one_shot
 		
 		%Wobble.z_index = dictmain.z_index
 		modulate = dictmain.colored

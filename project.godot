@@ -129,6 +129,10 @@ save={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/RemixV1 Translations - Sheet1.en.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://pq1maje81qan"
+
+[deps]
+
+files=["res://Localization/RemixV1 Translations - Sheet1.en.translation"]
+
+source_file="res://Localization/RemixV1 Translations - Sheet1.csv"
+dest_files=["res://Localization/RemixV1 Translations - Sheet1.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

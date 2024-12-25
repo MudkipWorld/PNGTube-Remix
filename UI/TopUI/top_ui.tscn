@@ -989,150 +989,43 @@ from the original software and improve existing ones."
 unique_name_in_owner = true
 auto_translate_mode = 1
 initial_position = 4
-size = Vector2i(471, 684)
+size = Vector2i(500, 600)
 unresizable = false
 borderless = false
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="InputsPopup"]
-custom_minimum_size = Vector2(420, 200)
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.019
-anchor_right = 0.98
-anchor_bottom = 0.981
+[node name="SettingVbox" type="VBoxContainer" parent="InputsPopup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 467.0
-offset_bottom = 680.0
-mouse_filter = 2
+offset_right = 496.0
+offset_bottom = 596.0
 
-[node name="GridContainer2" type="GridContainer" parent="InputsPopup/VBoxContainer2"]
+[node name="SettingsTab" type="TabContainer" parent="InputsPopup/SettingVbox"]
 layout_mode = 2
-size_flags_horizontal = 2
-theme_override_constants/h_separation = 8
-columns = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="VolumeLabel" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 20
-text = "Volume"
-horizontal_alignment = 1
-
-[node name="VolumeBar" type="ProgressBar" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 0)
-layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-max_value = 1.0
+theme_override_constants/side_margin = 0
+current_tab = 0
 
-[node name="VolumeSlider" type="HSlider" parent="InputsPopup/VBoxContainer2/GridContainer2/VolumeBar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_icons/grabber = ExtResource("22_suo2n")
-theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
-theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
-max_value = 1.0
-step = 0.01
-value = 0.1
-
-[node name="DelayLabel" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer2"]
+[node name="Model Settings" type="ScrollContainer" parent="InputsPopup/SettingVbox/SettingsTab"]
 layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 20
-text = "Delay"
-horizontal_alignment = 1
+metadata/_tab_index = 0
 
-[node name="DelayBar" type="ProgressBar" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 0)
+[node name="MarginContainer" type="MarginContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-max_value = 1.0
 
-[node name="DelaySlider" type="HSlider" parent="InputsPopup/VBoxContainer2/GridContainer2/DelayBar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_icons/grabber = ExtResource("22_suo2n")
-theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
-theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
-max_value = 1.0
-step = 0.01
-value = 0.1
-
-[node name="Sp" type="HSeparator" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Sp2" type="HSeparator" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="SensitivityLabel" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 20
-text = "Vol. Sensitivity"
-horizontal_alignment = 1
-
-[node name="SensitivityBar" type="ProgressBar" parent="InputsPopup/VBoxContainer2/GridContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 0)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-min_value = 1.0
-max_value = 10.0
-value = 1.0
-
-[node name="SensitivitySlider" type="HSlider" parent="InputsPopup/VBoxContainer2/GridContainer2/SensitivityBar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_icons/grabber = ExtResource("22_suo2n")
-theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
-theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
-min_value = 1.0
-max_value = 10.0
-step = 0.01
-value = 1.0
-
-[node name="GridContainer" type="GridContainer" parent="InputsPopup/VBoxContainer2"]
+[node name="GridContainer" type="GridContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer"]
 custom_minimum_size = Vector2(428, 0)
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="Sp2" type="HSeparator" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="Sp2" type="HSeparator" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(428, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="InputCheckButton" type="CheckButton" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="InputCheckButton" type="CheckButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(262, 27)
 layout_mode = 2
@@ -1142,7 +1035,7 @@ button_pressed = true
 text = "Change States With Inputs : "
 alignment = 1
 
-[node name="AntiAlCheck" type="CheckButton" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="AntiAlCheck" type="CheckButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(262, 27)
 layout_mode = 2
@@ -1152,7 +1045,7 @@ button_pressed = true
 text = "Anti-Aliasing : "
 alignment = 1
 
-[node name="AutoLoadCheck" type="CheckButton" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="AutoLoadCheck" type="CheckButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(262, 27)
 layout_mode = 2
@@ -1161,10 +1054,10 @@ size_flags_vertical = 2
 text = "Auto-Load Model : "
 alignment = 1
 
-[node name="HBox2" type="HBoxContainer" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="HBox2" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SaveOnExitCheck" type="CheckButton" parent="InputsPopup/VBoxContainer2/GridContainer/HBox2"]
+[node name="SaveOnExitCheck" type="CheckButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(262, 27)
 layout_mode = 2
@@ -1173,17 +1066,17 @@ size_flags_vertical = 2
 text = "Save Date On Exit  : "
 alignment = 1
 
-[node name="Label" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer/HBox2"]
+[node name="Label" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "(Helps remember toggled assets)"
 vertical_alignment = 1
 
-[node name="HBox" type="HBoxContainer" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="HBox" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="AutoSaveCheck" type="CheckButton" parent="InputsPopup/VBoxContainer2/GridContainer/HBox"]
+[node name="AutoSaveCheck" type="CheckButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -1191,7 +1084,7 @@ theme_override_font_sizes/font_size = 16
 text = "Auto-Save"
 alignment = 1
 
-[node name="AutoSaveSpin" type="SpinBox" parent="InputsPopup/VBoxContainer2/GridContainer/HBox"]
+[node name="AutoSaveSpin" type="SpinBox" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -1200,19 +1093,19 @@ alignment = 1
 suffix = "min"
 script = ExtResource("23_t65gs")
 
-[node name="AutoSaveTimer" type="Timer" parent="InputsPopup/VBoxContainer2/GridContainer/HBox"]
+[node name="AutoSaveTimer" type="Timer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox"]
 unique_name_in_owner = true
 wait_time = 60.0
 
-[node name="HBox3" type="HBoxContainer" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="HBox3" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer/HBox3"]
+[node name="Label" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Record FPS : "
 
-[node name="FpsSping" type="SpinBox" parent="InputsPopup/VBoxContainer2/GridContainer/HBox3"]
+[node name="FpsSping" type="SpinBox" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(158, 0)
 layout_mode = 2
@@ -1222,7 +1115,7 @@ max_value = 120.0
 value = 24.0
 script = ExtResource("23_t65gs")
 
-[node name="FileType" type="OptionButton" parent="InputsPopup/VBoxContainer2/GridContainer/HBox3"]
+[node name="FileType" type="OptionButton" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1233,7 +1126,7 @@ popup/item_0/text = "Image Sequence"
 popup/item_1/text = "Apng"
 popup/item_1/id = 1
 
-[node name="DeltaTimeCheck" type="CheckBox" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="DeltaTimeCheck" type="CheckBox" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -1247,17 +1140,17 @@ This needs to be set for every model to prevent sharing issues."
 text = "Use DeltaTime  "
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MaxFPSLabel" type="Label" parent="InputsPopup/VBoxContainer2/GridContainer/HBoxContainer"]
+[node name="MaxFPSLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(144, 0)
 layout_mode = 2
 text = "Max FPS : "
 
-[node name="MaxFPSlider" type="HSlider" parent="InputsPopup/VBoxContainer2/GridContainer/HBoxContainer"]
+[node name="MaxFPSlider" type="HSlider" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1265,22 +1158,157 @@ min_value = 30.0
 max_value = 241.0
 value = 241.0
 
-[node name="Sp3" type="HSeparator" parent="InputsPopup/VBoxContainer2/GridContainer"]
+[node name="Sp3" type="HSeparator" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InputsPopup/VBoxContainer2"]
+[node name="Audio" type="ScrollContainer" parent="InputsPopup/SettingVbox/SettingsTab"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="InputsPopup/SettingVbox/SettingsTab/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer2" type="GridContainer" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeBar" type="ProgressBar" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+max_value = 1.0
+
+[node name="VolumeSlider" type="HSlider" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/VolumeBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("22_suo2n")
+theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
+theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="DelayLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Delay"
+horizontal_alignment = 1
+
+[node name="DelayBar" type="ProgressBar" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+max_value = 1.0
+
+[node name="DelaySlider" type="HSlider" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/DelayBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("22_suo2n")
+theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
+theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="Sp" type="HSeparator" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Sp2" type="HSeparator" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SensitivityLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Vol. Sensitivity"
+horizontal_alignment = 1
+
+[node name="SensitivityBar" type="ProgressBar" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="SensitivitySlider" type="HSlider" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/SensitivityBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("22_suo2n")
+theme_override_icons/grabber_highlight = ExtResource("22_suo2n")
+theme_override_icons/grabber_disabled = ExtResource("22_suo2n")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+min_value = 1.0
+max_value = 10.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/separation = 7
 
-[node name="MicLabel" type="Label" parent="InputsPopup/VBoxContainer2/HBoxContainer"]
+[node name="MicLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Used Microphone : "
 
-[node name="MicroPhoneMenu" type="MenuButton" parent="InputsPopup/VBoxContainer2/HBoxContainer"]
+[node name="MicroPhoneMenu" type="MenuButton" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
@@ -1290,7 +1318,7 @@ text = "Default"
 flat = false
 text_overrun_behavior = 3
 
-[node name="ResetMicButton" type="TextureButton" parent="InputsPopup/VBoxContainer2/HBoxContainer"]
+[node name="ResetMicButton" type="TextureButton" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
@@ -1300,14 +1328,35 @@ texture_normal = ExtResource("24_14r3m")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VBoxContainer2" type="Control" parent="InputsPopup/VBoxContainer2"]
+[node name="States Remap" type="ScrollContainer" parent="InputsPopup/SettingVbox/SettingsTab"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InputsPopup/SettingVbox/SettingsTab/States Remap"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer"]
+custom_minimum_size = Vector2(420, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer2" type="Control" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(415, 210)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel2" type="Panel" parent="InputsPopup/VBoxContainer2/VBoxContainer2"]
+[node name="Panel2" type="Panel" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2"]
 custom_minimum_size = Vector2(420, 210)
 layout_mode = 1
 anchors_preset = 15
@@ -1317,7 +1366,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="RemapLabel" type="Label" parent="InputsPopup/VBoxContainer2/VBoxContainer2/Panel2"]
+[node name="RemapLabel" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2"]
 layout_mode = 2
 anchor_right = 0.991
 offset_left = 2.0
@@ -1326,7 +1375,7 @@ offset_bottom = 24.0
 theme_override_font_sizes/font_size = 17
 text = "Remap States Input :"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="InputsPopup/VBoxContainer2/VBoxContainer2/Panel2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2"]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 1
 anchors_preset = -1
@@ -1339,18 +1388,18 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Grid" type="VBoxContainer" parent="InputsPopup/VBoxContainer2/VBoxContainer2/Panel2/ScrollContainer"]
+[node name="Grid" type="VBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Grid2" type="GridContainer" parent="InputsPopup/VBoxContainer2"]
+[node name="Grid2" type="GridContainer" parent="InputsPopup/SettingVbox"]
 layout_mode = 2
 size_flags_horizontal = 0
 columns = 2
 
-[node name="ThemeLabel" type="Label" parent="InputsPopup/VBoxContainer2/Grid2"]
+[node name="ThemeLabel" type="Label" parent="InputsPopup/SettingVbox/Grid2"]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 20
@@ -1358,7 +1407,7 @@ text = "UI Theme : "
 vertical_alignment = 2
 max_lines_visible = 5
 
-[node name="UIThemeButton" type="OptionButton" parent="InputsPopup/VBoxContainer2/Grid2"]
+[node name="UIThemeButton" type="OptionButton" parent="InputsPopup/SettingVbox/Grid2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -1548,19 +1597,19 @@ presets_visible = false
 [connection signal="pressed" from="TempPopUp/VBoxContainer/GridContainer/NormalmTempButton" to="TopBarInput" method="_on_normalm_temp_button_pressed"]
 [connection signal="pressed" from="TempPopUp/VBoxContainer/GridContainer/FollowMouseTempButton" to="TopBarInput" method="_on_follow_mouse_temp_button_pressed"]
 [connection signal="pressed" from="TempPopUp/VBoxContainer/GridContainer/AssetTempButton" to="TopBarInput" method="_on_asset_temp_button_pressed"]
-[connection signal="drag_ended" from="InputsPopup/VBoxContainer2/GridContainer2/VolumeBar/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
-[connection signal="drag_ended" from="InputsPopup/VBoxContainer2/GridContainer2/DelayBar/DelaySlider" to="." method="_on_delay_slider_drag_ended"]
-[connection signal="drag_ended" from="InputsPopup/VBoxContainer2/GridContainer2/SensitivityBar/SensitivitySlider" to="." method="_on_sensitivity_slider_drag_ended"]
-[connection signal="toggled" from="InputsPopup/VBoxContainer2/GridContainer/InputCheckButton" to="TopBarInput" method="_on_input_check_button_toggled"]
-[connection signal="toggled" from="InputsPopup/VBoxContainer2/GridContainer/AntiAlCheck" to="TopBarInput" method="_on_anti_al_check_toggled"]
-[connection signal="toggled" from="InputsPopup/VBoxContainer2/GridContainer/HBox/AutoSaveCheck" to="TopBarInput" method="_on_auto_save_check_toggled"]
-[connection signal="value_changed" from="InputsPopup/VBoxContainer2/GridContainer/HBox/AutoSaveSpin" to="TopBarInput" method="_on_auto_save_spin_value_changed"]
-[connection signal="timeout" from="InputsPopup/VBoxContainer2/GridContainer/HBox/AutoSaveTimer" to="TopBarInput" method="_on_auto_save_timer_timeout"]
-[connection signal="item_selected" from="InputsPopup/VBoxContainer2/GridContainer/HBox3/FileType" to="TopBarInput" method="_on_file_type_item_selected"]
-[connection signal="toggled" from="InputsPopup/VBoxContainer2/GridContainer/DeltaTimeCheck" to="TopBarInput" method="_on_delta_time_check_toggled"]
-[connection signal="drag_ended" from="InputsPopup/VBoxContainer2/GridContainer/HBoxContainer/MaxFPSlider" to="TopBarInput" method="_on_max_fp_slider_drag_ended"]
-[connection signal="value_changed" from="InputsPopup/VBoxContainer2/GridContainer/HBoxContainer/MaxFPSlider" to="TopBarInput" method="_on_max_fp_slider_value_changed"]
-[connection signal="pressed" from="InputsPopup/VBoxContainer2/HBoxContainer/ResetMicButton" to="TopBarInput" method="_on_reset_mic_button_pressed"]
+[connection signal="toggled" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/InputCheckButton" to="TopBarInput" method="_on_input_check_button_toggled"]
+[connection signal="toggled" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/AntiAlCheck" to="TopBarInput" method="_on_anti_al_check_toggled"]
+[connection signal="toggled" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox/AutoSaveCheck" to="TopBarInput" method="_on_auto_save_check_toggled"]
+[connection signal="value_changed" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox/AutoSaveSpin" to="TopBarInput" method="_on_auto_save_spin_value_changed"]
+[connection signal="timeout" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox/AutoSaveTimer" to="TopBarInput" method="_on_auto_save_timer_timeout"]
+[connection signal="item_selected" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox3/FileType" to="TopBarInput" method="_on_file_type_item_selected"]
+[connection signal="toggled" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/DeltaTimeCheck" to="TopBarInput" method="_on_delta_time_check_toggled"]
+[connection signal="drag_ended" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer/MaxFPSlider" to="TopBarInput" method="_on_max_fp_slider_drag_ended"]
+[connection signal="value_changed" from="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer/MaxFPSlider" to="TopBarInput" method="_on_max_fp_slider_value_changed"]
+[connection signal="drag_ended" from="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/VolumeBar/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/DelayBar/DelaySlider" to="." method="_on_delay_slider_drag_ended"]
+[connection signal="drag_ended" from="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/SensitivityBar/SensitivitySlider" to="." method="_on_sensitivity_slider_drag_ended"]
+[connection signal="pressed" from="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer/ResetMicButton" to="TopBarInput" method="_on_reset_mic_button_pressed"]
 [connection signal="value_changed" from="BounceControlPopup/GridContainer/VBox/XFreqWobbleSlider" to="TopBarInput" method="_on_x_freq_wobble_slider_value_changed"]
 [connection signal="value_changed" from="BounceControlPopup/GridContainer/VBox2/XAmpWobbleSlider" to="TopBarInput" method="_on_x_amp_wobble_slider_value_changed"]
 [connection signal="value_changed" from="BounceControlPopup/GridContainer/VBox3/YFreqWobbleSlider" to="TopBarInput" method="_on_y_freq_wobble_slider_value_changed"]
