@@ -268,22 +268,26 @@ func static_prev():
 	%Sprite2D.curvature = 0
 
 func movements(delta):
-	glob = %Dragger.global_position
-	if not dictmain.ignore_bounce:
-		glob.y -= contain.bounceChange
-	drag(delta)
-	wobble()
-	var length = (glob.y - %Dragger.global_position.y)
-	if dictmain.physics:
-		if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D or get_parent() is CanvasGroup:
-			var c_parent = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
-			
-			var c_parrent_length = (c_parent.glob.y - c_parent.get_node("%Drag").global_position.y)
-			var c_parrent_length2 = (c_parent.glob.x - c_parent.get_node("%Drag").global_position.x)
-			length += c_parrent_length + c_parrent_length2
-	
-	rotationalDrag(length,delta)
-	stretch(length,delta)
+	if !Global.static_view:
+		glob = %Dragger.global_position
+		drag(delta)
+		wobble()
+		if not dictmain.ignore_bounce:
+			glob.y -= contain.bounceChange
+		
+		var length = (glob.y - %Dragger.global_position.y)
+		
+		if dictmain.physics:
+			if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D or get_parent() is CanvasGroup:
+				var c_parent = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+				
+				var c_parrent_length = (c_parent.glob.y - c_parent.get_node("%Dragger").global_position.y)
+				var c_parrent_length2 = (c_parent.glob.x - c_parent.get_node("%Dragger").global_position.x)
+				length += c_parrent_length + c_parrent_length2
+		
+		rotationalDrag(length)
+		stretch(length, delta)
+		
 
 func drag(_delta):
 	if dictmain.dragSpeed == 0:
@@ -296,21 +300,20 @@ func wobble():
 	%Wobble.position.x = sin(Global.tick*dictmain.xFrq)*dictmain.xAmp
 	%Wobble.position.y = sin(Global.tick*dictmain.yFrq)*dictmain.yAmp
 
-func rotationalDrag(length,_delta):
+func rotationalDrag(length):
 	var yvel = (length * dictmain.rdragStr)
 	
 	#Calculate Max angle
 	
 	yvel = clamp(yvel,dictmain.rLimitMin,dictmain.rLimitMax)
 	
-	%Rotation.rotation = lerp_angle(%Sprite2D.rotation,deg_to_rad(yvel),0.25)
+	%Rotation.rotation = lerp_angle(%Rotation.rotation,deg_to_rad(yvel),0.25)
 
-func stretch(length,_delta):
-	var yvel = (length * dictmain.stretchAmount * 0.01)
+func stretch(length, delta):
+	var yvel = (length * dictmain.stretchAmount * delta)
 	var target = Vector2(1.0-yvel,1.0+yvel)
 	
-	%Sprite2D.scale = lerp(%Sprite2D.scale,target,0.5)
-
+	sprite.scale = lerp(sprite.scale,target,delta)
 
 func follow_wiggle():
 	if dictmain.follow_wa_tip:
