@@ -95,6 +95,9 @@ var img_animated : bool = false
 	damping = 5,
 	comeback_speed = 0.419,
 	follow_mouse_velocity = false,
+	flip_h = false,
+	flip_v = false,
+	rot_frq = 0.0,
 	}
 
 var smooth_rot = 0.0
@@ -301,6 +304,7 @@ func wobble():
 	%Wobble.position.y = sin(Global.tick*dictmain.yFrq)*dictmain.yAmp
 
 func rotationalDrag(length):
+	%Drag.rotation = sin(Global.tick*dictmain.rot_frq)*deg_to_rad(dictmain.rdragStr)
 	var yvel = (length * dictmain.rdragStr)
 	
 	#Calculate Max angle

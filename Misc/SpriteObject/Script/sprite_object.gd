@@ -80,6 +80,7 @@ var currently_speaking : bool = false
 	flip_sprite_h = false,
 	flip_sprite_v = false,
 	follow_mouse_velocity = false,
+	rot_frq = 0.0,
 	}
 
 var anim_texture 
@@ -108,7 +109,6 @@ var last_dist : Vector2 = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	get_tree().get_root().get_node("Main").key_pressed.connect(asset)
 	og_glob = dictmain.position
 	Global.mode_changed.connect(update_to_mode_change)
@@ -299,6 +299,7 @@ func wobble():
 	%Wobble.position.y = sin(Global.tick*dictmain.yFrq)*dictmain.yAmp
 
 func rotationalDrag(length):
+	%Drag.rotation = sin(Global.tick*dictmain.rot_frq)*deg_to_rad(dictmain.rdragStr)
 	var yvel = (length * dictmain.rdragStr)
 	
 	#Calculate Max angle

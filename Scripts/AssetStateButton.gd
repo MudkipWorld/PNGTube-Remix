@@ -38,7 +38,7 @@ func _toggled(_button_pressed):
 func _unhandled_input(event):
 	if current_remap == Remap.Asset:
 		if not event is InputEventMouseMotion:
-			if event.is_released():
+			if event.is_pressed():
 				InputMap.action_erase_events(action)
 				InputMap.action_add_event(action, event)
 				Global.held_sprite.saved_event = event
@@ -49,7 +49,7 @@ func _unhandled_input(event):
 				button_pressed = false
 	elif current_remap == Remap.Keys:
 		if not event is InputEventMouseMotion:
-			if event.is_released():
+			if event.is_pressed():
 				if id in range(Global.held_sprite.saved_keys.size() -1):
 					Global.held_sprite.saved_keys.remove_at(id)
 				Global.held_sprite.saved_keys.append(event.as_text())
@@ -70,7 +70,7 @@ func update_key_text():
 	if InputMap.action_get_events(action).size() != 0:
 		text = "%s" % InputMap.action_get_events(action)[0].as_text()
 	else:
-		text = "Null"
+		text = "Bind Key"
 
 func update_stuff():
 	if Global.held_sprite.saved_event != null:

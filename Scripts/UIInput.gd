@@ -51,6 +51,8 @@ func held_sprite_is_null():
 	y_amp.editable = false
 	y_freq.editable = false
 
+	%EyeOption.disabled = true
+	%MouthOption.disabled = true
 	
 	%AnimationFramesSlider.editable = false
 	%AnimationSpeedSlider.editable = false
@@ -131,6 +133,8 @@ func held_sprite_is_true():
 	y_amp.editable = true
 	y_freq.editable = true
 	
+	%EyeOption.disabled = false
+	%MouthOption.disabled = false
 	
 	if not Global.held_sprite.dictmain.advanced_lipsync:
 		if Global.held_sprite.sprite_type == "Sprite2D" && not Global.held_sprite.img_animated:
@@ -184,10 +188,9 @@ func held_sprite_is_true():
 		
 		
 		
-	else:
-		%FlipSpriteH.disabled = false
-		%FlipSpriteV.disabled = false
-		
+	%FlipSpriteV.disabled = false
+	
+	%FlipSpriteH.disabled = false
 	%OffsetXSpinBox.editable = true
 	%OffsetYSpinBox.editable = true
 	
@@ -295,8 +298,8 @@ func reinfo():
 	
 	if not Global.held_sprite.dictmain.folder:
 		
-		%CurrentSelectedNormal.texture = Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture
-		%CurrentSelected.texture = Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.diffuse_texture
+		%CurrentSelectedNormal.texture = Global.held_sprite.get_node("%Sprite2D").texture.normal_texture
+		%CurrentSelected.texture = Global.held_sprite.get_node("%Sprite2D").texture.diffuse_texture
 	else:
 		%CurrentSelected.texture = null
 		%CurrentSelectedNormal.texture = null
@@ -323,7 +326,6 @@ func reinfo():
 	if Global.held_sprite.sprite_type == "Sprite2D":
 		%WiggleStuff.show()
 		%WiggleAppStuff.hide()
-		%FlipSpriteHBox.show()
 		%WiggleCheck.button_pressed = Global.held_sprite.dictmain.wiggle
 		%WigglePhysicsCheck.button_pressed = Global.held_sprite.dictmain.wiggle_physics
 		%FollowParentEffect.button_pressed = Global.held_sprite.dictmain.follow_parent_effects
@@ -335,7 +337,6 @@ func reinfo():
 		
 	
 	elif Global.held_sprite.sprite_type == "WiggleApp":
-		%FlipSpriteHBox.hide()
 		%WiggleStuff.hide()
 		%WiggleAppStuff.show()
 		%WiggleWidthSpin.value = Global.held_sprite.dictmain.width
@@ -345,7 +346,8 @@ func reinfo():
 		%WAGravityY.value = Global.held_sprite.dictmain.wiggle_gravity.y
 		%ClosedLoopCheck.button_pressed = Global.held_sprite.dictmain.wiggle_closed_loop
 		%AutoWagCheck.button_pressed = Global.held_sprite.dictmain.auto_wag
-		
+		%FlipSpriteH.button_pressed = Global.held_sprite.dictmain.flip_h
+		%FlipSpriteV.button_pressed = Global.held_sprite.dictmain.flip_v
 		
 	%OffsetXSpinBox.value = Global.held_sprite.dictmain.offset.x
 	%OffsetYSpinBox.value = Global.held_sprite.dictmain.offset.y
@@ -367,7 +369,7 @@ func reinfo():
 	
 	%TipSpin.value = Global.held_sprite.dictmain.tip_point
 	
-	if Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").get_clip_children_mode() == 0:
+	if Global.held_sprite.get_node("%Sprite2D").get_clip_children_mode() == 0:
 		clip.button_pressed = false
 	else:
 		clip.button_pressed = true
@@ -393,6 +395,25 @@ func reinfo():
 	%ShouldDisappearCheck.button_pressed = Global.held_sprite.should_disappear
 	%IsAssetButton.update_key_text()
 	
+	if Global.held_sprite.dictmain.should_blink:
+		if Global.held_sprite.dictmain.open_eyes:
+			%EyeOption.select(1)
+		else:
+			%EyeOption.select(2)
+	else:
+		%EyeOption.select(0)
+	
+	if Global.held_sprite.dictmain.should_talk:
+		if Global.held_sprite.dictmain.open_mouth:
+			%MouthOption.select(1)
+		else:
+			%MouthOption.select(2)
+	else:
+		%MouthOption.select(0)
+	
+	
+	
+	
 
 func update_pos_spins():
 	%PosXSpinBox.value = Global.held_sprite.position.x
@@ -415,10 +436,10 @@ func reinfoanim():
 #region misc
 func _on_check_box_toggled(toggled_on):
 	if toggled_on:
-		Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").set_clip_children_mode(2)
+		Global.held_sprite.get_node("%Sprite2D").set_clip_children_mode(2)
 		Global.held_sprite.dictmain.clip = 2
 	else:
-		Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").set_clip_children_mode(0)
+		Global.held_sprite.get_node("%Sprite2D").set_clip_children_mode(0)
 		Global.held_sprite.dictmain.clip = 0
 	Global.held_sprite.save_state(Global.current_state)
 
@@ -536,7 +557,7 @@ func _on_duplicate_button_pressed():
 		obj.dictmain.scale = Global.held_sprite.scale
 		contain.add_child(obj)
 		if obj.sprite_type != "Folder":
-			obj.texture = Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture
+			obj.texture = Global.held_sprite.get_node("%Sprite2D").texture
 			obj.get_node("%Sprite2D").texture = Global.held_sprite.get_node("%Sprite2D").texture
 		obj.sprite_name = "Duplicate" + Global.held_sprite.sprite_name 
 
@@ -634,7 +655,7 @@ func _on_size_spin_box_value_changed(value):
 
 func _on_wiggle_check_toggled(toggled_on):
 	Global.held_sprite.dictmain.wiggle = toggled_on
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").material.set_shader_parameter("wiggle", toggled_on)
+	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("wiggle", toggled_on)
 	Global.held_sprite.save_state(Global.current_state)
 
 
@@ -670,19 +691,19 @@ func _on_follow_wiggle_app_tip_toggled(toggled_on):
 
 func _on_wiggle_width_spin_value_changed(value):
 	Global.held_sprite.dictmain.width = value
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").width = value
+	Global.held_sprite.get_node("%Sprite2D").width = value
 	Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_wiggle_length_spin_value_changed(value):
 	Global.held_sprite.dictmain.segm_length = value
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").segment_length = value
+	Global.held_sprite.get_node("%Sprite2D").segment_length = value
 	Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_wiggle_sub_d_spin_value_changed(value):
 	Global.held_sprite.dictmain.subdivision = value
-	Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").subdivision = value
+	Global.held_sprite.get_node("%Sprite2D").subdivision = value
 	Global.held_sprite.save_state(Global.current_state)
 
 func _on_follow_parent_effect_toggled(toggled_on):
@@ -699,11 +720,11 @@ func _on_advanced_lip_sync_toggled(toggled_on):
 	if Global.held_sprite.sprite_type == "Sprite2D":
 		Global.held_sprite.dictmain.animation_speed = 1
 		if toggled_on:
-			Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").hframes = 6
+			Global.held_sprite.get_node("%Sprite2D").hframes = 6
 		else:
-			Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").hframes = 1
+			Global.held_sprite.get_node("%Sprite2D").hframes = 1
 		Global.held_sprite.advanced_lipsyc()
-		Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
+		Global.held_sprite.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 		Global.held_sprite.save_state(Global.current_state)
 	%AnimationFramesSlider.editable = !toggled_on
 	%AnimationSpeedSlider.editable = !toggled_on
@@ -721,9 +742,9 @@ func _on_advanced_lip_sync_mouse_exited():
 func _on_animation_one_shot_toggled(toggled_on):
 	Global.held_sprite.dictmain.one_shot = toggled_on
 	if Global.held_sprite.img_animated:
-		Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.diffuse_texture.one_shot = toggled_on
-		if Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture != null:
-			Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture.one_shot = toggled_on
+		Global.held_sprite.get_node("%Sprite2D").texture.diffuse_texture.one_shot = toggled_on
+		if Global.held_sprite.get_node("%Sprite2D").texture.normal_texture != null:
+			Global.held_sprite.get_node("%Sprite2D").texture.normal_texture.one_shot = toggled_on
 	Global.held_sprite.save_state(Global.current_state)
 
 func _on_mini_rotation_level_value_changed(value):
@@ -806,11 +827,26 @@ func _on_flip_sprite_h_toggled(toggled_on: bool) -> void:
 		Global.held_sprite.dictmain.flip_sprite_h = toggled_on
 		Global.held_sprite.get_node("%Sprite2D").flip_h = toggled_on
 		Global.held_sprite.save_state(Global.current_state)
+	elif Global.held_sprite.sprite_type == "WiggleApp":
+		Global.held_sprite.dictmain.flip_h = toggled_on
+		if Global.held_sprite.dictmain.flip_h:
+			Global.held_sprite.get_node("%AppendageFlip").scale.x = -1
+		else:
+			Global.held_sprite.get_node("%AppendageFlip").scale.x = 1
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_flip_sprite_v_toggled(toggled_on: bool) -> void:
 	if Global.held_sprite.sprite_type == "Sprite2D":
 		Global.held_sprite.dictmain.flip_sprite_v = toggled_on
 		Global.held_sprite.get_node("%Sprite2D").flip_v = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
+		
+	elif Global.held_sprite.sprite_type == "WiggleApp":
+		Global.held_sprite.dictmain.flip_v = toggled_on
+		if Global.held_sprite.dictmain.flip_v:
+			Global.held_sprite.get_node("%AppendageFlip").scale.y = -1
+		else:
+			Global.held_sprite.get_node("%AppendageFlip").scale.y = 1
 		Global.held_sprite.save_state(Global.current_state)
 
 func _on_name_focus_entered() -> void:
@@ -824,3 +860,27 @@ func _on_color_picker_button_focus_entered() -> void:
 
 func _on_color_picker_button_focus_exited() -> void:
 	Global.spinbox_held = false
+
+
+func _on_eye_option_item_selected(index: int) -> void:
+	match index:
+		0:
+			Global.held_sprite.dictmain.should_blink = false
+		1:
+			Global.held_sprite.dictmain.should_blink = true
+			Global.held_sprite.dictmain.open_eyes = true
+		2:
+			Global.held_sprite.dictmain.should_blink = true
+			Global.held_sprite.dictmain.open_eyes = false
+
+
+func _on_mouth_option_item_selected(index: int) -> void:
+	match index:
+		0:
+			Global.held_sprite.dictmain.should_talk = false
+		1:
+			Global.held_sprite.dictmain.should_talk = true
+			Global.held_sprite.dictmain.open_mouth = true
+		2:
+			Global.held_sprite.dictmain.should_talk = true
+			Global.held_sprite.dictmain.open_mouth = false

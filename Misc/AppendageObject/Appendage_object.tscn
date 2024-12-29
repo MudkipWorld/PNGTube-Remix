@@ -64,7 +64,10 @@ visible = false
 z_index = 4096
 texture = ExtResource("2_sl64r")
 
-[node name="Sprite2D" type="Line2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
+[node name="AppendageFlip" type="Node2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Line2D" parent="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1tqhp")
 points = PackedVector2Array(-10, 0, -4.96, 0, 2.16, 0, 11.36, 0, 22.64, 0, 36, 0, 50.4, 0, 64.8, 0, 79.2, 0, 93.6, 0, 108, 0, 122.4, 0, 136.8, 0, 151.2, 0, 165.6, 0, 180, 0, 194.4, 0, 208.8, 0, 223.2, 0, 237.6, 0, 252, 0, 266.4, 0, 280.8, 0, 295.2, 0, 309.6, 0, 324, 0, 338.4, 0, 352.8, 0)
@@ -81,7 +84,7 @@ max_angular_momentum = 15.0
 subdivision = 5
 additional_start_segment = true
 
-[node name="Grab" type="TextureButton" parent="Pos/Wobble/Squish/Drag/Rotation/Sprite2D"]
+[node name="Grab" type="TextureButton" parent="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip/Sprite2D"]
 unique_name_in_owner = true
 z_index = 4096
 anchors_preset = 15
@@ -95,7 +98,7 @@ mouse_filter = 1
 texture_normal = SubResource("CompressedTexture2D_8dpbe")
 stretch_mode = 0
 
-[node name="Selection" type="TextureRect" parent="Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab"]
+[node name="Selection" type="TextureRect" parent="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip/Sprite2D/Grab"]
 unique_name_in_owner = true
 visible = false
 z_index = 4096
@@ -116,5 +119,5 @@ wait_time = 0.2
 
 [node name="Animation" type="Timer" parent="."]
 
-[connection signal="button_down" from="Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab" to="." method="_on_grab_button_down"]
-[connection signal="button_up" from="Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab" to="." method="_on_grab_button_up"]
+[connection signal="button_down" from="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip/Sprite2D/Grab" to="." method="_on_grab_button_down"]
+[connection signal="button_up" from="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip/Sprite2D/Grab" to="." method="_on_grab_button_up"]

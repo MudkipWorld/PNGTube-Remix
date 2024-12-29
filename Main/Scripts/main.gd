@@ -143,7 +143,7 @@ func _on_file_dialog_file_selected(path):
 					Global.held_sprite.is_apng = false
 					img_can.diffuse_texture = texture
 					Global.held_sprite.texture = img_can
-					Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = img_can
+					Global.held_sprite.get_node("%Sprite2D").texture = img_can
 					Global.held_sprite.save_state(Global.current_state)
 					Global.held_sprite.treeitem.get_node("%Icon").texture = texture
 					
@@ -167,7 +167,7 @@ func _on_file_dialog_file_selected(path):
 				
 				
 				Global.held_sprite.anim_texture_normal = g_file
-				Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture = gif_tex'''
+				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = gif_tex'''
 			else:
 				var apng_test = AImgIOAPNGImporter.load_from_file(path)
 				if apng_test != ["No frames", null]:
@@ -180,7 +180,7 @@ func _on_file_dialog_file_selected(path):
 					
 					var cframe: AImgIOFrame = Global.held_sprite.frames2[0]
 					var text = ImageTexture.create_from_image(cframe.content)
-					Global.held_sprite.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture.normal_texture = text
+					Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = text
 
 				else:
 					var img = Image.load_from_file(path)
@@ -245,7 +245,7 @@ func _on_file_dialog_files_selected(paths):
 					var img_can = CanvasTexture.new()
 					img_can.diffuse_texture = texture
 					sprte_obj.texture = img_can
-					sprte_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = img_can
+					sprte_obj.get_node("%Sprite2D").texture = img_can
 					sprte_obj.sprite_name = path.get_file().get_basename()
 				
 			
@@ -253,7 +253,7 @@ func _on_file_dialog_files_selected(paths):
 
 
 
-			sprte_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
+			sprte_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 
 
 			sprte_obj.sprite_id = sprte_obj.get_instance_id()

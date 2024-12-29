@@ -163,19 +163,19 @@ func _process(delta):
 func moving_origin(delta):
 	if held_sprite != null:
 		if Input.is_action_pressed("ui_up"):
-			held_sprite.get_node("%Sprite2D").position.y += 10 * delta
+			held_sprite.get_node("%Sprite2D").global_position.y += 10 * delta
 			held_sprite.position.y -= 10 * delta
 			offset()
 		elif Input.is_action_pressed("ui_down"):
-			held_sprite.get_node("%Sprite2D").position.y -= 10 * delta
+			held_sprite.get_node("%Sprite2D").global_position.y -= 10 * delta
 			held_sprite.position.y += 10 * delta
 			offset()
 		if Input.is_action_pressed("ui_left"):
-			held_sprite.get_node("%Sprite2D").position.x += 10 * delta
+			held_sprite.get_node("%Sprite2D").global_position.x += 10 * delta
 			held_sprite.position.x -= 10 * delta
 			offset()
 		elif Input.is_action_pressed("ui_right"):
-			held_sprite.get_node("%Sprite2D").position.x -= 10 * delta
+			held_sprite.get_node("%Sprite2D").global_position.x -= 10 * delta
 			held_sprite.position.x += 10 * delta
 
 			offset()
@@ -186,7 +186,7 @@ func moving_origin(delta):
 				if Input.is_action_just_pressed("lmb"):
 					var of = held_sprite.get_parent().to_local(held_sprite.get_parent().get_global_mouse_position()) - held_sprite.position
 					held_sprite.position += of
-					held_sprite.get_node("%Sprite2D").position -= of
+					held_sprite.get_node("%Sprite2D").global_position -= of
 
 					offset()
 

@@ -826,7 +826,7 @@ theme_override_constants/separation = 6
 
 [node name="Visible" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 0)
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
@@ -835,45 +835,46 @@ alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
-alignment = 1
 
-[node name="CheckEye" type="CheckButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
-script = ExtResource("20_spl3g")
-value_to_update = "should_blink"
+size_flags_horizontal = 0
+text = "Should Blink : "
 
-[node name="EyeOpen" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="EyeOption" type="OptionButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 16
-text = "Eye Open      "
-alignment = 1
-script = ExtResource("20_spl3g")
-value_to_update = "open_eyes"
+selected = 0
+item_count = 3
+popup/item_0/text = "None"
+popup/item_1/text = "Eye Open"
+popup/item_1/id = 1
+popup/item_2/text = "Eye Closed"
+popup/item_2/id = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
 
-[node name="CheckMouth" type="CheckButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="Label2" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
-script = ExtResource("20_spl3g")
-value_to_update = "should_talk"
+text = "Should Talk : "
 
-[node name="MouthOpen" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="MouthOption" type="OptionButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 16
-text = "Mouth Open"
-alignment = 1
-script = ExtResource("20_spl3g")
-value_to_update = "open_mouth"
+selected = 0
+item_count = 3
+popup/item_0/text = "None"
+popup/item_1/text = "Mouth Open"
+popup/item_1/id = 1
+popup/item_2/text = "Mouth Closed"
+popup/item_2/id = 2
 
 [node name="Sp4" type="HSeparator" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -931,7 +932,7 @@ custom_minimum_size = Vector2(161, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 16
-text = "Flip Sprite H"
+text = "Flip H"
 
 [node name="FlipSpriteV" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox"]
 unique_name_in_owner = true
@@ -939,7 +940,7 @@ custom_minimum_size = Vector2(151, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 16
-text = "Flip Sprite V"
+text = "Flip V"
 
 [node name="HBoxAsset" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -960,7 +961,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(151, 30)
 layout_mode = 2
-text = "Input Key"
+text = "Bind Key"
 script = ExtResource("10_62mcs")
 
 [node name="RemoveAssetButton" type="TextureButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset"]
@@ -1151,6 +1152,24 @@ max_value = 180.0
 step = 0.01
 value_to_update = "rdragStr"
 
+[node name="RotationFreqBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rot-Freq :"
+mini_value = -100.0
+max_value = 100.0
+step = 0.01
+value_to_update = "rot_frq"
+
+[node name="ShouldRotCheck" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 14
+text = "Auto Rotation"
+
 [node name="RotationSpeedBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1160,13 +1179,6 @@ mini_value = -2.0
 max_value = 2.0
 step = 0.001
 value_to_update = "should_rot_speed"
-
-[node name="ShouldRotCheck" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 14
-text = "Auto Rotation"
 
 [node name="MiniRotationLevelBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
 unique_name_in_owner = true
@@ -2033,10 +2045,8 @@ columns = 9
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/HBox9/SizeSpinBox" to="UIInput" method="_on_size_spin_box_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/HBox9/SizeSpinYBox" to="UIInput" method="_on_size_spin_y_box_value_changed"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/Visible" to="UIInput" method="_on_visible_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/CheckEye" to="UIInput" method="_on_check_eye_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/EyeOpen" to="UIInput" method="_on_eye_open_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/CheckMouth" to="UIInput" method="_on_check_mouth_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/MouthOpen" to="UIInput" method="_on_mouth_open_toggled"]
+[connection signal="item_selected" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/EyeOption" to="UIInput" method="_on_eye_option_item_selected"]
+[connection signal="item_selected" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/MouthOption" to="UIInput" method="_on_mouth_option_item_selected"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/IgnoreBounce" to="UIInput" method="_on_ignore_bounce_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/Physics" to="UIInput" method="_on_physics_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/ClipChildren" to="UIInput" method="_on_check_box_toggled"]

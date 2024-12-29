@@ -5,7 +5,7 @@ var heldTicks = 0
 var dragSpeed = 0
 @onready var dragger = $Pos/Wobble/Squish/Drag
 @onready var wob = $Pos/Wobble
-@onready var sprite = $Pos/Wobble/Squish/Drag/Rotation/Sprite2D
+@onready var sprite = $%Sprite2D
 @onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
 @onready var img = null
 #Wobble
@@ -52,7 +52,7 @@ var currently_speaking : bool = false
 	folder = true,
 	global_position = global_position,
 	rotation = rotation,
-#	offset = $Pos/Wobble/Squish/Drag/Rotation/Sprite2D.offset,
+#	offset = $%Sprite2D.offset,
 	ignore_bounce = false,
 	clip = 0,
 	physics = true,
@@ -194,7 +194,7 @@ func wiggle_sprite():
 			wiggle_val = wiggle_val + (c_parrent_length/10)
 		
 		
-	$Pos/Wobble/Squish/Drag/Rotation/Sprite2D.material.set_shader_parameter("rotation", wiggle_val )
+	$%Sprite2D.material.set_shader_parameter("rotation", wiggle_val )
 
 func drag(delta):
 	if dragSpeed == 0:
@@ -293,14 +293,14 @@ func get_state(id):
 		%Sprite2D.self_modulate.a = dictmain.colored.a
 		scale = dictmain.scale
 		global_position = dictmain.global_position
-#		$Pos/Wobble/Squish/Drag/Rotation/Sprite2D.offset = dictmain.offset 
-#		$Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Origin.position = - dictmain.offset 
-		get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").set_clip_children_mode(dictmain.clip)
+#		$%Sprite2D.offset = dictmain.offset 
+#		$%Sprite2D/Origin.position = - dictmain.offset 
+		get_node("%Sprite2D").set_clip_children_mode(dictmain.clip)
 		rotation = dictmain.rotation
-#		$Pos/Wobble/Squish/Drag/Rotation/Sprite2D.material.set_shader_parameter("wiggle", dictmain.wiggle)
+#		$%Sprite2D.material.set_shader_parameter("wiggle", dictmain.wiggle)
 		
 #		if dictmain.advanced_lipsync:
-#			$Pos/Wobble/Squish/Drag/Rotation/Sprite2D.hframes = 6
+#			$%Sprite2D.hframes = 6
 		
 		visible = dictmain.visible
 		speaking()
@@ -348,4 +348,4 @@ func _on_grab_button_up():
 func reparent_obj(parent):
 	for i in parent:
 		if i.sprite_id == parent_id:
-			reparent(i.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D"))
+			reparent(i.get_node("%Sprite2D"))

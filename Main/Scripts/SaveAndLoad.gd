@@ -222,7 +222,7 @@ func load_file(path):
 							var nimg_tex = ImageTexture.new()
 							nimg_tex.set_image(nimg)
 							img_can.normal_texture = nimg_tex
-					sprite_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = img_can
+					sprite_obj.get_node("%Sprite2D").texture = img_can
 			else:
 				if sprite.has("is_apng"):
 					var img = AImgIOAPNGImporter.load_from_buffer(sprite.img)
@@ -249,7 +249,7 @@ func load_file(path):
 						img_can.normal_texture = text2
 					sprite_obj.texture = img_can
 					sprite_obj.is_apng = true
-					sprite_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = img_can
+					sprite_obj.get_node("%Sprite2D").texture = img_can
 				else:
 					var img_data
 					var img = Image.new()
@@ -279,7 +279,7 @@ func load_file(path):
 							var nimg_tex = ImageTexture.new()
 							nimg_tex.set_image(nimg)
 							img_can.normal_texture = nimg_tex
-					sprite_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D").texture = img_can
+					sprite_obj.get_node("%Sprite2D").texture = img_can
 
 					
 			if sprite.has("img_animated"):
@@ -290,7 +290,7 @@ func load_file(path):
 			if sprite.has("is_collapsed"):
 				sprite_obj.is_collapsed = sprite.is_collapsed
 			get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer").add_child(sprite_obj)
-			sprite_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
+			sprite_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 
 		if !load_dict.input_array.is_empty():
 			for input in len(load_dict.input_array):
@@ -419,7 +419,7 @@ func load_pngplus_file(path):
 			
 			
 		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer").add_child(sprite_obj)
-		sprite_obj.get_node("Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
+		sprite_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 		
 	for n in 10:
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").add_state()
