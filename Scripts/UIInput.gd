@@ -34,7 +34,8 @@ func _ready():
 	blend.get_popup().connect("id_pressed",_on_blend_state_pressed)
 	mo_anim.get_popup().connect("id_pressed",_on_mo_anim_state_pressed)
 	mc_anim.get_popup().connect("id_pressed",_on_mc_anim_state_pressed)
-
+	%SquishAmount.get_node("%SliderValue").value_changed.connect(_on_squish_amount_changed)
+	%SquishAmount.get_node("%SpinBoxValue").value_changed.connect(_on_squish_amount_changed)
 
 
 
@@ -431,6 +432,8 @@ func update_offset():
 func reinfoanim():
 	mc_anim.text = contain.current_mc_anim
 	mo_anim.text = contain.current_mo_anim
+	%ShouldSquish.button_pressed = contain.should_squish
+	%SquishAmount.get_node("%SliderValue").value = contain.squish_amount
 #endregion
 
 #region misc
@@ -884,3 +887,12 @@ func _on_mouth_option_item_selected(index: int) -> void:
 		2:
 			Global.held_sprite.dictmain.should_talk = true
 			Global.held_sprite.dictmain.open_mouth = false
+
+
+func _on_should_squish_toggled(toggled_on: bool) -> void:
+	contain.should_squish = toggled_on
+	contain.save_state(Global.current_state)
+
+func _on_squish_amount_changed(value : float):
+	contain.squish_amount = value
+	contain.save_state(Global.current_state)

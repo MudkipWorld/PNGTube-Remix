@@ -589,9 +589,10 @@ custom_minimum_size = Vector2(350, 513)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/side_margin = 1
-current_tab = 0
+current_tab = 3
 
 [node name="Properties" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -1615,7 +1616,6 @@ size_flags_horizontal = 0
 text = "Is a Closed Loop    "
 
 [node name="Misc" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -1705,6 +1705,25 @@ popup/item_4/text = "Squish"
 popup/item_4/id = 5
 popup/item_5/text = "Float"
 popup/item_5/id = 6
+
+[node name="Grid" type="GridContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ShouldSquish" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/Grid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(163, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Squish on Blink"
+
+[node name="SquishAmount" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/Grid" instance=ExtResource("10_m6pfk")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Squish Amount"
+mini_value = 1.01
+max_value = 10.0
+step = 0.01
+value_to_update = ""
 
 [node name="HBox15" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -2076,6 +2095,7 @@ columns = 9
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleAppStuff/HBox33/WAGravityX" to="UIInput" method="_on_wa_gravity_x_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleAppStuff/HBox33/WAGravityY" to="UIInput" method="_on_wa_gravity_y_value_changed"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleAppStuff/ClosedLoopCheck" to="UIInput" method="_on_closed_loop_check_toggled"]
+[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/Grid/ShouldSquish" to="UIInput" method="_on_should_squish_toggled"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox15/BlinkSpeedSlider" to="UIInput" method="_on_blink_speed_slider_value_changed"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox16/LightSourceVis" to="LightControl" method="_on_light_source_vis_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox16/LSShapeVis" to="LightControl" method="_on_ls_shape_vis_toggled"]

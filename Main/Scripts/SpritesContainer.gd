@@ -7,6 +7,9 @@ var mouth_open = 0
 var pos = Vector2(0,0)
 var current_mc_anim = "Idle"
 var current_mo_anim = "Idle"
+var should_squish : bool = false
+var squish_amount : float = 1.0
+var tween : Tween
 
 var bounce_amount = 50
 var wave_amount = Vector2(100,100)
@@ -23,6 +26,22 @@ func _ready():
 	Global.animation_state.connect(get_state)
 	Global.speaking.connect(speaking)
 	Global.not_speaking.connect(not_speaking)
+	Global.blink.connect(_squish)
+
+
+func _squish():
+	if should_squish:
+		if tween:
+			tween.kill()
+		tween = create_tween()
+		scale.y = 1.0 * (1/squish_amount)
+		tween.tween_property(self, "scale:y", 1.0 * (squish_amount), 0.4).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		tween.kill()
+		tween = create_tween()
+		tween.tween_property(self, "scale:y", 1.0 , 0.25).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		tween.kill()
 
 func _process(delta):
 	tick +=1
@@ -72,7 +91,9 @@ func save_state(id):
 		mouth_closed = mouth_closed,
 		mouth_open = mouth_open,
 		current_mc_anim = current_mc_anim,
-		current_mo_anim = current_mo_anim
+		current_mo_anim = current_mo_anim,
+		should_squish = should_squish,
+		squish_amount = squish_amount,
 	}
 	Global.settings_dict.states[id] = dict
 	
@@ -83,11 +104,15 @@ func save_state(id):
 
 func get_state(state):
 	if not Global.settings_dict.states[state].is_empty():
-		var dict = Global.settings_dict.states[state]
+		var dict : Dictionary = Global.settings_dict.states[state]
 		mouth_closed = dict.mouth_closed
 		mouth_open = dict.mouth_open
 		current_mc_anim = dict.current_mc_anim
 		current_mo_anim = dict.current_mo_anim
+		if dict.has("squish_amount"):
+			squish_amount = dict.squish_amount
+			should_squish = dict.should_squish
+		
 		if Global.settings_dict.bounce_state:
 			state_bounce()
 			
