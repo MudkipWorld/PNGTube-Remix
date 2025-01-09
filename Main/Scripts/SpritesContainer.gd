@@ -35,11 +35,11 @@ func _squish():
 			tween.kill()
 		tween = create_tween()
 		scale.y = 1.0 * (1/squish_amount)
-		tween.tween_property(self, "scale:y", 1.0 * (squish_amount), 0.4).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(self, "scale:y", 1.0 * (squish_amount), 0.25).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 		tween.kill()
 		tween = create_tween()
-		tween.tween_property(self, "scale:y", 1.0 , 0.25).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(self, "scale:y", 1.0 , 0.1).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 		tween.kill()
 

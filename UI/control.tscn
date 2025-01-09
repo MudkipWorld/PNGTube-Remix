@@ -589,10 +589,9 @@ custom_minimum_size = Vector2(350, 513)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/side_margin = 1
-current_tab = 3
+current_tab = 0
 
 [node name="Properties" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -849,7 +848,7 @@ custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
 selected = 0
 item_count = 3
-popup/item_0/text = "None"
+popup/item_0/text = "Disabled"
 popup/item_1/text = "Eye Open"
 popup/item_1/id = 1
 popup/item_2/text = "Eye Closed"
@@ -871,7 +870,7 @@ custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
 selected = 0
 item_count = 3
-popup/item_0/text = "None"
+popup/item_0/text = "Disabled"
 popup/item_1/text = "Mouth Open"
 popup/item_1/id = 1
 popup/item_2/text = "Mouth Closed"
@@ -975,6 +974,14 @@ size_flags_vertical = 4
 texture_normal = ExtResource("9_jhnap")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="DontHideOnToggleCheck" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Shows Asset only and doesn't hide it even when key is pressed again. "
+text = "Only Show on Toggle"
 
 [node name="ShouldDisappearCheck" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1616,6 +1623,7 @@ size_flags_horizontal = 0
 text = "Is a Closed Loop    "
 
 [node name="Misc" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -2073,6 +2081,7 @@ columns = 9
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox/FlipSpriteV" to="UIInput" method="_on_flip_sprite_v_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetCheck" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_is_asset_check_toggled"]
 [connection signal="pressed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/RemoveAssetButton" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_remove_asset_button_pressed"]
+[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/DontHideOnToggleCheck" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_dont_hide_on_toggle_check_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisappearCheck" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_disappear_check_toggled"]
 [connection signal="pressed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer/ShouldDisAddButton" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_add_button_pressed"]
 [connection signal="pressed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer/ShouldDisDelButton" to="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_del_button_pressed"]

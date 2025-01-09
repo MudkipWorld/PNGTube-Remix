@@ -125,9 +125,6 @@ func _on_should_dis_list_item_selected(index):
 	%ShouldDisDelButton.disabled = false
 	
 
-
-
-
 func _on_should_dis_remap_button_toggled(toggled_on):
 	current_remap = Remap.Keys
 	set_process_unhandled_input(toggled_on)
@@ -146,3 +143,7 @@ func _on_should_dis_list_focus_exited():
 	id = null
 	%ShouldDisRemapButton.disabled = true
 	%ShouldDisDelButton.disabled = true
+
+
+func _on_dont_hide_on_toggle_check_toggled(toggled_on: bool) -> void:
+	Global.held_sprite.show_only = toggled_on

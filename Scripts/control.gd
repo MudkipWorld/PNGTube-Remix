@@ -203,7 +203,7 @@ func check_parent(new_item = null):
 	
 	if new_item != null:
 		if new_item.get_parent() is Sprite2D:
-			var parent = new_item.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().treeitem
+			var parent = new_item.get_parent().owner.treeitem
 			new_item.treeitem.get_parent().get_parent().remove_child(new_item.treeitem.get_parent())
 			parent.get_node("%OtherLayers").add_child(new_item.treeitem.get_parent())
 			parent.get_node("%Collapse").disabled = false
@@ -211,7 +211,7 @@ func check_parent(new_item = null):
 			new_item.treeitem.get_node("%Intend2").show()
 			new_item.treeitem.get_node("%Intend").show()
 		elif new_item.get_parent() is WigglyAppendage2D:
-			var parent = new_item.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().treeitem
+			var parent = new_item.get_parent().owner.treeitem
 			new_item.treeitem.get_parent().get_parent().remove_child(new_item.treeitem.get_parent())
 			parent.get_parent().add_child(new_item.treeitem.get_parent())
 			parent.get_node("%Collapse").disabled = false
@@ -222,7 +222,7 @@ func check_parent(new_item = null):
 	else:
 		for x in sprites:
 			if x.get_parent() is Sprite2D:
-				var parent = x.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().treeitem
+				var parent = x.get_parent().owner.treeitem
 				x.treeitem.get_parent().get_parent().remove_child(x.treeitem.get_parent())
 				parent.get_node("%OtherLayers").add_child(x.treeitem.get_parent())
 				x.treeitem.get_node("%Intend2").show()
@@ -230,7 +230,7 @@ func check_parent(new_item = null):
 				parent.get_node("%Intend").show()
 				parent.get_node("%Collapse").disabled = false
 			elif x.get_parent() is WigglyAppendage2D:
-				var parent = x.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().treeitem
+				var parent = x.get_parent().owner.treeitem
 				x.treeitem.get_parent().get_parent().remove_child(x.treeitem.get_parent())
 				parent.get_node("%OtherLayers").add_child(x.treeitem.get_parent())
 				x.treeitem.get_node("%Intend2").show()

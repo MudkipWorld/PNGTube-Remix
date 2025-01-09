@@ -50,6 +50,7 @@ func save_file(path):
 				was_active_before = sprt.was_active_before,
 				should_disappear = sprt.should_disappear,
 				saved_keys = sprt.saved_keys,
+				show_only = sprt.show_only,
 				is_collapsed = sprt.is_collapsed,
 			}
 			
@@ -89,6 +90,7 @@ func save_file(path):
 				saved_event = sprt.saved_event,
 				was_active_before = sprt.was_active_before,
 				should_disappear = sprt.should_disappear,
+				show_only = sprt.show_only,
 				saved_keys = sprt.saved_keys,
 				is_collapsed = sprt.is_collapsed,
 			}
@@ -163,6 +165,8 @@ func load_file(path):
 				sprite_obj.is_asset = sprite.is_asset
 				sprite_obj.saved_event = sprite.saved_event
 				sprite_obj.should_disappear = sprite.should_disappear
+				if sprite.has("show_only"):
+					sprite_obj.show_only = sprite.show_only
 				if sprite_obj.is_asset:
 					sprite_obj.get_node("%Drag").visible = sprite.was_active_before
 					sprite_obj.was_active_before = sprite.was_active_before

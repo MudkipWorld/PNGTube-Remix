@@ -116,6 +116,7 @@ func held_sprite_is_null():
 	%IsAssetButton.disabled = true
 	%RemoveAssetButton.disabled = true
 	%ShouldDisappearCheck.disabled = true
+	%DontHideOnToggleCheck.disabled = true
 	%ShouldDisDelButton.disabled = true
 	%ShouldDisRemapButton.disabled = true
 	%OffsetXSpinBox.editable = false
@@ -211,6 +212,7 @@ func held_sprite_is_true():
 	%IsAssetButton.disabled = false
 	%RemoveAssetButton.disabled = false
 	%ShouldDisappearCheck.disabled = false
+	%DontHideOnToggleCheck.disabled = false
 	%TipSpin.editable = true
 	%IsAssetButton.text = "Null"
 	
@@ -390,6 +392,7 @@ func reinfo():
 	
 	%IsAssetButton.action = str(Global.held_sprite.sprite_id)
 	%IsAssetCheck.button_pressed = Global.held_sprite.is_asset
+	%DontHideOnToggleCheck.button_pressed = Global.held_sprite.show_only
 	%ShouldDisList.clear()
 	for i in Global.held_sprite.saved_keys:
 		%ShouldDisList.add_item(i)

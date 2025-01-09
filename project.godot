@@ -35,6 +35,11 @@ GlobalAudioStreamPlayer="*res://Main/Scripts/AudioStreamPlayer.gd"
 Themes="*res://Scripts/_Themes_.gd"
 LipSyncGlobals="*res://UI/Lipsync stuff/godot-lip-sync/lip_sync_globals.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1280

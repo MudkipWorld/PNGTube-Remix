@@ -114,6 +114,7 @@ var saved_event : InputEvent
 var is_asset : bool = false
 var was_active_before : bool = true
 var should_disappear : bool = false
+var show_only : bool = false
 var saved_keys : Array = []
 
 var last_mouse_position : Vector2 = Vector2(0,0)
@@ -282,7 +283,7 @@ func movements(delta):
 		
 		if dictmain.physics:
 			if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D or get_parent() is CanvasGroup:
-				var c_parent = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+				var c_parent = get_parent().owner
 				
 				var c_parrent_length = (c_parent.glob.y - c_parent.get_node("%Dragger").global_position.y)
 				var c_parrent_length2 = (c_parent.glob.x - c_parent.get_node("%Dragger").global_position.x)
@@ -373,7 +374,7 @@ func wiggle_sprite():
 	var wiggle_val = sin(Global.tick*dictmain.wiggle_freq)*dictmain.wiggle_amp
 	if dictmain.wiggle_physics:
 		if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D:
-			var c_parent = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+			var c_parent = get_parent().owner
 			var c_parrent_length = (c_parent.glob.y - c_parent.dragger.global_position.y)
 			wiggle_val = wiggle_val + (c_parrent_length/10)
 		
@@ -588,13 +589,15 @@ func _physics_process(delta):
 		
 
 func asset(key):
-	if is_asset:
-		if InputMap.action_get_events(str(sprite_id)).size() > 0:
-			if saved_event.as_text() == key:
+	if is_asset && InputMap.action_get_events(str(sprite_id)).size() > 0:
+		if saved_event.as_text() == key:
+			if show_only:
+				%Drag.visible = true
+			else:
 				%Drag.visible = !%Drag.visible
-				was_active_before = %Drag.visible
-				for i in get_tree().get_nodes_in_group("Sprites"):
-					if i.should_disappear:
-						if saved_event.as_text() in i.saved_keys:
-							i.get_node("%Drag").visible = false
-							i.was_active_before = false
+			was_active_before = %Drag.visible
+			for i in get_tree().get_nodes_in_group("Sprites"):
+				if i.should_disappear:
+					if saved_event.as_text() in i.saved_keys:
+						i.get_node("%Drag").visible = false
+						i.was_active_before = false
