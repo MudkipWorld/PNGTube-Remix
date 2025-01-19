@@ -1234,6 +1234,43 @@ max_value = 500.0
 step = 0.01
 value_to_update = "look_at_mouse_pos_y"
 
+[node name="RMBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rotation amount : "
+mini_value = -1.0
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_rotation"
+
+[node name="SMXBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Scale Squish-x : "
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_scale_x"
+
+[node name="SMYBSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("10_m6pfk")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Scale Squish-y : "
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_scale_y"
+
+[node name="Label" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3/MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.686275)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Small note
+the scale change depending on mouse
+position still needs some work, it may feel
+or look a little different in later releases."
+
 [node name="Wiggle" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]
 visible = false
 layout_mode = 2

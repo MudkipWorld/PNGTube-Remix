@@ -11,12 +11,13 @@ var has_delayed : bool = true
 
 var speech_value : float : 
 	set(value):
-		if value >= Global.settings_dict.volume_limit:
-			if not has_spoken:
-				%DelayBar.value = 1
-				Global.speaking.emit()
-				has_delayed = true
-				has_spoken = true
+		if %DelayBar.value < Global.settings_dict.volume_delay:
+			if value >= Global.settings_dict.volume_limit:
+				if not has_spoken:
+					%DelayBar.value = 1
+					Global.speaking.emit()
+					has_delayed = true
+					has_spoken = true
 
 		if value < Global.settings_dict.volume_limit:
 			if has_spoken:
@@ -42,13 +43,17 @@ func _ready():
 func info_held():
 	%DeselectButton.show()
 
-func _process(_delta):
+func _physics_process(_delta):
 	sample = audio.get_bus_peak_volume_left_db(2, 0)
 	linear_sampler = db_to_linear(sample) 
-	%VolumeBar.value = linear_sampler * Global.settings_dict.sensitivity_limit
-	%DelayBar.value = move_toward(%DelayBar.value, %VolumeBar.value, 0.01)
+	%VolumeBar.value = lerpf(%VolumeBar.value,linear_sampler * Global.settings_dict.sensitivity_limit, 0.15)
 	speech_value = %VolumeBar.value
 	speech_delay = %DelayBar.value
+	if %VolumeBar.value < Global.settings_dict.volume_limit:
+		%DelayBar.value = move_toward(%DelayBar.value, 0, 0.5*_delta)
+	elif %VolumeBar.value > Global.settings_dict.volume_limit && has_spoken:
+		%DelayBar.value = 1
+
 
 func sliders_revalue(settings_dict):
 	%BounceAmountSlider.get_node("%SliderValue").value = settings_dict.bounceSlider

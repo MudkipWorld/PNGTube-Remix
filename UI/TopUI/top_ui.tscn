@@ -1203,6 +1203,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 12
 max_value = 1.0
+step = 0.0
 
 [node name="VolumeSlider" type="HSlider" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/VolumeBar"]
 unique_name_in_owner = true
