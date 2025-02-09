@@ -30,7 +30,7 @@ var sprite_type : String = "WiggleApp"
 var anim_texture 
 var anim_texture_normal 
 var img_animated : bool = false
-
+var is_plus_first_import : bool = false
 
 
 @onready var dictmain : Dictionary = {
@@ -373,11 +373,12 @@ func follow_mouse(delta):
 		var dist = mouse.length()
 		%Pos.position.x = lerp(%Pos.position.x, dir.x * min(dist, dictmain.look_at_mouse_pos), 0.1)
 		%Pos.position.y = lerp(%Pos.position.y, dir.y * min(dist, dictmain.look_at_mouse_pos_y), 0.1)
-		var clamping = clamp(atan2(get_local_mouse_position().y,get_global_mouse_position().x)*dictmain.mouse_rotation,deg_to_rad(dictmain.rLimitMin),deg_to_rad(dictmain.rLimitMax))
-		%Wobble.rotation = lerp(%Wobble.rotation,clamping,0.1)
+		var clamping = clamp(mouse.angle()*dictmain.mouse_rotation,deg_to_rad(dictmain.rLimitMin),deg_to_rad(dictmain.rLimitMax))
+		%Squish.rotation = lerp_angle(%Squish.rotation ,clamping,0.1)
+#		print(clamping)
 		var dire = Vector2.ZERO - get_tree().get_root().get_node("Main/%Marker").get_local_mouse_position()
-		var scl_x = abs(dire.x) *dictmain.mouse_scale_x *0.005
-		var scl_y = abs(dire.y) *dictmain.mouse_scale_y *0.005
+		var scl_x = (abs(dire.x) *dictmain.mouse_scale_x *0.005) * Global.settings_dict.zoom.x
+		var scl_y = (abs(dire.y) *dictmain.mouse_scale_y *0.005) * Global.settings_dict.zoom.y
 		%Drag.scale.x = lerp(%Drag.scale.x, float(clamp(1 - scl_x, 0.15 , 1)), 0.1)
 		%Drag.scale.y = lerp(%Drag.scale.y, float(clamp(1 - scl_y,  0.15 , 1)), 0.1)
 
@@ -580,7 +581,11 @@ func reparent_obj(parent):
 	for i in parent:
 		if i.sprite_id == parent_id:
 			reparent(i.get_node("%Sprite2D"))
-
+			if is_plus_first_import:
+				for zaza in states:
+					var global = global_position
+					zaza.position = to_local(global)
+					#position = zaza.position
 
 func _physics_process(delta):
 	var cframe2: AImgIOFrame

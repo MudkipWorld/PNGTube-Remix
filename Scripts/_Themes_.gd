@@ -66,7 +66,8 @@ func save():
 
 func _ready():
 	if !FileAccess.file_exists(OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres"):
-		ResourceSaver.save(preload("res://UI/Lipsync stuff/DefaultLipsync.tres"),OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres")
+		ResourceSaver.save(preload("res://UI/Lipsync stuff/PrebuildFile/DefaultTraining.tres"),OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres")
+		LipSyncGlobals.file_data = ResourceLoader.load(OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres")
 	await  get_tree().create_timer(0.1).timeout
 	ui_theme = get_tree().get_root().get_node("Main/%TopUI/%UIThemeButton")
 	top_bar = get_tree().get_root().get_node("Main/%TopUI")

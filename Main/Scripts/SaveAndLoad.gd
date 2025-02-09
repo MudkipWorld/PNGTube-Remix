@@ -359,7 +359,8 @@ func load_pngplus_file(path):
 		sprite_obj.get_node("%Sprite2D").texture = img_can
 		
 	#	'''
-		sprite_obj.dictmain.position = str_to_var(load_dict[i]["pos"])
+	
+		sprite_obj.is_plus_first_import = true
 		sprite_obj.sprite_id = load_dict[i]["identification"]
 		sprite_obj.parent_id = load_dict[i]["parentId"]
 		sprite_obj.sprite_name = "Sprite " + str(i)
@@ -384,7 +385,9 @@ func load_pngplus_file(path):
 		sprite_obj.dictmain.rLimitMin = load_dict[i]["rLimitMin"]
 		sprite_obj.dictmain.rLimitMax = load_dict[i]["rLimitMax"]
 		sprite_obj.dictmain.z_index = load_dict[i]["zindex"]
+		sprite_obj.dictmain.position = str_to_var(load_dict[i]["pos"])
 		sprite_obj.dictmain.offset = str_to_var(load_dict[i]["offset"])
+	#	sprite_obj.dictmain.offset -= str_to_var(load_dict[i]["offset"])
 
 		var test = load_dict[i]["showBlink"]
 		var test2 = load_dict[i]["showTalk"]
@@ -410,16 +413,18 @@ func load_pngplus_file(path):
 			sprite_obj.dictmain.open_mouth = true
 			
 		
+		sprite_obj.states = [{}]
 		sprite_obj.states[0].merge(sprite_obj.dictmain, true)
 		
-		var cust = str_to_var(load_dict[i]["costumeLayers"])
-		for l in cust:
+		
+		for l in 10:
 			var ndict = sprite_obj.dictmain.duplicate()
 			if l == 0:
 				ndict.visible = false
 			else:
 				ndict.visible = true
 			sprite_obj.states.append(ndict)
+			
 			
 			
 		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer").add_child(sprite_obj)
@@ -446,7 +451,8 @@ func load_pngplus_file(path):
 		scale = Vector2(1,1),
 	}
 	
-	
+	Global.settings_dict.states = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+	Global.settings_dict.light_states = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
 	for n in Global.settings_dict.states:
 		n.merge(dict, true)
 	
@@ -458,5 +464,8 @@ func load_pngplus_file(path):
 	get_tree().get_root().get_node("Main/%Control").loaded_tree(get_tree().get_nodes_in_group("Sprites"))
 #	get_tree().get_root().get_node("Main/Control/BackgroundEdit").loaded_tree(get_tree().get_nodes_in_group("BackgroundStuff"))
 	get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
+	for i in get_tree().get_nodes_in_group("Sprites"):
+		i.zazaza(get_tree().get_nodes_in_group("Sprites"))
+	
 	Global.load_sprite_states(0)
 	get_tree().get_root().get_node("Main/%Control/UIInput").reinfoanim()
