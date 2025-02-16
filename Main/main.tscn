@@ -134,7 +134,7 @@ layout_mode = 2
 unique_name_in_owner = true
 initial_position = 2
 size = Vector2i(338, 100)
-dialog_text = " Do you want to make a PNGTuber model?"
+dialog_text = "Do you want to make a new PNGTuber model?"
 dialog_autowrap = true
 
 [node name="FileDialog" type="FileDialog" parent="."]

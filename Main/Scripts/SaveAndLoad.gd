@@ -416,14 +416,17 @@ func load_pngplus_file(path):
 		sprite_obj.states = [{}]
 		sprite_obj.states[0].merge(sprite_obj.dictmain, true)
 		
+		var costume = str_to_var(load_dict[i]["costumeLayers"])
+		print(costume)
 		
-		for l in 10:
+		sprite_obj.states.resize(10)
+		for l in costume.size():
 			var ndict = sprite_obj.dictmain.duplicate()
-			if l == 0:
+			if costume[l] == 0:
 				ndict.visible = false
 			else:
 				ndict.visible = true
-			sprite_obj.states.append(ndict)
+			sprite_obj.states[l] = ndict
 			
 			
 			
@@ -432,33 +435,6 @@ func load_pngplus_file(path):
 		
 	for n in 10:
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").add_state()
-	
-	
-		
-	var dict = {
-		mouth_closed = 0,
-		mouth_open = 3,
-		current_mc_anim = "Idle",
-		current_mo_anim = "One Bounce",
-	}
-	
-	
-	var dict2 = {
-		visible = false,
-		energy = 0.2,
-		color = Color.WHITE,
-		global_position = Vector2(640,360),
-		scale = Vector2(1,1),
-	}
-	
-	Global.settings_dict.states = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-	Global.settings_dict.light_states = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-	for n in Global.settings_dict.states:
-		n.merge(dict, true)
-	
-	for l in Global.settings_dict.light_states:
-		l.merge(dict2, true)
-		
 	
 	Global.load_sprite_states(0)
 	get_tree().get_root().get_node("Main/%Control").loaded_tree(get_tree().get_nodes_in_group("Sprites"))

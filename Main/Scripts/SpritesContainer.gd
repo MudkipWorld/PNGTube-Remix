@@ -122,7 +122,6 @@ func get_state(state):
 			not_speaking()
 			
 	reinfoanim.emit()
-	
 
 func not_speaking():
 	currenly_speaking = false
