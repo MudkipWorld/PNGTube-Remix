@@ -275,8 +275,8 @@ func _on_file_dialog_files_selected(paths):
 
 
 func _on_confirmation_dialog_confirmed():
-	Themes.theme_settings.path = null
-	%TopUI/TopBarInput.path = null
+	Themes.theme_settings.path = ""
+	%TopUI/TopBarInput.path = ""
 	%TopUI/TopBarInput.last_path = ""
 	clear_sprites()
 	Global.settings_dict.max_fps = 241

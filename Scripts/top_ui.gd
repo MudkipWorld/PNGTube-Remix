@@ -43,6 +43,12 @@ func _ready():
 func info_held():
 	%DeselectButton.show()
 
+func check_data():
+	%AutoLoadCheck.button_pressed = Themes.theme_settings.auto_load
+	%SaveOnExitCheck.button_pressed = Themes.theme_settings.save_on_exit
+	%AutoSaveCheck.button_pressed = Global.settings_dict.auto_save
+
+
 func _physics_process(_delta):
 	sample = audio.get_bus_peak_volume_left_db(2, 0)
 	linear_sampler = db_to_linear(sample) 

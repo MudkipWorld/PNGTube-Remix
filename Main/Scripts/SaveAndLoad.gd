@@ -95,30 +95,29 @@ func save_file(path):
 				is_collapsed = sprt.is_collapsed,
 			}
 			sprites_array.append(sprt_dict)
-			
-			
+		
 	save_dict = {
 		sprites_array = sprites_array,
 		settings_dict = Global.settings_dict,
 		input_array = input_array,
 	}
-	
-	
 	var file = FileAccess.open(path,FileAccess.WRITE)
 #	if FileAccess.file_exists(path):
 	#	print(file.get_var())
 	
-	
+	Themes.save()
 	file.store_var(save_dict, true)
 	file.close()
 	file = null
 
-func load_file(path):
+func load_file(path, should_load_path = false):
 	if path.get_extension() == "save":
 		load_pngplus_file(path)
 	else:
 		Themes.theme_settings.path = path
-		get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path = path
+		if should_load_path:
+			get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path = path
+			print("t")
 		
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").delete_all_states()
 		get_tree().get_root().get_node("Main").clear_sprites()
@@ -317,12 +316,13 @@ func load_file(path):
 		get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
 		Global.load_sprite_states(0)
 		get_tree().get_root().get_node("Main/%Control/UIInput").reinfoanim()
+		Themes.save()
 		file.close()
 		file = null
 
 func load_pngplus_file(path):
 	Themes.theme_settings.path = path
-	get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path = path
+#	get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path = path
 	
 	get_tree().get_root().get_node("Main/%Control/StatesStuff").delete_all_states()
 	get_tree().get_root().get_node("Main").clear_sprites()

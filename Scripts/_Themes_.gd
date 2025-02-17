@@ -4,7 +4,6 @@ extends Node
 var ui_theme
 var popup = preload("res://UI/TopUI/popup_panel.tscn").instantiate()
 
-
 @warning_ignore("integer_division")
 @onready var theme_settings : Dictionary = {
 	theme_id = 0,
@@ -35,28 +34,16 @@ func _notification(what: int) -> void:
 
 func save_before_closing():
 	if theme_settings.save_on_exit:
-		if FileAccess.file_exists(theme_settings.path):
+		if FileAccess.file_exists(theme_settings.path) && get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path == theme_settings.path:
 			SaveAndLoad.save_file(theme_settings.path)
 		else:
 			DirAccess.make_dir_absolute(os_path + "/AutoSaves")
-			
 			SaveAndLoad.save_file(OS.get_executable_path().get_base_dir() + "/AutoSaves" + "/" + str(randi()))
 		window_size_changed()
 		save()
-	
+	await get_tree().create_timer(0.1).timeout
 	get_tree().quit()
 
-
-func _exit_tree():
-	if theme_settings.save_on_exit:
-		if FileAccess.file_exists(theme_settings.path):
-			SaveAndLoad.save_file(theme_settings.path)
-		else:
-			DirAccess.make_dir_absolute(os_path + "/AutoSaves")
-			
-			SaveAndLoad.save_file(OS.get_executable_path().get_base_dir() + "/AutoSaves" + "/" + str(randi()))
-		window_size_changed()
-		save()
 
 func save():
 	var file = FileAccess
@@ -115,8 +102,8 @@ func _ready():
 			
 			if theme_settings.auto_load:
 				if FileAccess.file_exists(theme_settings.path):
-					await get_tree().create_timer(0.02).timeout
-					SaveAndLoad.load_file(theme_settings.path)
+					await get_tree().create_timer(0.1).timeout
+					SaveAndLoad.load_file(theme_settings.path, true)
 					
 			if FileAccess.file_exists(theme_settings.lipsync_file_path):
 				LipSyncGlobals.file_data = ResourceLoader.load(theme_settings.lipsync_file_path)
@@ -131,9 +118,6 @@ func _ready():
 		create_file.store_var(theme_settings)
 		create_file.close()
 		get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
-	top_bar.get_node("%SaveOnExitCheck").button_pressed = theme_settings.save_on_exit
-	
-	
 	get_window().size_changed.connect(window_size_changed)
 	
 	
@@ -142,12 +126,11 @@ func _ready():
 	get_tree().get_root().get_node("Main/%Control/%VSplitContainer").dragged.connect(_on_v_split_container_dragged)
 	get_tree().get_root().get_node("Main/%Control/%LayersViewSplit").dragged.connect(_on_layers_view_split_dragged)
 	
-	
-	
 	await get_tree().create_timer(0.05).timeout
 	get_window().size = theme_settings.screen_size
 	check_ui()
-	top_bar.get_node("%WindowSize").text = "Window Size " + str(theme_settings.screen_size)
+	top_bar.check_data()
+	top_bar.sliders_revalue(Global.settings_dict)
 	add_child(popup)
 	popup.hide()
 	

@@ -454,3 +454,13 @@ func add_a_lipsync_config():
 	var lipsync = preload("res://UI/Lipsync stuff/lipsync_configuration_popup.tscn").instantiate()
 	lipsync.name = "LipsyncConfigurationPopup"
 	get_tree().get_root().get_node("Main").add_child(lipsync)
+
+
+func _on_auto_load_check_toggled(toggled_on: bool) -> void:
+	Themes.theme_settings.auto_load = toggled_on
+	Themes.save()
+
+
+func _on_save_on_exit_check_toggled(toggled_on: bool) -> void:
+	Themes.theme_settings.save_on_exit = toggled_on
+	Themes.save()
