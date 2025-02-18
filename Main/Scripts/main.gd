@@ -257,6 +257,7 @@ func _on_file_dialog_files_selected(paths):
 					sprte_obj.texture_diffuse_bytes = img.save_png_to_buffer()
 
 			
+				sprte_obj.update_texture(true)
 				sprte_obj.img_animated = false
 
 

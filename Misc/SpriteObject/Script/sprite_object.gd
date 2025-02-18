@@ -86,6 +86,35 @@ var is_plus_first_import : bool = false
 	mouse_scale_y = 0.0,
 	}
 
+func update_texture(compress : bool):
+
+	if use_compressed_texture && compress: return
+	if !use_compressed_texture && !compress: return
+	if !texture_diffuse_bytes : return
+	if texture_diffuse_bytes.size() == 0: return
+	var temp_image = Image.new()
+	temp_image.load_png_from_buffer(texture_diffuse_bytes)
+	var texture_offsets	
+	var texture_size = temp_image.get_size()
+	if (compress):
+		texture_offsets = temp_image.get_used_rect()
+		compressed_texture_offset = -texture_size * 0.5 + 1.0 * texture_offsets.get_center()
+		use_compressed_texture = true
+	else:
+		texture_offsets = Rect2i(0, 0, texture_size.x, texture_size.y)
+		compressed_texture_offset = Vector2i(0,0)
+		use_compressed_texture = false
+	
+	%Sprite2D.texture.diffuse_texture = ImageTexture.create_from_image(temp_image.get_region(texture_offsets))
+	if (texture_normal_bytes):
+		temp_image.load_png_from_buffer(texture_normal_bytes)
+		%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(temp_image.get_region(texture_offsets))
+		
+	%Sprite2D.offset = compressed_texture_offset
+	
+	
+var use_compressed_texture: bool = false
+var compressed_texture_offset: Vector2i
 var texture_diffuse_bytes: PackedByteArray 
 var texture_normal_bytes: PackedByteArray
  
@@ -206,6 +235,8 @@ func update_to_mode_change(mode : int):
 
 
 func animation():
+	if %Sprite2D.hframes != dictmain.hframes:
+		update_texture(dictmain.hframes == 1 && !img_animated)
 	if not dictmain.advanced_lipsync:
 		%Sprite2D.hframes = dictmain.hframes
 		%Sprite2D.vframes = 1
@@ -498,15 +529,16 @@ func get_state(id):
 				print(%Sprite2D.frame)
 			elif is_apng:
 				fidx = 0
-				
+
+		update_texture(!img_animated && dictmain.hframes == 1)
+		%Sprite2D.position = dictmain.offset	
 		
-		%Sprite2D.position = dictmain.offset 
 		%Sprite2D.scale = Vector2(1,1)
 		
 		%Wobble.z_index = dictmain.z_index
 		modulate = dictmain.colored
 		scale = dictmain.scale
-	#	global_position = dictmain.global_position
+	#	global_position = dictmain.global_position		
 		position = dictmain.position
 
 		%Sprite2D.set_clip_children_mode(dictmain.clip)
