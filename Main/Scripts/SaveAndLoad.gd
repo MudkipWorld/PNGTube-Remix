@@ -207,12 +207,14 @@ func load_file(path, should_load_path = false):
 					img_tex.set_image(img)
 					var img_can = CanvasTexture.new()
 					img_can.diffuse_texture = img_tex
+					sprite_obj.texture_diffuse_bytes = sprite.img
+
 					if sprite.has("normal"):
 						var normalBytes = sprite.normal
 						if normalBytes != null:
 							var nimg = Image.new()							
 							nimg.load_png_from_buffer(normalBytes)
-
+							sprite_obj.texture_normal_bytes = normalBytes
 							nimg.fix_alpha_edges()
 							var nimg_tex = ImageTexture.new()
 							nimg_tex.set_image(nimg)

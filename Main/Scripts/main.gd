@@ -133,7 +133,8 @@ func _on_file_dialog_file_selected(path):
 					Global.held_sprite.texture = img_can
 					Global.held_sprite.treeitem.get_node("%Icon").texture = Global.held_sprite.texture
 					Global.held_sprite.is_apng = true
-					Global.held_sprite.img_animated = false
+					Global.held_sprite.img_animated = false					
+					Global.held_sprite.texture_diffuse_bytes = img[1]
 				else:
 					var img = Image.load_from_file(path)
 					var texture = ImageTexture.create_from_image(img)
@@ -146,7 +147,9 @@ func _on_file_dialog_file_selected(path):
 					Global.held_sprite.get_node("%Sprite2D").texture = img_can
 					Global.held_sprite.save_state(Global.current_state)
 					Global.held_sprite.treeitem.get_node("%Icon").texture = texture
-					
+					Global.held_sprite.texture_diffuse_bytes = img.save_png_to_buffer()
+
+				Global.held_sprite.update_texture(Global.held_sprite.img_animated)
 				if Global.held_sprite.sprite_type == "WiggleApp":
 					Global.held_sprite.correct_sprite_size()
 					Global.held_sprite.update_wiggle_parts()
@@ -181,12 +184,15 @@ func _on_file_dialog_file_selected(path):
 					var cframe: AImgIOFrame = Global.held_sprite.frames2[0]
 					var text = ImageTexture.create_from_image(cframe.content)
 					Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = text
+					Global.held_sprite.texture_normal_bytes = img[1]
 
 				else:
 					var img = Image.load_from_file(path)
 					img.fix_alpha_edges()
 					var texture = ImageTexture.create_from_image(img)
 					Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = texture
+					Global.held_sprite.texture_normal_bytes = img.save_png_to_buffer()
+
 			Global.get_sprite_states(Global.current_state)
 
 func _on_file_dialog_files_selected(paths):
@@ -237,7 +243,8 @@ func _on_file_dialog_files_selected(paths):
 					sprte_obj.texture = img_can
 					sprte_obj.is_apng = true
 					sprte_obj.sprite_name = "(Apng) " + path.get_file().get_basename() 
-					
+					sprte_obj.texture_diffuse_bytes = img[1]
+
 				else:
 					var img = Image.load_from_file(path)
 					img.fix_alpha_edges()
@@ -247,7 +254,8 @@ func _on_file_dialog_files_selected(paths):
 					sprte_obj.texture = img_can
 					sprte_obj.get_node("%Sprite2D").texture = img_can
 					sprte_obj.sprite_name = path.get_file().get_basename()
-				
+					sprte_obj.texture_diffuse_bytes = img.save_png_to_buffer()
+
 			
 				sprte_obj.img_animated = false
 

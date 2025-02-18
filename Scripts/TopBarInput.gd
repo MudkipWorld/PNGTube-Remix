@@ -395,12 +395,12 @@ func export_images(images = get_tree().get_nodes_in_group("Sprites")):
 		if !sprite.dictmain.folder:
 			if sprite.texture_diffuse_bytes:
 				var file = FileAccess.open(dire +"/" + sprite.sprite_name + str(randi()) + ".gif", FileAccess.WRITE)
-				file.store_buffer(sprite.anim_texture)
+				file.store_buffer(sprite.texture_diffuse_bytes)
 				file.close()
 				file = null
 				if sprite.texture_normal_bytes != null:
 					var filenormal = FileAccess.open(dire +"/" + sprite.sprite_name + str(randi()) + "Normal" + ".gif", FileAccess.WRITE)
-					filenormal.store_buffer(sprite.anim_texture_normal)
+					filenormal.store_buffer(sprite.texture_normal_bytes)
 					filenormal.close()
 					filenormal = null
 					
