@@ -6,10 +6,9 @@ var heldTicks = 0
 @onready var wob = $Pos/Wobble
 @onready var sprite = %Sprite2D
 @onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
-@onready var img = %Sprite2D.texture.get_image()
 #Wobble
 var squish = 1
-var texture 
+var texture : CanvasTexture
 
 # Misc
 var treeitem : LayerItem
@@ -87,8 +86,9 @@ var is_plus_first_import : bool = false
 	mouse_scale_y = 0.0,
 	}
 
-var anim_texture 
-var anim_texture_normal 
+var texture_diffuse_bytes: PackedByteArray 
+var texture_normal_bytes: PackedByteArray
+ 
 var img_animated : bool = false
 var is_apng : bool = false
 var is_collapsed : bool = false
