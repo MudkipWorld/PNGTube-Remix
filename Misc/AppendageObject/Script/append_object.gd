@@ -123,6 +123,39 @@ var saved_keys : Array = []
 var last_mouse_position : Vector2 = Vector2(0,0)
 var last_dist : Vector2 = Vector2(0,0)
 
+var use_compressed_texture: bool = false
+var compressed_texture_offset: Vector2i
+var texture_diffuse_bytes: PackedByteArray 
+var texture_normal_bytes: PackedByteArray
+ 
+
+func update_texture(compress : bool):
+
+	if use_compressed_texture && compress: return
+	if !use_compressed_texture && !compress: return
+	if !texture_diffuse_bytes : return
+	if texture_diffuse_bytes.size() == 0: return
+	var temp_image = Image.new()
+	temp_image.load_png_from_buffer(texture_diffuse_bytes)
+	var texture_offsets	
+	var texture_size = temp_image.get_size()
+	if (compress):
+		texture_offsets = temp_image.get_used_rect()
+		compressed_texture_offset = -texture_size * 0.5 + 1.0 * texture_offsets.get_center()
+		use_compressed_texture = true
+	else:
+		texture_offsets = Rect2i(0, 0, texture_size.x, texture_size.y)
+		compressed_texture_offset = Vector2i(0,0)
+		use_compressed_texture = false
+	
+	%Sprite2D.texture.diffuse_texture = ImageTexture.create_from_image(temp_image.get_region(texture_offsets))
+	if (texture_normal_bytes):
+		temp_image.load_png_from_buffer(texture_normal_bytes)
+		%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(temp_image.get_region(texture_offsets))
+		
+	%Sprite2D.offset = compressed_texture_offset
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().get_root().get_node("Main").key_pressed.connect(asset)
