@@ -58,11 +58,15 @@ func save_file(path):
 		else:
 			if sprt.img_animated:
 				img = sprt.anim_texture
+			if sprt.img_animated:
+				img = sprt.anim_texture
 			else:
 				img = sprt.get_node("%Sprite2D").texture.diffuse_texture.get_image().save_png_to_buffer()
 				
 			var normal_img
 			if sprt.get_node("%Sprite2D").texture.normal_texture:
+				if sprt.img_animated:
+					normal_img = sprt.anim_texture_normal
 				if sprt.img_animated:
 					normal_img = sprt.anim_texture_normal
 				else:
@@ -200,12 +204,15 @@ func load_file(path, should_load_path = false):
 					load_sprite(sprite_obj, sprite)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else:
 				if sprite.has("is_apng"):
 					load_apng(sprite_obj, sprite)
 				else:
 					load_sprite(sprite_obj, sprite)
 =======
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 					if sprite.img is not PackedByteArray:
 						img_data = Marshalls.base64_to_raw(sprite.img)
 						img.load_png_from_buffer(img_data)
@@ -217,6 +224,16 @@ func load_file(path, should_load_path = false):
 					var img_can = CanvasTexture.new()
 					img_can.diffuse_texture = img_tex
 					if sprite.has("normal"):
+						if sprite.normal != null:
+							var img_normal
+							var nimg = Image.new()
+							
+							if sprite.normal is not PackedByteArray:
+								img_normal = Marshalls.base64_to_raw(sprite.normal)
+								nimg.load_png_from_buffer(img_normal)
+							else:
+								nimg.load_png_from_buffer(sprite.normal)
+
 						if sprite.normal != null:
 							var img_normal
 							var nimg = Image.new()
@@ -292,6 +309,8 @@ func load_file(path, should_load_path = false):
 >>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 
 					
+			if sprite.has("img_animated"):
+				sprite_obj.img_animated = sprite.img_animated
 			if sprite.has("img_animated"):
 				sprite_obj.img_animated = sprite.img_animated
 			sprite_obj.sprite_id = sprite.sprite_id
@@ -434,6 +453,13 @@ func load_pngplus_file(path):
 		sprite_obj.parent_id = load_dict[i]["parentId"]
 		sprite_obj.sprite_name = "Sprite " + str(i)
 		
+		sprite_obj.dictmain.xFrq = load_dict[i]["xFrq"]
+		sprite_obj.dictmain.xAmp = load_dict[i]["xAmp"]
+		sprite_obj.dictmain.yFrq = load_dict[i]["yFrq"]
+		sprite_obj.dictmain.yAmp = load_dict[i]["yAmp"]
+		sprite_obj.dictmain.dragSpeed = load_dict[i]["drag"]
+		sprite_obj.dictmain.rdragStr = load_dict[i]["rotDrag"]
+		sprite_obj.dictmain.stretchAmount = load_dict[i]["stretchAmount"]
 		sprite_obj.dictmain.xFrq = load_dict[i]["xFrq"]
 		sprite_obj.dictmain.xAmp = load_dict[i]["xAmp"]
 		sprite_obj.dictmain.yFrq = load_dict[i]["yFrq"]
