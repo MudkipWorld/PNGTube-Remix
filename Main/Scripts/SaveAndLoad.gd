@@ -58,8 +58,11 @@ func save_file(path):
 		else:
 			if sprt.img_animated:
 				img = sprt.anim_texture
+<<<<<<< HEAD
 			if sprt.img_animated:
 				img = sprt.anim_texture
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 			else:
 				img = sprt.get_node("%Sprite2D").texture.diffuse_texture.get_image().save_png_to_buffer()
 				
@@ -67,8 +70,11 @@ func save_file(path):
 			if sprt.get_node("%Sprite2D").texture.normal_texture:
 				if sprt.img_animated:
 					normal_img = sprt.anim_texture_normal
+<<<<<<< HEAD
 				if sprt.img_animated:
 					normal_img = sprt.anim_texture_normal
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 				else:
 					normal_img = sprt.get_node("%Sprite2D").texture.normal_texture.get_image().save_png_to_buffer()
 			
@@ -205,12 +211,15 @@ func load_file(path, should_load_path = false):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			else:
 				if sprite.has("is_apng"):
 					load_apng(sprite_obj, sprite)
 				else:
 					load_sprite(sprite_obj, sprite)
 =======
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 =======
 >>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 					if sprite.img is not PackedByteArray:
@@ -234,6 +243,7 @@ func load_file(path, should_load_path = false):
 							else:
 								nimg.load_png_from_buffer(sprite.normal)
 
+<<<<<<< HEAD
 						if sprite.normal != null:
 							var img_normal
 							var nimg = Image.new()
@@ -244,6 +254,8 @@ func load_file(path, should_load_path = false):
 							else:
 								nimg.load_png_from_buffer(sprite.normal)
 
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 							nimg.fix_alpha_edges()
 							var nimg_tex = ImageTexture.new()
 							nimg_tex.set_image(nimg)
@@ -311,8 +323,11 @@ func load_file(path, should_load_path = false):
 					
 			if sprite.has("img_animated"):
 				sprite_obj.img_animated = sprite.img_animated
+<<<<<<< HEAD
 			if sprite.has("img_animated"):
 				sprite_obj.img_animated = sprite.img_animated
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 			sprite_obj.sprite_id = sprite.sprite_id
 			sprite_obj.parent_id = sprite.parent_id
 			sprite_obj.sprite_name = sprite.sprite_name
@@ -460,6 +475,7 @@ func load_pngplus_file(path):
 		sprite_obj.dictmain.dragSpeed = load_dict[i]["drag"]
 		sprite_obj.dictmain.rdragStr = load_dict[i]["rotDrag"]
 		sprite_obj.dictmain.stretchAmount = load_dict[i]["stretchAmount"]
+<<<<<<< HEAD
 		sprite_obj.dictmain.xFrq = load_dict[i]["xFrq"]
 		sprite_obj.dictmain.xAmp = load_dict[i]["xAmp"]
 		sprite_obj.dictmain.yFrq = load_dict[i]["yFrq"]
@@ -467,6 +483,8 @@ func load_pngplus_file(path):
 		sprite_obj.dictmain.dragSpeed = load_dict[i]["drag"]
 		sprite_obj.dictmain.rdragStr = load_dict[i]["rotDrag"]
 		sprite_obj.dictmain.stretchAmount = load_dict[i]["stretchAmount"]
+=======
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 		
 		sprite_obj.dictmain.ignore_bounce = load_dict[i]["ignoreBounce"]
 		sprite_obj.dictmain.hframes = load_dict[i]["frames"]
