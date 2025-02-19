@@ -990,7 +990,6 @@ unique_name_in_owner = true
 auto_translate_mode = 1
 initial_position = 4
 size = Vector2i(500, 600)
-visible = true
 unresizable = false
 borderless = false
 
@@ -1311,14 +1310,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Used Microphone : "
 
-[node name="MicroPhoneMenu" type="MenuButton" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MicroPhoneMenu" type="OptionButton" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 17
-text = "Default"
-flat = false
 text_overrun_behavior = 3
 
 [node name="ResetMicButton" type="TextureButton" parent="InputsPopup/SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]

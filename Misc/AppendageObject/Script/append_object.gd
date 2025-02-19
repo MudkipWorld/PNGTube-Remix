@@ -321,7 +321,7 @@ func stretch(length,delta):
 	var yvel = (length * dictmain.stretchAmount * delta)
 	var target = Vector2(1.0-yvel,1.0+yvel)
 	
-	sprite.scale = sprite.scale.move_toward(target,(2* delta))
+	%Squish.scale = %Squish.scale.move_toward(target,(2* delta))
 
 func follow_wiggle():
 	if dictmain.follow_wa_tip:

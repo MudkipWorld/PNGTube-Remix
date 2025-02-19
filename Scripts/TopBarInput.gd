@@ -65,7 +65,8 @@ func choosing_files(id):
 		1:
 			main.load_file()
 		2:
-			main.save_file(last_path)
+			pass
+		#	main.save_file(last_path)
 		3:
 			main.save_as_file()
 		4:

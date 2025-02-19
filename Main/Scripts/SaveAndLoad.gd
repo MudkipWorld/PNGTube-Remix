@@ -268,10 +268,8 @@ func load_sprite(sprite_obj, sprite):
 			if sprite.normal is not PackedByteArray:
 				var img_normal = Marshalls.base64_to_raw(sprite.normal)
 				nimg.load_png_from_buffer(img_normal)
-				sprite_obj.texture_normal_bytes = img_normal
 			else:
 				nimg.load_png_from_buffer(sprite.normal)
-				sprite_obj.texture_normal_bytes = sprite.normal
 			nimg.fix_alpha_edges()
 			var nimg_tex = ImageTexture.new()
 			nimg_tex.set_image(nimg)
@@ -324,6 +322,9 @@ func load_pngplus_file(path):
 	file.close()
 	file = null
 	
+	
+	if load_dict.size() < 1:
+		return
 	if !load_dict["0"].has("identification"):
 		print("Failed")
 		return
@@ -397,7 +398,7 @@ func load_pngplus_file(path):
 		sprite_obj.states[0].merge(sprite_obj.dictmain, true)
 		
 		var costume = str_to_var(load_dict[i]["costumeLayers"])
-		print(costume)
+	#	print(costume)
 		
 		sprite_obj.states.resize(10)
 		for l in costume.size():

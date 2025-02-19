@@ -178,24 +178,38 @@ func _on_ui_theme_button_item_selected(index):
 		0:
 			ui_theme.text = "Purple"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
+			popup.theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 		1:
 			ui_theme.text = "Blue"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
+			popup.theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
 		2:
 			ui_theme.text = "Orange"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
+			popup.theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
 		3:
 			ui_theme.text = "White"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
+			popup.theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
 		4:
 			ui_theme.text = "Dark"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
+			popup.theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
 		5:
 			ui_theme.text = "Green"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/GreenTheme/Green_theme.tres")
+			popup.theme = preload("res://Themes/GreenTheme/Green_theme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/GreenTheme/Green_theme.tres")
 		6:
 			ui_theme.text = "Funky"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
+			popup.theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
+			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
 	theme_settings.theme_id = index
 	ui_theme.select(index)
 	Global.theme_update.emit(index)

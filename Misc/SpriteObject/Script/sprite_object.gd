@@ -230,16 +230,24 @@ func animation():
 func _process(delta):
 	if Global.held_sprite == self:
 		%Grab.mouse_filter = 1
-		%Sprite2D.material.set_shader_parameter("marshing_ants",true)
+		%Ghost.texture = %Sprite2D.texture
+		%Ghost.hframes = %Sprite2D.hframes
+		%Ghost.frame = %Sprite2D.frame
+		%Ghost.show()
+	
 		if dictmain.wiggle:
 			%WiggleOrigin.show()
 			var pos = ( %Sprite2D.material.get_shader_parameter("rotation_offset") * %Sprite2D.texture.get_size())/2
 			%WiggleOrigin.position = Vector2(pos.x, pos.y)
 		else:
 			%WiggleOrigin.hide()
+		%Ghost.material.set_shader_parameter("wiggle", dictmain.wiggle)
+		%Ghost.material.set_shader_parameter("rotation", %Sprite2D.material.get_shader_parameter("rotation"))
+		
 	else:
 		%Grab.mouse_filter = 2
-		%Sprite2D.material.set_shader_parameter("marshing_ants",false)
+		%Ghost.hide()
+	#	%Sprite2D.material.set_shader_parameter("marshing_ants",false)
 		%WiggleOrigin.hide()
 	#	%Origin.mouse_filter = 2
 	
@@ -275,7 +283,7 @@ func movements(delta):
 		glob = %Dragger.global_position
 		drag(delta)
 		wobble()
-		if not dictmain.ignore_bounce:
+		if dictmain.ignore_bounce:
 			glob.y -= contain.bounceChange
 		
 		var length = (glob.y - %Dragger.global_position.y)
@@ -317,7 +325,7 @@ func stretch(length,delta):
 	var yvel = (length * dictmain.stretchAmount * delta)
 	var target = Vector2(1.0-yvel,1.0+yvel)
 	
-	sprite.scale = sprite.scale.move_toward(target,(2* delta))
+	%Squish.scale = %Squish.scale.move_toward(target,(2* delta))
 
 func static_prev():
 	%Pos.position = Vector2(0,0)

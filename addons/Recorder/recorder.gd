@@ -107,7 +107,7 @@ func save_frames(userdata):
 	for image in _images:
 		if (flip_y):
 			image.flip_y()
-		image.save_png(output_folder +"."+ "%04d" % i)
+		image.save_png(output_folder.get_basename() +"."+ "%04d" % i + ".png")
 		i+=1
 	_images.clear()
 	_thread.call_deferred("wait_to_finish")
