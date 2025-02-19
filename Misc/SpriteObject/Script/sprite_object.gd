@@ -387,15 +387,15 @@ func rainbow():
 
 func follow_mouse(delta):
 	if dictmain.follow_mouse_velocity:
-		var mouse = get_tree().get_root().get_node("Main/%Marker").get_local_mouse_position()
+		var mouse = get_local_mouse_position()
 		var distance = last_mouse_position - mouse
 		if !distance.is_zero_approx():
 			var vel = -(distance/delta)
-			var dir = vel.normalized()
+			var dir = Vector2.ZERO.direction_to(vel)
 			var dist = vel.length()
 			last_dist = Vector2(dir.x * min(dist, dictmain.look_at_mouse_pos),dir.y * min(dist, dictmain.look_at_mouse_pos_y))
-		%Pos.position.x = lerp(%Pos.position.x, last_dist.x, 0.08)
-		%Pos.position.y = lerp(%Pos.position.y, last_dist.y, 0.08)
+		%Pos.position.x = lerp(%Pos.position.x, last_dist.x, 0.1)
+		%Pos.position.y = lerp(%Pos.position.y, last_dist.y, 0.1)
 		%Wobble.rotation = lerp(%Wobble.rotation,clamp(atan2(last_dist.y,last_dist.x)*dictmain.mouse_rotation,deg_to_rad(dictmain.rLimitMin),deg_to_rad(dictmain.rLimitMax)),0.1)
 		var dire = Vector2.ZERO - (last_mouse_position -get_tree().get_root().get_node("Main/%Marker").get_local_mouse_position())
 		var scl_x = abs(dire.x) *dictmain.mouse_scale_x *0.005
@@ -404,8 +404,8 @@ func follow_mouse(delta):
 		%Drag.scale.y = lerp(%Drag.scale.y, float(clamp(1 - scl_y,  0.15 , 1)), 0.1)
 		last_mouse_position = mouse
 	else:
-		var mouse = get_tree().get_root().get_node("Main/%Marker").get_local_mouse_position()
-		var dir = mouse.normalized()
+		var mouse = get_local_mouse_position()
+		var dir = Vector2.ZERO.direction_to(mouse)
 		var dist = mouse.length()
 		%Pos.position.x = lerp(%Pos.position.x, dir.x * min(dist, dictmain.look_at_mouse_pos), 0.1)
 		%Pos.position.y = lerp(%Pos.position.y, dir.y * min(dist, dictmain.look_at_mouse_pos_y), 0.1)

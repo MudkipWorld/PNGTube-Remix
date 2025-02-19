@@ -895,7 +895,7 @@ custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
-text = "Global Bounce"
+text = "Ignore Bounce"
 
 [node name="Physics" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics"]
 unique_name_in_owner = true
@@ -1057,7 +1057,7 @@ anchor_bottom = 1.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 0
 follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3"]

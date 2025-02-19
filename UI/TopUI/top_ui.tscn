@@ -990,6 +990,7 @@ unique_name_in_owner = true
 auto_translate_mode = 1
 initial_position = 4
 size = Vector2i(500, 600)
+visible = true
 unresizable = false
 borderless = false
 
