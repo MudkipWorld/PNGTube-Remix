@@ -56,15 +56,15 @@ func save_file(path):
 			
 			sprites_array.append(sprt_dict)
 		else:
-			if sprt.texture_diffuse_bytes:
-				img = sprt.texture_diffuse_bytes
+			if sprt.img_animated:
+				img = sprt.anim_texture
 			else:
 				img = sprt.get_node("%Sprite2D").texture.diffuse_texture.get_image().save_png_to_buffer()
 				
 			var normal_img
 			if sprt.get_node("%Sprite2D").texture.normal_texture:
-				if sprt.texture_normal_bytes:
-					normal_img = sprt.texture_normal_bytes
+				if sprt.img_animated:
+					normal_img = sprt.anim_texture_normal
 				else:
 					normal_img = sprt.get_node("%Sprite2D").texture.normal_texture.get_image().save_png_to_buffer()
 			
@@ -199,15 +199,101 @@ func load_file(path, should_load_path = false):
 				else:
 					load_sprite(sprite_obj, sprite)
 
+<<<<<<< HEAD
 			else:
 				if sprite.has("is_apng"):
 					load_apng(sprite_obj, sprite)
 				else:
 					load_sprite(sprite_obj, sprite)
+=======
+					if sprite.img is not PackedByteArray:
+						img_data = Marshalls.base64_to_raw(sprite.img)
+						img.load_png_from_buffer(img_data)
+					else:
+						img.load_png_from_buffer(sprite.img)
+					img.fix_alpha_edges()
+					var img_tex = ImageTexture.new()
+					img_tex.set_image(img)
+					var img_can = CanvasTexture.new()
+					img_can.diffuse_texture = img_tex
+					if sprite.has("normal"):
+						if sprite.normal != null:
+							var img_normal
+							var nimg = Image.new()
+							
+							if sprite.normal is not PackedByteArray:
+								img_normal = Marshalls.base64_to_raw(sprite.normal)
+								nimg.load_png_from_buffer(img_normal)
+							else:
+								nimg.load_png_from_buffer(sprite.normal)
+
+							nimg.fix_alpha_edges()
+							var nimg_tex = ImageTexture.new()
+							nimg_tex.set_image(nimg)
+							img_can.normal_texture = nimg_tex
+					sprite_obj.get_node("%Sprite2D").texture = img_can
+			else:
+				if sprite.has("is_apng"):
+					var img = AImgIOAPNGImporter.load_from_buffer(sprite.img)
+					var tex = img[1] as Array[AImgIOFrame]
+					sprite_obj.frames = tex
+					
+					for n in sprite_obj.frames:
+						n.content.fix_alpha_edges()
+					
+					var cframe: AImgIOFrame = sprite_obj.frames[0]
+					
+					var text = ImageTexture.create_from_image(cframe.content)
+					var img_can = CanvasTexture.new()
+					img_can.diffuse_texture = text
+					if sprite.normal:
+						var norm = AImgIOAPNGImporter.load_from_buffer(sprite.normal)
+						var texn = norm[1] as Array[AImgIOFrame]
+						sprite_obj.frames2 = texn
+						for n in sprite_obj.frames2:
+							n.content.fix_alpha_edges()
+						
+						var cframe2: AImgIOFrame = sprite_obj.frames2[0]
+						var text2 = ImageTexture.create_from_image(cframe2.content)
+						img_can.normal_texture = text2
+					sprite_obj.texture = img_can
+					sprite_obj.is_apng = true
+					sprite_obj.get_node("%Sprite2D").texture = img_can
+				else:
+					var img_data
+					var img = Image.new()
+
+					if sprite.img is not PackedByteArray:
+						img_data = Marshalls.base64_to_raw(sprite.img)
+						img.load_png_from_buffer(img_data)
+					else:
+						img.load_png_from_buffer(sprite.img)
+
+					img.fix_alpha_edges()
+					var img_tex = ImageTexture.new()
+					img_tex.set_image(img)
+					var img_can = CanvasTexture.new()
+					img_can.diffuse_texture = img_tex
+					if sprite.has("normal"):
+						if sprite.normal != null:
+							var img_normal
+							var nimg = Image.new()
+							
+							if sprite.normal is not PackedByteArray:
+								img_normal = Marshalls.base64_to_raw(sprite.normal)
+								nimg.load_png_from_buffer(img_normal)
+							else:
+								nimg.load_png_from_buffer(sprite.normal)
+							nimg.fix_alpha_edges()
+							var nimg_tex = ImageTexture.new()
+							nimg_tex.set_image(nimg)
+							img_can.normal_texture = nimg_tex
+					sprite_obj.get_node("%Sprite2D").texture = img_can
+>>>>>>> parent of 5571f32 (Merge pull request #6 from michaelivey/image-optimization)
 
 					
-			if sprite.has("img_animated") && sprite.img_animated is PackedByteArray:
-				sprite_obj.texture_diffuse_bytes = sprite.img_animated
+			if sprite.has("img_animated"):
+				sprite_obj.img_animated = sprite.img_animated
 			sprite_obj.sprite_id = sprite.sprite_id
 			sprite_obj.parent_id = sprite.parent_id
 			sprite_obj.sprite_name = sprite.sprite_name
@@ -340,7 +426,6 @@ func load_pngplus_file(path):
 		var img_can = CanvasTexture.new()
 		img_can.diffuse_texture = img_tex
 		sprite_obj.get_node("%Sprite2D").texture = img_can
-		sprite_obj.texture_diffuse_bytes = img_data
 		
 	#	'''
 	
@@ -349,13 +434,13 @@ func load_pngplus_file(path):
 		sprite_obj.parent_id = load_dict[i]["parentId"]
 		sprite_obj.sprite_name = "Sprite " + str(i)
 		
-		sprite_obj.dictmain.xFrq = float(load_dict[i]["xFrq"])
-		sprite_obj.dictmain.xAmp = float(load_dict[i]["xAmp"])
-		sprite_obj.dictmain.yFrq = float(load_dict[i]["yFrq"])
-		sprite_obj.dictmain.yAmp = float(load_dict[i]["yAmp"])
-		sprite_obj.dictmain.dragSpeed = float(load_dict[i]["drag"])
-		sprite_obj.dictmain.rdragStr = float(load_dict[i]["rotDrag"])
-		sprite_obj.dictmain.stretchAmount = float(load_dict[i]["stretchAmount"])
+		sprite_obj.dictmain.xFrq = load_dict[i]["xFrq"]
+		sprite_obj.dictmain.xAmp = load_dict[i]["xAmp"]
+		sprite_obj.dictmain.yFrq = load_dict[i]["yFrq"]
+		sprite_obj.dictmain.yAmp = load_dict[i]["yAmp"]
+		sprite_obj.dictmain.dragSpeed = load_dict[i]["drag"]
+		sprite_obj.dictmain.rdragStr = load_dict[i]["rotDrag"]
+		sprite_obj.dictmain.stretchAmount = load_dict[i]["stretchAmount"]
 		
 		sprite_obj.dictmain.ignore_bounce = load_dict[i]["ignoreBounce"]
 		sprite_obj.dictmain.hframes = load_dict[i]["frames"]

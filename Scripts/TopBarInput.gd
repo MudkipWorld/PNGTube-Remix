@@ -393,14 +393,14 @@ func export_images(images = get_tree().get_nodes_in_group("Sprites")):
 		
 	for sprite in images:
 		if !sprite.dictmain.folder:
-			if sprite.texture_diffuse_bytes:
+			if sprite.img_animated:
 				var file = FileAccess.open(dire +"/" + sprite.sprite_name + str(randi()) + ".gif", FileAccess.WRITE)
-				file.store_buffer(sprite.texture_diffuse_bytes)
+				file.store_buffer(sprite.anim_texture)
 				file.close()
 				file = null
-				if sprite.texture_normal_bytes != null:
+				if sprite.anim_texture_normal != null:
 					var filenormal = FileAccess.open(dire +"/" + sprite.sprite_name + str(randi()) + "Normal" + ".gif", FileAccess.WRITE)
-					filenormal.store_buffer(sprite.texture_normal_bytes)
+					filenormal.store_buffer(sprite.anim_texture_normal)
 					filenormal.close()
 					filenormal = null
 					
@@ -419,13 +419,13 @@ func export_images(images = get_tree().get_nodes_in_group("Sprites")):
 				
 			elif !sprite.img_animated && !sprite.is_apng:
 				var img = Image.new()
-				img.load_png_from_buffer(sprite.texture_diffuse_bytes)
+				img = sprite.get_node("%Sprite2D").texture.diffuse_texture.get_image()
 				img.save_png(dire +"/" + sprite.sprite_name + str(randi()) + ".png")
 				img = null
 				
 				if sprite.get_node("%Sprite2D").texture.normal_texture != null:
 					var normimg = Image.new()
-					normimg.load_png_from_buffer(sprite.texture_normal_bytes)
+					normimg = sprite.get_node("%Sprite2D").texture.normal_texture.get_image()
 					normimg.save_png(dire +"/" + sprite.sprite_name + "Normal" + str(randi()) + ".png")
 					normimg = null
 
