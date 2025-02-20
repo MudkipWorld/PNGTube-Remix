@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb6sos2p8qbrr"]
+[gd_scene load_steps=13 format=3 uid="uid://cb6sos2p8qbrr"]
 
 [ext_resource type="Script" path="res://Misc/AppendageObject/Script/append_object.gd" id="1_yuqos"]
 [ext_resource type="Texture2D" uid="uid://cppqjhaoi70l5" path="res://Misc/EasyBlend/Blends/add.png" id="2_2g5n2"]
 [ext_resource type="Texture2D" uid="uid://t7lg762xsffp" path="res://Misc/FolderObject/origin.png" id="2_sl64r"]
 [ext_resource type="Shader" path="res://Scripts/SpriteShader.gdshader" id="3_p6byp"]
 [ext_resource type="Script" path="res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd" id="4_e6x1l"]
-[ext_resource type="Texture2D" uid="uid://c7poyj5s0pd1v" path="res://PicklesIdle.png" id="5_fthni"]
+[ext_resource type="Texture2D" uid="uid://dajiyes440dqd" path="res://Misc/TestAssets/tail - Copy.png" id="5_mwqm8"]
 [ext_resource type="Shader" path="res://Scripts/SpriteSelectionWA.gdshader" id="8_cwgos"]
 [ext_resource type="Texture2D" uid="uid://chuvmi2yancux" path="res://Misc/AppendageObject/origin.png" id="9_u04em"]
 
@@ -24,6 +24,9 @@ shader_parameter/rotation = 0.0
 shader_parameter/rotation_offset = Vector2(0.5, 0.5)
 shader_parameter/marshing_ants = false
 shader_parameter/Blend = ExtResource("2_2g5n2")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_swft8"]
+diffuse_texture = ExtResource("5_mwqm8")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dpbe"]
 load_path = "res://.godot/imported/Folder.png-3e2b186b08c07a918653895b22f207e4.ctex"
@@ -71,7 +74,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1tqhp")
 points = PackedVector2Array(-10, 0, -4.96, 0, 2.16, 0, 11.36, 0, 22.64, 0, 36, 0, 50.4, 0, 64.8, 0, 79.2, 0, 93.6, 0, 108, 0, 122.4, 0, 136.8, 0, 151.2, 0, 165.6, 0, 180, 0, 194.4, 0, 208.8, 0, 223.2, 0, 237.6, 0, 252, 0, 266.4, 0, 280.8, 0, 295.2, 0, 309.6, 0, 324, 0, 338.4, 0, 352.8, 0)
-texture = ExtResource("5_fthni")
+texture = SubResource("CanvasTexture_swft8")
 texture_mode = 2
 joint_mode = 2
 script = ExtResource("4_e6x1l")

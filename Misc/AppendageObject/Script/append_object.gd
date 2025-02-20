@@ -112,6 +112,7 @@ var dt = 0.0
 var frames : Array[AImgIOFrame] = []
 var frames2 : Array[AImgIOFrame] = []
 var fidx = 0
+var played_once : bool = false
 
 var saved_event : InputEvent
 var is_asset : bool = false
@@ -403,6 +404,10 @@ func speaking():
 		%Rotation.modulate.a = 1
 		if dictmain.should_talk:
 			if dictmain.open_mouth:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
+				played_once = false
 				%Rotation.show()
 					
 			else:
@@ -414,13 +419,19 @@ func speaking():
 		%Rotation.show()
 		if dictmain.should_talk:
 			if dictmain.open_mouth:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
+				played_once = false
 				%Rotation.modulate.a = 1
 					
 			else:
 				%Rotation.modulate.a = 0.3
 		else:
 			%Rotation.modulate.a = 1
-		
+	if dictmain.one_shot:
+		fidx = 0
+	played_once = false
 	currently_speaking = true
 
 func not_speaking():
@@ -430,6 +441,10 @@ func not_speaking():
 			if dictmain.open_mouth:
 				%Rotation.hide()
 			else:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
+				played_once = false
 				%Rotation.show()
 		else:
 			%Rotation.show()
@@ -440,19 +455,19 @@ func not_speaking():
 			if dictmain.open_mouth:
 				%Rotation.modulate.a = 0.3
 			else:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
+				played_once = false
 				%Rotation.modulate.a = 1
 		else:
 			%Rotation.modulate.a = 1
 			
-		
-		
 	currently_speaking = false
-
 
 func save_state(id):
 	var dict : Dictionary = dictmain.duplicate()
 	states[id] = dict
-
 
 func get_state(id):
 	if not states[id].is_empty():
@@ -504,6 +519,9 @@ func get_state(id):
 		not_speaking()
 #		animation()
 		set_blend(dictmain.blend_mode)
+		if dictmain.one_shot:
+			fidx = 0
+		played_once = false
 
 func update_wiggle_parts():
 	if %Sprite2D.segment_count != dictmain.wiggle_segm:
@@ -587,28 +605,40 @@ func reparent_obj(parent):
 					zaza.position = to_local(global)
 					#position = zaza.position
 
+func proper_apng_one_shot():
+	var cframe: AImgIOFrame = frames[0]
+	var tex = ImageTexture.create_from_image(cframe.content)
+	%Sprite2D.texture.diffuse_texture = tex
+	if %Sprite2D.texture.normal_texture:
+		var cframe2 = frames2[0]
+		%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
+		
+
 func _physics_process(delta):
 	var cframe2: AImgIOFrame
 	if is_apng:
-		if len(frames) == 0:
-			return
-		if fidx >= len(frames):
-			fidx = 0
-		dt += delta
-		var cframe: AImgIOFrame = frames[fidx]
-		if %Sprite2D.texture.normal_texture:
-			cframe2= frames2[fidx]
-		if dt >= cframe.duration:
-			dt -= cframe.duration
-			fidx += 1
-		# yes this does this every _process, oh well
-		var tex = ImageTexture.create_from_image(cframe.content)
-		%Sprite2D.texture.diffuse_texture = tex
-		if %Sprite2D.texture.normal_texture:
-			if frames2.size() != frames.size():
-				frames2.resize(frames.size())
-			%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
-		
+		if !played_once:
+			if len(frames) == 0:
+				return
+			if fidx >= len(frames):
+				fidx = 0
+				if dictmain.one_shot:
+					played_once = true
+					return
+			dt += delta
+			var cframe: AImgIOFrame = frames[fidx]
+			if %Sprite2D.texture.normal_texture:
+				cframe2= frames2[fidx]
+			if dt >= cframe.duration:
+				dt -= cframe.duration
+				fidx += 1
+			# yes this does this every _process, oh well
+			var tex = ImageTexture.create_from_image(cframe.content)
+			%Sprite2D.texture.diffuse_texture = tex
+			if %Sprite2D.texture.normal_texture:
+				if frames2.size() != frames.size():
+					frames2.resize(frames.size())
+				%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
 
 func asset(key):
 	if is_asset && InputMap.action_get_events(str(sprite_id)).size() > 0:

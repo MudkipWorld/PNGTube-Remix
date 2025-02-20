@@ -237,6 +237,7 @@ func _on_file_dialog_files_selected(paths):
 					sprte_obj.texture = img_can
 					sprte_obj.is_apng = true
 					sprte_obj.sprite_name = "(Apng) " + path.get_file().get_basename() 
+					sprte_obj.get_node("%Sprite2D").texture = img_can
 					
 				else:
 					var img = Image.load_from_file(path)

@@ -197,8 +197,7 @@ func held_sprite_is_true():
 	%OffsetYSpinBox.editable = true
 	
 	
-	if !Global.held_sprite.is_apng:
-		%AnimationOneShot.disabled = false
+	%AnimationOneShot.disabled = false
 	%AnimationReset.disabled = false
 	
 	
@@ -747,6 +746,7 @@ func _on_advanced_lip_sync_mouse_exited():
 
 func _on_animation_one_shot_toggled(toggled_on):
 	Global.held_sprite.dictmain.one_shot = toggled_on
+	Global.held_sprite.played_once = false
 	if Global.held_sprite.img_animated:
 		Global.held_sprite.get_node("%Sprite2D").texture.diffuse_texture.one_shot = toggled_on
 		if Global.held_sprite.get_node("%Sprite2D").texture.normal_texture != null:

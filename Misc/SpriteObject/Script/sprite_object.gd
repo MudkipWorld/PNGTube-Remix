@@ -92,6 +92,7 @@ var anim_texture_normal
 var img_animated : bool = false
 var is_apng : bool = false
 var is_collapsed : bool = false
+var played_once : bool = false
 
 var dragging_type = "Null"
 @onready var og_glob = global_position
@@ -277,7 +278,6 @@ func _process(delta):
 	follow_wiggle()
 	advanced_lipsyc()
 
-
 func movements(delta):
 	if !Global.static_view:
 		glob = %Dragger.global_position
@@ -421,7 +421,11 @@ func speaking():
 		%Rotation.modulate.a = 1
 		if dictmain.should_talk:
 			if dictmain.open_mouth:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
 				%Rotation.show()
+				played_once = false
 				coord = 0
 				animation()
 					
@@ -434,7 +438,11 @@ func speaking():
 		%Rotation.show()
 		if dictmain.should_talk:
 			if dictmain.open_mouth:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
 				%Rotation.modulate.a = 1
+				played_once = false
 				coord = 0
 				animation()
 					
@@ -442,7 +450,6 @@ func speaking():
 				%Rotation.modulate.a = 0.3
 		else:
 			%Rotation.modulate.a = 1
-		
 	currently_speaking = true
 
 func advanced_lipsyc():
@@ -465,7 +472,11 @@ func not_speaking():
 			if dictmain.open_mouth:
 				%Rotation.hide()
 			else:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
 				%Rotation.show()
+				played_once = false
 				coord = 0
 				animation()
 		else:
@@ -475,16 +486,19 @@ func not_speaking():
 		%Rotation.show()
 		if dictmain.should_talk:
 			if dictmain.open_mouth:
+				
 				%Rotation.modulate.a = 0.3
 			else:
+				if dictmain.one_shot:
+					fidx = 0
+					proper_apng_one_shot()
 				%Rotation.modulate.a = 1
+				played_once = false
 				coord = 0
 				animation()
 		else:
 			%Rotation.modulate.a = 1
 			
-		
-		
 	currently_speaking = false
 
 func save_state(id):
@@ -549,6 +563,10 @@ func get_state(id):
 		
 		%Sprite2D.scale = Vector2(1,1)
 		%Pos.position = Vector2(0,0)
+		if dictmain.one_shot:
+			fidx = 0
+			proper_apng_one_shot()
+		played_once = false
 
 func check_talk():
 	if dictmain.should_talk:
@@ -612,30 +630,42 @@ func zazaza(perent):
 						global = global_position
 						state.position = to_local(global) - state.offset
 
+func proper_apng_one_shot():
+	var cframe: AImgIOFrame = frames[0]
+	var tex = ImageTexture.create_from_image(cframe.content)
+	%Sprite2D.texture.diffuse_texture = tex
+	if %Sprite2D.texture.normal_texture:
+		var cframe2 = frames2[0]
+		%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var cframe2: AImgIOFrame
 	if is_apng:
-		if len(frames) == 0:
-			return
-		if fidx >= len(frames):
-			fidx = 0
-		dt += delta
-		var cframe: AImgIOFrame = frames[fidx]
-		if %Sprite2D.texture.normal_texture:
-			cframe2= frames2[fidx]
-		if dt >= cframe.duration:
-			dt -= cframe.duration
-			fidx += 1
-		# yes this does this every _process, oh well
-		var tex = ImageTexture.create_from_image(cframe.content)
-		%Sprite2D.texture.diffuse_texture = tex
-		if %Sprite2D.texture.normal_texture:
-			if frames2.size() != frames.size():
-				frames2.resize(frames.size())
-			%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
+		if !played_once:
+			if len(frames) == 0:
+				return
+			if fidx >= len(frames):
+				if dictmain.one_shot:
+					played_once = true
+					return
+				fidx = 0
+			dt += delta
+			var cframe: AImgIOFrame = frames[fidx]
+			if %Sprite2D.texture.normal_texture:
+				cframe2= frames2[fidx]
+			if dt >= cframe.duration:
+				dt -= cframe.duration
+				fidx += 1
+			# yes this does this every _process, oh well
+			var tex = ImageTexture.create_from_image(cframe.content)
+			%Sprite2D.texture.diffuse_texture = tex
+			if %Sprite2D.texture.normal_texture:
+				if frames2.size() != frames.size():
+					frames2.resize(frames.size())
+				%Sprite2D.texture.normal_texture = ImageTexture.create_from_image(cframe2.content)
 
 func asset(key):
 	if is_asset && InputMap.action_get_events(str(sprite_id)).size() > 0:
