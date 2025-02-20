@@ -49,7 +49,7 @@ func update_to_mode_change(mode : int):
 				%Rotation.show()
 				%Rotation.modulate.a = 1
 		1:
-			actor.blink()
+			blink()
 			%Rotation.modulate.a = 1
 			if actor.dictmain.should_talk:
 				if actor.currently_speaking:
