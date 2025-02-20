@@ -1,27 +1,27 @@
 [gd_scene load_steps=24 format=3 uid="uid://ngta1o5yiqxs"]
 
 [ext_resource type="StyleBox" uid="uid://2gwilgyuyfv7" path="res://Themes/PurpleTheme/LightPanel.tres" id="2_6cxu6"]
-[ext_resource type="Script" path="res://Scripts/control.gd" id="2_a5rie"]
-[ext_resource type="Script" path="res://Scripts/UIInput.gd" id="3_1eur5"]
-[ext_resource type="Script" path="res://Scripts/StatesStuff.gd" id="3_pa6sx"]
+[ext_resource type="Script" path="res://Scripts/UI/control.gd" id="2_a5rie"]
+[ext_resource type="Script" path="res://Scripts/UI/UIInput.gd" id="3_1eur5"]
+[ext_resource type="Script" path="res://Scripts/UI/StatesStuff.gd" id="3_pa6sx"]
 [ext_resource type="StyleBox" uid="uid://dpeurts54fvip" path="res://Themes/PurpleTheme/SmallPanelTheme.tres" id="5_w3axc"]
-[ext_resource type="Script" path="res://Scripts/LightControl.gd" id="6_5v3ft"]
-[ext_resource type="Texture2D" uid="uid://bobj6c6goa1d3" path="res://UI/FolderButton.png" id="6_hynel"]
-[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/ZoominButton.png" id="6_t2a3p"]
-[ext_resource type="Script" path="res://Scripts/ViewportControl.gd" id="6_xt0ob"]
-[ext_resource type="Texture2D" uid="uid://x1nc07bigmj1" path="res://UI/ZoomResetButton.png" id="7_82n4t"]
-[ext_resource type="Texture2D" uid="uid://dkly2qhfs7vd8" path="res://UI/ReplaceButton.png" id="7_cg0wr"]
-[ext_resource type="Texture2D" uid="uid://bxuqwqa2tk5j8" path="res://UI/ZoomOutButton.png" id="8_46wi4"]
-[ext_resource type="Texture2D" uid="uid://bv1t65n5ha20j" path="res://UI/DupButton.png" id="8_r6auv"]
-[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/DeleteButton.png" id="9_jhnap"]
-[ext_resource type="Script" path="res://Scripts/AssetStateButton.gd" id="10_62mcs"]
+[ext_resource type="Script" path="res://Scripts/UI/LightControl.gd" id="6_5v3ft"]
+[ext_resource type="Texture2D" uid="uid://bobj6c6goa1d3" path="res://UI/Assets/FolderButton.png" id="6_hynel"]
+[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/Assets/ZoominButton.png" id="6_t2a3p"]
+[ext_resource type="Script" path="res://Scripts/UI/ViewportControl.gd" id="6_xt0ob"]
+[ext_resource type="Texture2D" uid="uid://x1nc07bigmj1" path="res://UI/Assets/ZoomResetButton.png" id="7_82n4t"]
+[ext_resource type="Texture2D" uid="uid://dkly2qhfs7vd8" path="res://UI/Assets/ReplaceButton.png" id="7_cg0wr"]
+[ext_resource type="Texture2D" uid="uid://bxuqwqa2tk5j8" path="res://UI/Assets/ZoomOutButton.png" id="8_46wi4"]
+[ext_resource type="Texture2D" uid="uid://bv1t65n5ha20j" path="res://UI/Assets/DupButton.png" id="8_r6auv"]
+[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/Assets/DeleteButton.png" id="9_jhnap"]
+[ext_resource type="Script" path="res://Scripts/UI/AssetStateButton.gd" id="10_62mcs"]
 [ext_resource type="PackedScene" uid="uid://clxl1gighe78l" path="res://UI/BetterSlider/better_slider.tscn" id="10_m6pfk"]
-[ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/ZoomResetMainButton.png" id="14_24obs"]
-[ext_resource type="Texture2D" uid="uid://diyx30a4yqalc" path="res://UI/NormalMapButton.png" id="16_l1e6k"]
-[ext_resource type="Texture2D" uid="uid://cxpsf8uoktwrd" path="res://UI/NormalMapDelButton.png" id="17_ex20s"]
+[ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/Assets/ZoomResetMainButton.png" id="14_24obs"]
+[ext_resource type="Texture2D" uid="uid://diyx30a4yqalc" path="res://UI/Assets/NormalMapButton.png" id="16_l1e6k"]
+[ext_resource type="Texture2D" uid="uid://cxpsf8uoktwrd" path="res://UI/Assets/NormalMapDelButton.png" id="17_ex20s"]
 [ext_resource type="Script" path="res://UI/BetterSlider/BetterToggles.gd" id="20_spl3g"]
 [ext_resource type="PackedScene" uid="uid://mldwqrl5tu11" path="res://UI/LayerView/layer_view_bg.tscn" id="25_g04q3"]
-[ext_resource type="Script" path="res://Scripts/Spinboxes.gd" id="26_0wx0w"]
+[ext_resource type="Script" path="res://Scripts/UI/Spinboxes.gd" id="26_0wx0w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcgtm"]
 bg_color = Color(0.227451, 0.580392, 0.431373, 1)
@@ -628,12 +628,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Hbox" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="ColorLabel" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 16
 text = "Color :"
 
@@ -641,6 +639,24 @@ text = "Color :"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="ColorLabel2" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Tint :"
+
+[node name="TintPickerButton" type="ColorPickerButton" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+size_flags_horizontal = 2
 color = Color(1, 1, 1, 1)
 
 [node name="HBox2" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer"]
@@ -988,8 +1004,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Check if the current toggle sprite shound't be visible if another one got toggled on. I.e different faces, types of hats, etc.."
-text = "Should Disappear On Other Assets Toggle  "
+tooltip_text = "Keys that makes your Sprite Disappear whenever toggled."
+text = "Disappear Key(s)"
 
 [node name="ShouldDisListContainer" type="VBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1057,7 +1073,7 @@ anchor_bottom = 1.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
+mouse_filter = 2
 follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Movement/ScrollContainer3"]
@@ -1765,9 +1781,9 @@ text = "Squish on Blink"
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Squish Amount"
-mini_value = 1.01
+mini_value = 1.001
 max_value = 10.0
-step = 0.01
+step = 0.001
 value_to_update = ""
 
 [node name="HBox15" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer"]
@@ -2100,6 +2116,9 @@ columns = 9
 [connection signal="color_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="UIInput" method="_on_color_picker_button_color_changed"]
 [connection signal="focus_entered" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="UIInput" method="_on_color_picker_button_focus_entered"]
 [connection signal="focus_exited" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="UIInput" method="_on_color_picker_button_focus_exited"]
+[connection signal="color_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/HBoxContainer/TintPickerButton" to="UIInput" method="_on_tint_picker_button_color_changed"]
+[connection signal="focus_entered" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/HBoxContainer/TintPickerButton" to="UIInput" method="_on_color_picker_button_focus_entered"]
+[connection signal="focus_exited" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/Hbox/HBoxContainer/TintPickerButton" to="UIInput" method="_on_color_picker_button_focus_exited"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/HBox12/ZOrderSpinbox" to="UIInput" method="_on_z_order_spinbox_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/HBox21/PosXSpinBox" to="UIInput" method="_on_pos_x_spin_box_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Properties/ScrollContainer1/MarginContainer/VBoxContainer/HBox21/PosYSpinBox" to="UIInput" method="_on_pos_y_spin_box_value_changed"]

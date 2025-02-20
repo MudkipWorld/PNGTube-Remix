@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://drok2umdmycjc"]
 
-[ext_resource type="Script" path="res://Scripts/StateRemapButton.gd" id="2_ih08l"]
-[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/DeleteButton.png" id="3_5sre3"]
+[ext_resource type="Script" path="res://Scripts/UI/StateRemapButton.gd" id="2_ih08l"]
+[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/Assets/DeleteButton.png" id="3_5sre3"]
 
 [node name="StateButtonHbox" type="HBoxContainer"]
 offset_right = 258.0

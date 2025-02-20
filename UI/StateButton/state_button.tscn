@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwtyu481ec5vq"]
 
-[ext_resource type="Script" path="res://Scripts/StateButton.gd" id="2_2ybu4"]
+[ext_resource type="Script" path="res://Scripts/UI/StateButton.gd" id="2_2ybu4"]
 
 [node name="StateButton" type="Button" groups=["StateButtons"]]
 custom_minimum_size = Vector2(35, 35)

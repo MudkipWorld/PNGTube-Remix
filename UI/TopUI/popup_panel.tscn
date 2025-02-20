@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1x30v3npumk6"]
 
-[ext_resource type="Script" path="res://Scripts/popup_panel.gd" id="1_wqjpb"]
+[ext_resource type="Script" path="res://Scripts/UI/popup_panel.gd" id="1_wqjpb"]
 
 [node name="PopupPanel" type="PopupPanel"]
 transparent_bg = true
@@ -15,8 +15,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 304.0
-offset_bottom = 196.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -30,10 +30,10 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "If you clicked quit without making sure
 your work is saved, you will lose your 
-progress (note, this is a placeholder
-sorry for it being ugly)"
+progress"
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2

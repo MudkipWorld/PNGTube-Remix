@@ -77,7 +77,7 @@ func _ready():
 	current_state = 0
 
 func blinking():
-	blink_timer.wait_time = randf_range(1,5) * settings_dict.blink_speed
+	blink_timer.wait_time = settings_dict.blink_speed
 	blink_timer.start()
 	await blink_timer.timeout
 	blink.emit()

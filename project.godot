@@ -32,7 +32,7 @@ driver/enable_input=true
 Global="*res://Main/Scripts/Global.gd"
 SaveAndLoad="*res://Main/Scripts/SaveAndLoad.gd"
 GlobalAudioStreamPlayer="*res://Main/Scripts/AudioStreamPlayer.gd"
-Themes="*res://Scripts/_Themes_.gd"
+Themes="*res://Scripts/AutoLoads/_Themes_.gd"
 LipSyncGlobals="*res://UI/Lipsync stuff/godot-lip-sync/lip_sync_globals.gd"
 
 [debug]

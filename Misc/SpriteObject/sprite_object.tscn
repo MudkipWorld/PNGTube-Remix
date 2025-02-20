@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://du5v1xpm5fjcm"]
+[gd_scene load_steps=13 format=3 uid="uid://du5v1xpm5fjcm"]
 
 [ext_resource type="Script" path="res://Misc/SpriteObject/Script/sprite_object.gd" id="1_i7wd5"]
 [ext_resource type="Texture2D" uid="uid://t7lg762xsffp" path="res://Misc/FolderObject/origin.png" id="2_lsh2x"]
-[ext_resource type="Shader" path="res://Scripts/SpriteShader.gdshader" id="3_lejuk"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/SpriteShader.gdshader" id="3_lejuk"]
 [ext_resource type="Texture2D" uid="uid://chuvmi2yancux" path="res://Misc/AppendageObject/origin.png" id="3_n7qih"]
 [ext_resource type="Texture2D" uid="uid://cppqjhaoi70l5" path="res://Misc/EasyBlend/Blends/add.png" id="3_updi2"]
 [ext_resource type="Texture2D" uid="uid://dv27xjbwfkacl" path="res://Misc/LightSource/Lamp.png" id="3_x1bf3"]
-[ext_resource type="Shader" path="res://Scripts/SpriteSelection.gdshader" id="6_3ws45"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/SpriteSelection.gdshader" id="6_3ws45"]
+[ext_resource type="Script" path="res://Scripts/ObjectComponents/movements.gd" id="8_aa1sy"]
+[ext_resource type="Script" path="res://Scripts/ObjectComponents/reaction_config.gd" id="9_hkdvl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1tqhp"]
 resource_local_to_scene = true
@@ -110,12 +112,20 @@ z_index = 4096
 texture = ExtResource("3_n7qih")
 
 [node name="Blink" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 0.2
 
 [node name="Animation" type="Timer" parent="."]
 
-[node name="Talk" type="Timer" parent="."]
-wait_time = 0.12
+[node name="Movements" type="Node" parent="." node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
+script = ExtResource("8_aa1sy")
+actor = NodePath("..")
+
+[node name="ReactionConfig" type="Node" parent="." node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
+script = ExtResource("9_hkdvl")
+actor = NodePath("..")
 
 [connection signal="button_down" from="Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab" to="." method="_on_grab_button_down"]
 [connection signal="button_up" from="Pos/Wobble/Squish/Drag/Rotation/Sprite2D/Grab" to="." method="_on_grab_button_up"]

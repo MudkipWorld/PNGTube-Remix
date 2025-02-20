@@ -2,7 +2,6 @@ extends Control
 
 signal key_pressed
 
-
 var filepath : Array = []
 enum State {
 	LoadFile,
@@ -48,13 +47,11 @@ func load_sprites():
 	current_state = State.LoadSprites
 	%FileDialog.show()
 
-
 func load_append_sprites():
 	%FileDialog.filters = ["*.png, *.apng", "*.png", "*.jpeg", "*.jpg", "*.svg", "*.apng"]
 	$FileDialog.file_mode = 1
 	current_state = State.AddAppend
 	%FileDialog.show()
-
 
 func replacing_sprite():
 	if Global.held_sprite != null:
@@ -274,7 +271,6 @@ func _on_file_dialog_files_selected(paths):
 
 		%Control._added_tree(sprite_nodes)
 
-
 func _on_confirmation_dialog_confirmed():
 	Themes.theme_settings.path = ""
 	%TopUI/TopBarInput.path = ""
@@ -283,8 +279,6 @@ func _on_confirmation_dialog_confirmed():
 	Global.settings_dict.max_fps = 241
 	%TopUI.update_fps(241)
 	%TopUI/%MaxFPSlider.value = 241
-	
-	
 
 func clear_sprites():
 	Global.held_sprite = null
@@ -306,8 +300,6 @@ func clear_sprites():
 	%CamPos.global_position = Vector2(640, 360)
 	Global.settings_dict.zoom = Vector2(1,1)
 	Global.settings_dict.pan = Vector2(640, 360)
-	
-
 
 func _input(event):
 	if can_scroll && not Input.is_action_pressed("ctrl"):
@@ -331,14 +323,11 @@ func _on_sub_viewport_container_mouse_entered():
 func _on_sub_viewport_container_mouse_exited():
 	can_scroll = false
 
-
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		rec_inp = false
 	elif what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
 		rec_inp = true
-	
-
 
 func _on_background_input_capture_bg_key_pressed(_node, keys_pressed):
 	if Global.settings_dict.checkinput:
