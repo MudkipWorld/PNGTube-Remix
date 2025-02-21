@@ -12,7 +12,7 @@ uniform float rotation = 0.0;
 uniform vec2 rotation_offset = vec2(0.5, 0.5);
 
 varying vec2 rot_uv;
-
+uniform bool add_margins = true;
 
 void fragment() {
 	COLOR.a = 0.0;

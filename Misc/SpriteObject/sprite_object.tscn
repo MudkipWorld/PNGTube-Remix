@@ -33,13 +33,14 @@ diffuse_texture = ExtResource("3_x1bf3")
 resource_local_to_scene = true
 shader = ExtResource("6_3ws45")
 shader_parameter/line_color = Vector4(1, 1, 1, 1)
-shader_parameter/line_thickness = 3.0
+shader_parameter/line_thickness = 2.0
 shader_parameter/frequency = 10.0
 shader_parameter/phase_speed = 1.0
 shader_parameter/base_line_color = Vector4(0, 0, 0, 1)
 shader_parameter/wiggle = false
 shader_parameter/rotation = 0.0
 shader_parameter/rotation_offset = Vector2(0.5, 0.5)
+shader_parameter/add_margins = false
 
 [node name="SpriteObject" type="Node2D" groups=["Sprites"]]
 script = ExtResource("1_i7wd5")
@@ -81,7 +82,6 @@ texture = SubResource("CanvasTexture_upggl")
 
 [node name="Ghost" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation/Sprite2D"]
 unique_name_in_owner = true
-visible = false
 z_index = 4095
 z_as_relative = false
 material = SubResource("ShaderMaterial_vf3uq")

@@ -14,6 +14,8 @@ signal remake_layers
 signal update_layers
 signal update_layer_visib
 
+signal new_file
+
 signal mode_changed
 signal deselect
 signal theme_update

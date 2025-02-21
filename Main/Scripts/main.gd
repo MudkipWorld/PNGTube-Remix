@@ -113,11 +113,11 @@ func _on_file_dialog_files_selected(paths):
 			else:
 				Global.update_layers.emit(0, sprte_obj, "Sprite2D")
 
-
 func _on_confirmation_dialog_confirmed():
 	Themes.theme_settings.path = ""
 	%TopUI/TopBarInput.path = ""
 	%TopUI/TopBarInput.last_path = ""
+	Global.new_file.emit()
 	clear_sprites()
 	Global.settings_dict.max_fps = 241
 	%TopUI.update_fps(241)
@@ -126,17 +126,13 @@ func _on_confirmation_dialog_confirmed():
 func clear_sprites():
 	Global.held_sprite = null
 	%Control/UIInput.held_sprite_is_null()
-	
-	for i in %Control/%LayerViewBG.get_node("%LayerVBox").get_children():
-		i.free()
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		if InputMap.has_action(str(i.sprite_id)):
 			InputMap.erase_action(str(i.sprite_id))
 
 	for i in %SpritesContainer.get_children():
-		i.free()
-		
-
+		i.queue_free()
+	
 	%Control/StatesStuff.delete_all_states()
 	%Control/StatesStuff.initial_state()
 	%Camera2D.zoom = Vector2(1,1)

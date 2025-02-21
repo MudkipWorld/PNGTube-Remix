@@ -454,7 +454,7 @@ func _on_visible_toggled(toggled_on):
 	else:
 		Global.held_sprite.dictmain.visible = false
 		Global.held_sprite.visible = false
-	get_parent().update_visib_buttons()
+	Global.held_sprite.treeitem.update_visib_buttons()
 	Global.held_sprite.save_state(Global.current_state)
 
 func _on_z_order_spinbox_value_changed(value):
@@ -529,6 +529,7 @@ func _on_blink_speed_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_blink_speed_slider_value_changed(value):
 	%BlinkSpeedLabel.text = "Blink Speed : " + str(snappedf(value, 0.1))
+	Global.settings_dict.blink_speed = value
 
 func _on_delete_button_pressed():
 	if Global.held_sprite != null:
@@ -591,7 +592,7 @@ func _on_folder_button_pressed():
 	var states = get_tree().get_nodes_in_group("StateButtons").size()
 	for i in states:
 		sprte_obj.states.append({})
-	get_parent().add_item(sprte_obj)
+	Global.update_layers.emit(0, sprte_obj, "Sprite2D")
 	sprte_obj.sprite_id = sprte_obj.get_instance_id()
 #endregion
 

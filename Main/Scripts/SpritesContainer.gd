@@ -49,8 +49,7 @@ func _process(delta):
 	
 	get_parent().position.y = clamp(get_parent().position.y + (yVel * delta),-90000000, 0)
 	
-	if get_parent().position.y > 0:
-		get_parent().position.y = lerp(get_parent().position.y, 0, 0.08)
+	get_parent().position.y = lerp(get_parent().position.y, 0.0, 0.08)
 	bounceChange = hold - get_parent().position.y
 	
 	yVel = clamp(yVel + Global.settings_dict.bounceGravity* delta,-90000000, 90000000)
@@ -67,6 +66,11 @@ func _process(delta):
 			set_mo_squish()
 		elif current_mo_anim == "Float":
 			set_mo_float()
+		else:
+			position = lerp(position, pos, 0.05)
+			
+		if current_mo_anim != "Squish":
+			scale = lerp(scale, Vector2(1.0,1.0), 0.06)
 			
 	elif not currenly_speaking:
 		if current_mc_anim == "Bouncy":
@@ -77,6 +81,11 @@ func _process(delta):
 			set_mc_squish()
 		elif current_mc_anim == "Float":
 			set_mc_float()
+		else:
+			position = lerp(position, pos, 0.05)
+		
+		if current_mc_anim != "Squish":
+			scale = lerp(scale, Vector2(1.0,1.0), 0.06)
 
 
 
@@ -125,16 +134,15 @@ func get_state(state):
 
 func not_speaking():
 	currenly_speaking = false
-	scale = Vector2(1,1)
 	
 	match mouth_closed:
 		0:
 			set_mc_idle()
 		1:
-			position = pos
+		#	position = pos
 			set_mc_bouncy()
 		3:
-			position = pos
+		#	position = pos
 			set_mc_one_bounce()
 		4:
 			set_mc_wobble()
@@ -144,16 +152,15 @@ func not_speaking():
 func speaking():
 #	modulate = Color.WHITE
 	currenly_speaking = true
-	scale = Vector2(1,1)
 	
 	match mouth_open:
 		0:
 			set_mo_idle()
 		1:
-			position = pos
+		#	position = pos
 			set_mo_bouncy()
 		3:
-			position = pos
+		#	position = pos
 			set_mo_one_bounce()
 		4:
 			set_mo_wobble()
@@ -168,13 +175,14 @@ func state_bounce():
 
 
 func set_mc_float():
-	position.y = (sin(tick*Global.settings_dict.yFrq)*(Global.settings_dict.yAmp*2))
+	position.y = lerp(position.y, (sin(tick*Global.settings_dict.yFrq)*(Global.settings_dict.yAmp)), 0.08)
 #	yVel = (position.y * 0.08)
-	bounceChange = position.y /10
+	bounceChange = position.y /8
 
 
 func set_mc_idle():
-	position = pos
+	pass
+#	position = pos
 
 func set_mc_bouncy():
 	if get_parent().position.y > -1:
@@ -185,13 +193,13 @@ func set_mc_one_bounce():
 		yVel = Global.settings_dict.bounceSlider * -1
 
 func set_mc_wobble():
-	position.x = sin(tick*Global.settings_dict.xFrq)*Global.settings_dict.xAmp
-	position.y = sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp
+	position.x = lerp(position.x, sin(tick*Global.settings_dict.xFrq)*Global.settings_dict.xAmp, 0.08)
+	position.y = lerp(position.y, sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp, 0.08)
 	bounceChange = position.y/10
 	
 
 func set_mc_squish():
-	position.y = sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp
+	position.y = lerp(position.y,sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp, 0.08)
 	
 	var yvel = (position.y * 0.01)
 	var target = Vector2(1.0-yvel,1.0+yvel)
@@ -201,12 +209,13 @@ func set_mc_squish():
 
 
 func set_mo_float():
-	position.y = (sin(tick*Global.settings_dict.yFrq)*(Global.settings_dict.yAmp*10))
-	bounceChange = position.y /10
-
+	position.y = lerp(position.y, (sin(tick*Global.settings_dict.yFrq)*(Global.settings_dict.yAmp)), 0.08)
+#	yVel = (position.y * 0.08)
+	bounceChange = position.y /8
 
 func set_mo_idle():
-	position = pos
+	pass
+#	position = pos
 
 func set_mo_bouncy():
 	if get_parent().position.y > -1:
@@ -217,14 +226,14 @@ func set_mo_one_bounce():
 		yVel = Global.settings_dict.bounceSlider * -1
 
 func set_mo_wobble():
-	position.x = sin(tick*Global.settings_dict.xFrq)*Global.settings_dict.xAmp
-	position.y = sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp
+	position.x = lerp(position.x, sin(tick*Global.settings_dict.xFrq)*Global.settings_dict.xAmp, 0.08)
+	position.y = lerp(position.y, sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp, 0.08)
 	bounceChange = position.y/10
 	
 
 
 func set_mo_squish():
-	position.y = sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp
+	position.y = lerp(position.y,sin(tick*Global.settings_dict.yFrq)*Global.settings_dict.yAmp, 0.08)
 	
 	var yvel = (position.y * 0.01)
 	var target = Vector2(1.0-yvel,1.0+yvel)

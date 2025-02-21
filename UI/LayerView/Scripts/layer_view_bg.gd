@@ -8,6 +8,7 @@ var layer_item = preload("res://UI/LayerView/layer_item.tscn")
 
 
 func _ready() -> void:
+	Global.new_file.connect(delete_layers)
 	Global.remake_layers.connect(remake_layers)
 	Global.update_layers.connect(update_layers)
 	layers_popup.connect("id_pressed",choosing_layers_popup)
@@ -59,6 +60,7 @@ func add_new_layer_item(new_item, type):
 		new_layer_item.get_node("%Icon").texture = new_item.get_node("%Sprite2D").texture
 
 	new_layer_item.get_node("%NameLabel").text = new_item.sprite_name
+	new_layer_item.get_node("LayerItem").layer_holder = self
 	%LayerVBox.add_child(new_layer_item)
 	new_item.treeitem = new_layer_item.get_node("LayerItem")
 

@@ -233,3 +233,9 @@ func check_indents():
 		if get_parent().get_parent().name == "OtherLayers":
 			%Intend.show()
 			%Intend2.show()
+
+func update_visib_buttons():
+	if Global.held_sprite.dictmain.visible:
+		%Visiblity.button_pressed = false
+	elif !Global.held_sprite.dictmain.visible:
+		%Visiblity.button_pressed = true
