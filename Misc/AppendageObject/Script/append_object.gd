@@ -5,7 +5,6 @@ var heldTicks = 0
 @onready var dragger = $Pos/Wobble/Squish/Drag
 @onready var wob = $Pos/Wobble
 @onready var sprite = %Sprite2D
-@onready var contain = get_tree().get_root().get_node("Main/%SpritesContainer")
 @onready var img = %Sprite2D.texture.get_image()
 #Wobble
 var squish = 1

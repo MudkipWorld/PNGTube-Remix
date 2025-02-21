@@ -2,21 +2,20 @@ extends Node2D
 
 signal blink
 
-@warning_ignore("unused_signal")
 signal reinfo
 signal animation_state
 signal light_info
-@warning_ignore("unused_signal")
-signal speaking
-@warning_ignore("unused_signal")
-signal not_speaking
-signal reinfoanim
 
-@warning_ignore("unused_signal")
+signal speaking
+signal not_speaking
+
+signal reinfoanim
+signal remake_layers
+signal update_layers
+signal update_layer_visib
+
 signal mode_changed
-@warning_ignore("unused_signal")
 signal deselect
-@warning_ignore("unused_signal")
 signal theme_update
 
 var blink_timer : Timer = Timer.new()
@@ -68,6 +67,10 @@ var new_rot = 0
 var static_view : bool = false
 var spinbox_held : bool = false
 
+@onready var main = get_tree().get_root().get_node("Main")
+@onready var sprite_container = get_tree().get_root().get_node("Main/%SpritesContainer")
+@onready var top_ui = get_tree().get_root().get_node("Main/%TopUI")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_window().min_size = Vector2(1000,720)
@@ -107,8 +110,8 @@ func get_sprite_states(state):
 		
 	animation_state.emit(current_state)
 	light_info.emit(current_state)
+	update_layer_visib.emit()
 	reinfoanim.emit()
-
 
 func _input(_event : InputEvent):
 	if held_bg_sprite != null:
@@ -131,11 +134,6 @@ func _input(_event : InputEvent):
 				held_sprite.dictmain.rotation += 0.05
 				rot()
 
-
-
-
-
-
 func offset():
 	held_sprite.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 	held_sprite.dictmain.position = held_sprite.position
@@ -144,11 +142,9 @@ func offset():
 
 	get_tree().get_root().get_node("Main/%Control/%UIInput").update_offset()
 
-
 func bg_rot():
 	held_bg_sprite.save_state(current_state)
 	get_tree().get_root().get_node("Main/%Control/BackgroundEdit").update_pos_spins()
-
 
 func _process(delta):
 	if settings_dict.should_delta:
@@ -190,13 +186,10 @@ func moving_origin(delta):
 
 					offset()
 
-
 func rot():
 	held_sprite.rotation = held_sprite.dictmain.rotation
 	held_sprite.save_state(current_state)
 	get_tree().get_root().get_node("Main/%Control/%UIInput").update_pos_spins()
-
-
 
 func moving_sprite(delta):
 	if held_sprite != null:

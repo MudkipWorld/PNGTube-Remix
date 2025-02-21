@@ -6,7 +6,7 @@ var dragSpeed = 0
 @onready var dragger = $Pos/Wobble/Squish/Drag
 @onready var wob = $Pos/Wobble
 @onready var sprite = $Pos/Wobble/Squish/Drag/Sprite2D
-@onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
+@onready var contain = Global.sprite_container
 @onready var img = $Pos/Wobble/Squish/Drag/Sprite2D.texture.get_image()
 #Wobble
 var squish = 1
@@ -137,5 +137,3 @@ func _on_grab_button_up():
 	if Global.held_bg_sprite == self:
 		dragging = false
 		save_state(Global.current_state)
-
-

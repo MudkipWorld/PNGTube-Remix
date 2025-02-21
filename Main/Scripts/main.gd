@@ -74,12 +74,6 @@ func add_normal_sprite():
 			current_state = State.AddNormal
 			%FileDialog.show()
 
-func load_bg_sprites():
-	%FileDialog.filters = ["*.png", "*.jpeg", "*.jpg", "*.svg"]
-	$FileDialog.file_mode = 1
-	current_state = State.AddBgSprite
-	%FileDialog.show()
-
 func _on_file_dialog_file_selected(path): 
 	match current_state:
 		State.LoadFile:
@@ -88,176 +82,25 @@ func _on_file_dialog_file_selected(path):
 			SaveAndLoad.save_file(path)
 			
 		State.ReplaceSprite:
-			
-			
-			if path.get_extension() == "gif":
-				pass
-				'''
-				var g_file = FileAccess.get_file_as_bytes(path)
-				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
-				var img_can = CanvasTexture.new()
-				
-				for n in gif_tex.frames:
-					gif_tex.get_frame_texture(n).get_image().fix_alpha_edges()
-				
-				img_can.diffuse_texture = gif_tex
-				Global.held_sprite.anim_texture = g_file
-				Global.held_sprite.anim_texture_normal = null
-				Global.held_sprite.texture = img_can
-				Global.held_sprite.get_node("%Sprite2D").texture = img_can
-				Global.held_sprite.img_animated = true
-				Global.held_sprite.is_apng = false
-				Global.held_sprite.save_state(Global.current_state)
-				Global.held_sprite.treeitem.get_node("%Icon").texture = Global.held_sprite.get_node("%Sprite2D").texture
-				'''
-				
-				
-
-			else:
-				var apng_test = AImgIOAPNGImporter.load_from_file(path)
-				if apng_test != ["No frames", null]:
-					var img = AImgIOAPNGImporter.load_from_file(path)
-					var tex = img[1] as Array[AImgIOFrame]
-					Global.held_sprite.frames = tex
-					
-					for n in Global.held_sprite.frames:
-						n.content.fix_alpha_edges()
-					
-					var cframe: AImgIOFrame = Global.held_sprite.frames[0]
-					var text = ImageTexture.create_from_image(cframe.content)
-					var img_can = CanvasTexture.new()
-					img_can.diffuse_texture = text
-					Global.held_sprite.texture = img_can
-					Global.held_sprite.treeitem.get_node("%Icon").texture = Global.held_sprite.texture
-					Global.held_sprite.is_apng = true
-					Global.held_sprite.img_animated = false
-				else:
-					var img = Image.load_from_file(path)
-					var texture = ImageTexture.create_from_image(img)
-					var img_can = CanvasTexture.new()
-					img.fix_alpha_edges()
-					Global.held_sprite.img_animated = false
-					Global.held_sprite.is_apng = false
-					img_can.diffuse_texture = texture
-					Global.held_sprite.texture = img_can
-					Global.held_sprite.get_node("%Sprite2D").texture = img_can
-					Global.held_sprite.save_state(Global.current_state)
-					Global.held_sprite.treeitem.get_node("%Icon").texture = texture
-					
-				if Global.held_sprite.sprite_type == "WiggleApp":
-					Global.held_sprite.correct_sprite_size()
-					Global.held_sprite.update_wiggle_parts()
-			Global.held_sprite.get_node("%Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
-			Global.get_sprite_states(Global.current_state)
-			
+			%FileImporter.replace_texture(path)
 			
 		State.AddNormal:
-			
-			if path.get_extension() == "gif":
-				pass
-				'''
-				var g_file = FileAccess.get_file_as_bytes(path)
-				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
-				
-				for n in gif_tex.frames:
-					gif_tex.get_frame_texture(n).get_image().fix_alpha_edges()
-				
-				
-				Global.held_sprite.anim_texture_normal = g_file
-				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = gif_tex'''
-			else:
-				var apng_test = AImgIOAPNGImporter.load_from_file(path)
-				if apng_test != ["No frames", null]:
-					var img = AImgIOAPNGImporter.load_from_file(path)
-					var tex = img[1] as Array[AImgIOFrame]
-					Global.held_sprite.frames2 = tex
-					
-					for n in Global.held_sprite.frames2:
-						n.content.fix_alpha_edges()
-					
-					var cframe: AImgIOFrame = Global.held_sprite.frames2[0]
-					var text = ImageTexture.create_from_image(cframe.content)
-					Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = text
-
-				else:
-					var img = Image.load_from_file(path)
-					img.fix_alpha_edges()
-					var texture = ImageTexture.create_from_image(img)
-					Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = texture
-			Global.get_sprite_states(Global.current_state)
+			%FileImporter.add_normal(path)
 
 func _on_file_dialog_files_selected(paths):
 	if current_state == State.LoadSprites or current_state == State.AddAppend:
-		var sprite_nodes = []
+	#	var sprite_nodes = []
 		for path in paths:
 			
 			var sprte_obj
-
 			if current_state == State.LoadSprites:
-				sprte_obj = preload("res://Misc/SpriteObject/sprite_object.tscn").instantiate()
+				sprte_obj = %FileImporter.import_sprite(path)
 			elif current_state == State.AddAppend:
-				sprte_obj = preload("res://Misc/AppendageObject/Appendage_object.tscn").instantiate()
+				sprte_obj = %FileImporter.import_appendage(path)
 			%SpritesContainer.add_child(sprte_obj)
-
-			if path.get_extension() == "gif":
-				pass
-				'''
-				var g_file = FileAccess.get_file_as_bytes(path)
-				var gif_tex = GifManager.animated_texture_from_buffer(g_file)
-				
-				for n in gif_tex.frames:
-					gif_tex.get_frame_texture(n).get_image().fix_alpha_edges()
-				
-				var img_can = CanvasTexture.new()
-				img_can.diffuse_texture = gif_tex
-				sprte_obj.anim_texture = g_file
-				sprte_obj.img_animated = true
-				sprte_obj.get_node("%Sprite2D").texture = img_can'''
-
-
-			
-			
-			else:
-				var apng_test = AImgIOAPNGImporter.load_from_file(path)
-				if apng_test != ["No frames", null]:
-					var img = AImgIOAPNGImporter.load_from_file(path)
-					var tex = img[1] as Array[AImgIOFrame]
-					sprte_obj.frames = tex
-					
-					for n in sprte_obj.frames:
-						n.content.fix_alpha_edges()
-					
-					var cframe: AImgIOFrame = sprte_obj.frames[0]
-					var text = ImageTexture.create_from_image(cframe.content)
-					var img_can = CanvasTexture.new()
-					img_can.diffuse_texture = text
-					sprte_obj.texture = img_can
-					sprte_obj.is_apng = true
-					sprte_obj.sprite_name = "(Apng) " + path.get_file().get_basename() 
-					sprte_obj.get_node("%Sprite2D").texture = img_can
-					
-				else:
-					var img = Image.load_from_file(path)
-					img.fix_alpha_edges()
-					var texture = ImageTexture.create_from_image(img)
-					var img_can = CanvasTexture.new()
-					img_can.diffuse_texture = texture
-					sprte_obj.texture = img_can
-					sprte_obj.get_node("%Sprite2D").texture = img_can
-					sprte_obj.sprite_name = path.get_file().get_basename()
-				
-			
-				sprte_obj.img_animated = false
-
-
-
 			sprte_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 
-
 			sprte_obj.sprite_id = sprte_obj.get_instance_id()
-			if sprte_obj.img_animated:
-				sprte_obj.sprite_name = "(Gif) " + path.get_file().get_basename() 
-				
 			sprte_obj.states = []
 			var states = get_tree().get_nodes_in_group("StateButtons").size()
 			for i in states:
@@ -266,10 +109,10 @@ func _on_file_dialog_files_selected(paths):
 			if current_state == State.AddAppend:
 				sprte_obj.correct_sprite_size()
 				sprte_obj.update_wiggle_parts()
-			sprite_nodes.append(sprte_obj)
-			
+				Global.update_layers.emit(0, sprte_obj, "WiggleApp")
+			else:
+				Global.update_layers.emit(0, sprte_obj, "Sprite2D")
 
-		%Control._added_tree(sprite_nodes)
 
 func _on_confirmation_dialog_confirmed():
 	Themes.theme_settings.path = ""

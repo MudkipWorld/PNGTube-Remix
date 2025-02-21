@@ -6,7 +6,7 @@ var dragSpeed = 0
 @onready var dragger = $Pos/Wobble/Squish/Drag
 @onready var wob = $Pos/Wobble
 @onready var sprite = $%Sprite2D
-@onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
+@onready var contain = Global.sprite_container
 @onready var img = null
 #Wobble
 var squish = 1

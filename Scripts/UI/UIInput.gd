@@ -13,7 +13,7 @@ extends Node
 @onready var zord = %ZOrderSpinbox
 @onready var mc_anim = %MouthClosedAnim
 @onready var mo_anim = %MouthOpenAnim
-@onready var contain = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer")
+@onready var contain = Global.sprite_container
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	color.get_picker().picker_shape = 1

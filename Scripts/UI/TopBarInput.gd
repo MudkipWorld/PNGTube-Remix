@@ -8,7 +8,7 @@ var bg_color = Color.DIM_GRAY
 var is_transparent : bool
 var is_editor : bool = true
 var last_path : String = ""
-@onready var origin = get_tree().get_root().get_node("Main/%SpritesContainer")
+
 @onready var light = get_tree().get_root().get_node("Main/%LightSource")
 var devices : Array = []
 var path = null
@@ -224,19 +224,19 @@ func _on_collab_button_pressed():
 func _on_anti_al_check_toggled(toggled_on):
 	Global.settings_dict.anti_alias = toggled_on
 	if toggled_on:
-		origin.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		Global.sprite_container.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 
 	else:
-		origin.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+		Global.sprite_container.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 
 
 
 func origin_alias():
 	if Global.settings_dict.anti_alias:
-		origin.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		Global.sprite_container.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 
 	else:
-		origin.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+		Global.sprite_container.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 
 
 func _on_hide_ui_button_toggled(toggled_on):

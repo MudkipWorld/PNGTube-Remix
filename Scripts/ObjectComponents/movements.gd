@@ -4,7 +4,7 @@ extends Node
 var glob : Vector2 = Vector2.ZERO
 var last_mouse_position : Vector2 = Vector2(0,0)
 var last_dist : Vector2 = Vector2(0,0)
-@onready var contain = get_tree().get_root().get_node("Main/%SpritesContainer")
+
 
 func _process(delta: float) -> void:
 	if !Global.static_view:
@@ -26,7 +26,7 @@ func movements(delta):
 		drag(delta)
 		wobble()
 		if actor.dictmain.ignore_bounce:
-			glob.y -= contain.bounceChange
+			glob.y -= Global.sprite_container.bounceChange
 		
 		var length = (glob.y - %Dragger.global_position.y)
 		

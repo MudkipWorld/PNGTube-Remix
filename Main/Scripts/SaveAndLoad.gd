@@ -178,44 +178,17 @@ func load_file(path, should_load_path = false):
 					InputMap.add_action(str(sprite.sprite_id))
 					InputMap.action_add_event(str(sprite.sprite_id), sprite_obj.saved_event)
 					
-			
-			if sprite.has("img_animated"):
-				pass
-				if sprite.img_animated:
-					pass
-					'''var gif_texture : AnimatedTexture = GifManager.animated_texture_from_buffer(sprite.img)
-					sprite_obj.anim_texture = sprite.img
-					var img_can = CanvasTexture.new()
-					
-					for n in gif_texture.frames:
-						gif_texture.get_frame_texture(n).get_image().fix_alpha_edges()
-					img_can.diffuse_texture = gif_texture
-					if sprite.has("normal"):
-						if sprite.normal != null:
-							var gif_normal = GifManager.animated_texture_from_buffer(sprite.normal)
-							
-							for n in gif_normal.frames:
-								gif_normal.get_frame_texture(n).get_image().fix_alpha_edges()
-							
-							img_can.normal_texture = gif_normal
-							sprite_obj.anim_texture_normal = sprite.normal
-					sprite_obj.get_node("%Sprite2D").texture = img_can'''
-					
-				else:
-					load_sprite(sprite_obj, sprite)
-
+			if sprite.has("is_apng"):
+				load_apng(sprite_obj, sprite)
 			else:
-				if sprite.has("is_apng"):
-					load_apng(sprite_obj, sprite)
-				else:
-					load_sprite(sprite_obj, sprite)
+				load_sprite(sprite_obj, sprite)
 
 			sprite_obj.sprite_id = sprite.sprite_id
 			sprite_obj.parent_id = sprite.parent_id
 			sprite_obj.sprite_name = sprite.sprite_name
 			if sprite.has("is_collapsed"):
 				sprite_obj.is_collapsed = sprite.is_collapsed
-			get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer").add_child(sprite_obj)
+			Global.sprite_container.add_child(sprite_obj)
 			sprite_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 
 		if !load_dict.input_array.is_empty():
@@ -235,7 +208,7 @@ func load_file(path, should_load_path = false):
 				for l in abs(i.states.size() - state_count):
 					i.states.append({})
 		Global.load_sprite_states(0)
-		get_tree().get_root().get_node("Main/%Control").loaded_tree(get_tree().get_nodes_in_group("Sprites"))
+		Global.remake_layers.emit()
 		get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
 		Global.load_sprite_states(0)
 		get_tree().get_root().get_node("Main/%Control/UIInput").reinfoanim()
@@ -411,14 +384,14 @@ func load_pngplus_file(path):
 			
 			
 			
-		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/Origin/SpritesContainer").add_child(sprite_obj)
+		Global.sprite_container.add_child(sprite_obj)
 		sprite_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 		
 	for n in 10:
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").add_state()
 	
 	Global.load_sprite_states(0)
-	get_tree().get_root().get_node("Main/%Control").loaded_tree(get_tree().get_nodes_in_group("Sprites"))
+	Global.remake_layers.emit()
 #	get_tree().get_root().get_node("Main/Control/BackgroundEdit").loaded_tree(get_tree().get_nodes_in_group("BackgroundStuff"))
 	get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
 	for i in get_tree().get_nodes_in_group("Sprites"):
