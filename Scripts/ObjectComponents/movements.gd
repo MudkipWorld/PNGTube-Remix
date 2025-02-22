@@ -38,7 +38,7 @@ func movements(delta):
 				var c_parrent_length2 = (c_parent.get_node("%Movements").glob.x - c_parent.get_node("%Dragger").global_position.x)
 				length += c_parrent_length + c_parrent_length2
 		
-		rotationalDrag(length)
+		rotationalDrag(length, delta)
 		stretch(length, delta)
 
 func drag(_delta):
@@ -49,10 +49,10 @@ func drag(_delta):
 		%Drag.global_position = %Dragger.global_position
 
 func wobble():
-	%Wobble.position.x = sin(Global.tick*actor.dictmain.xFrq)*actor.dictmain.xAmp
-	%Wobble.position.y = sin(Global.tick*actor.dictmain.yFrq)*actor.dictmain.yAmp
+	%Wobble.position.x = lerp(%Wobble.position.x, sin(Global.tick*actor.dictmain.xFrq)*actor.dictmain.xAmp, 0.15)
+	%Wobble.position.y = lerp(%Wobble.position.y, sin(Global.tick*actor.dictmain.yFrq)*actor.dictmain.yAmp, 0.15)
 
-func rotationalDrag(length):
+func rotationalDrag(length,delta):
 	%Drag.rotation = sin(Global.tick*actor.dictmain.rot_frq)*deg_to_rad(actor.dictmain.rdragStr)
 	var yvel = (length * actor.dictmain.rdragStr)
 	
@@ -60,7 +60,7 @@ func rotationalDrag(length):
 	
 	yvel = clamp(yvel,actor.dictmain.rLimitMin,actor.dictmain.rLimitMax)
 	
-	%Rotation.rotation = lerp_angle(%Rotation.rotation,deg_to_rad(yvel),0.25)
+	%Rotation.rotation = move_toward(%Rotation.rotation,deg_to_rad(yvel),(2* delta))
 
 func stretch(length,delta):
 	var yvel = (length * actor.dictmain.stretchAmount * delta)
