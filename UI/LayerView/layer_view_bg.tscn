@@ -37,3 +37,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 1
 theme_override_constants/separation = 4
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

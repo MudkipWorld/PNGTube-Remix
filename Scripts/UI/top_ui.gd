@@ -1,37 +1,5 @@
 extends Control
 
-
-var audio = AudioServer
-var sample 
-var linear_sampler
-
-
-var has_spoken : bool = true
-var has_delayed : bool = true
-
-var speech_value : float : 
-	set(value):
-		if %DelayBar.value < Global.settings_dict.volume_delay:
-			if value >= Global.settings_dict.volume_limit:
-				if not has_spoken:
-					%DelayBar.value = 1
-					Global.speaking.emit()
-					has_delayed = true
-					has_spoken = true
-
-		if value < Global.settings_dict.volume_limit:
-			if has_spoken:
-				has_spoken = false
-
-var speech_delay : float : 
-	set(value):
-		if value < Global.settings_dict.volume_delay:
-			if has_delayed:
-				Global.not_speaking.emit()
-				has_delayed = false
-
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	sliders_revalue(Global.settings_dict)
@@ -48,18 +16,9 @@ func check_data():
 	%SaveOnExitCheck.button_pressed = Themes.theme_settings.save_on_exit
 	%AutoSaveCheck.button_pressed = Global.settings_dict.auto_save
 
-
 func _physics_process(_delta):
-	sample = audio.get_bus_peak_volume_left_db(2, 0)
-	linear_sampler = db_to_linear(sample) 
-	%VolumeBar.value = lerpf(%VolumeBar.value,linear_sampler * Global.settings_dict.sensitivity_limit, 0.15)
-	speech_value = %VolumeBar.value
-	speech_delay = %DelayBar.value
-	if %VolumeBar.value < Global.settings_dict.volume_limit:
-		%DelayBar.value = move_toward(%DelayBar.value, 0, 0.5*_delta)
-	elif %VolumeBar.value > Global.settings_dict.volume_limit && has_spoken:
-		%DelayBar.value = 1
-
+	%VolumeBar.value = lerpf(%VolumeBar.value, GlobalMicAudio.volume, 0.15)
+	%DelayBar.value = GlobalMicAudio.delay
 
 func sliders_revalue(settings_dict):
 	%BounceAmountSlider.get_node("%SliderValue").value = settings_dict.bounceSlider
@@ -86,11 +45,8 @@ func sliders_revalue(settings_dict):
 	%MaxFPSlider.value = settings_dict.max_fps
 	update_fps(settings_dict.max_fps)
 	
-	
 	if %AutoSaveCheck.button_pressed:
 		%AutoSaveTimer.start()
-
-
 
 func update_fps(value):
 	if value == 241:
@@ -99,11 +55,9 @@ func update_fps(value):
 	
 	Engine.max_fps = value
 
-
 func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		Global.settings_dict.volume_limit = %VolumeSlider.value
-
 
 func _on_delay_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:

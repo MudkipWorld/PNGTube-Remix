@@ -103,3 +103,13 @@ func collapsing(sprites):
 	for i in sprites:
 		if i.treeitem.get_node("%OtherLayers").get_child_count() > 0:
 			i.treeitem.get_node("%Collapse").button_pressed = i.is_collapsed
+
+func _on_layer_view_bg_focus_entered() -> void:
+	if has_focus():
+		release_focus()
+	deselect_all()
+	Global.deselect.emit()
+
+
+func _on_focus_entered() -> void:
+	pass # Replace with function body.

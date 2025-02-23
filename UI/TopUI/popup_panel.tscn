@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1x30v3npumk6"]
 
-[ext_resource type="Script" path="res://Scripts/UI/popup_panel.gd" id="1_wqjpb"]
+[ext_resource type="Script" path="res://Scripts/UI/Others/popup_panel.gd" id="1_wqjpb"]
 
 [node name="PopupPanel" type="PopupPanel"]
 transparent_bg = true

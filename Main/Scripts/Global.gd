@@ -20,6 +20,10 @@ signal mode_changed
 signal deselect
 signal theme_update
 
+signal update_pos_spins
+signal update_offset_spins
+
+
 var blink_timer : Timer = Timer.new()
 var held_sprite = null
 var held_bg_sprite = null
@@ -142,7 +146,7 @@ func offset():
 	held_sprite.dictmain.offset = held_sprite.get_node("%Sprite2D").position
 	held_sprite.save_state(current_state)
 
-	get_tree().get_root().get_node("Main/%Control/%UIInput").update_offset()
+	update_offset_spins.emit()
 
 func bg_rot():
 	held_bg_sprite.save_state(current_state)
@@ -191,7 +195,7 @@ func moving_origin(delta):
 func rot():
 	held_sprite.rotation = held_sprite.dictmain.rotation
 	held_sprite.save_state(current_state)
-	get_tree().get_root().get_node("Main/%Control/%UIInput").update_pos_spins()
+	update_pos_spins.emit()
 
 func moving_sprite(delta):
 	if held_sprite != null:
@@ -216,4 +220,4 @@ func moving_sprite(delta):
 
 func update_spins():
 	held_sprite.save_state(current_state)
-	get_tree().get_root().get_node("Main/%Control/%UIInput").update_pos_spins()
+	update_pos_spins.emit()

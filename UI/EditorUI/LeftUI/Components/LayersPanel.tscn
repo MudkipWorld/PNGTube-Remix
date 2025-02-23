@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=3 uid="uid://7r3v4vohf4at"]
+
+[ext_resource type="Script" path="res://Scripts/UI/LeftPanel/layers_panel_scripts.gd" id="1_jg6ph"]
+[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/Assets/ZoominButton.png" id="2_r48vs"]
+[ext_resource type="Texture2D" uid="uid://bobj6c6goa1d3" path="res://UI/Assets/FolderButton.png" id="3_4imd6"]
+[ext_resource type="Texture2D" uid="uid://dkly2qhfs7vd8" path="res://UI/Assets/ReplaceButton.png" id="4_fs6qq"]
+[ext_resource type="Texture2D" uid="uid://bv1t65n5ha20j" path="res://UI/Assets/DupButton.png" id="5_rccg0"]
+[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/Assets/DeleteButton.png" id="6_jo6pm"]
+[ext_resource type="Texture2D" uid="uid://diyx30a4yqalc" path="res://UI/Assets/NormalMapButton.png" id="7_q36il"]
+[ext_resource type="Texture2D" uid="uid://cxpsf8uoktwrd" path="res://UI/Assets/NormalMapDelButton.png" id="8_x22hm"]
+[ext_resource type="PackedScene" uid="uid://mldwqrl5tu11" path="res://UI/LayerView/layer_view_bg.tscn" id="9_4x1i6"]
+
+[node name="LayersPanel" type="Control"]
+custom_minimum_size = Vector2(258, 150)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="LayersPanelScripts" type="Node" parent="."]
+script = ExtResource("1_jg6ph")
+
+[node name="LabelPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 28)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="Sprites" type="Label" parent="LabelPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
+text = "Sprites"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(210, 36)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 26.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LayersButtons" type="HBoxContainer" parent="ButtonsPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="AddSpriteButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Add Sprite"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("2_r48vs")
+expand_icon = true
+
+[node name="FolderButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Add Folder"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("3_4imd6")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ReplaceButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Replace Sprite"
+focus_mode = 0
+icon = ExtResource("4_fs6qq")
+expand_icon = true
+
+[node name="DuplicateButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Duplicate Sprite"
+focus_mode = 0
+icon = ExtResource("5_rccg0")
+expand_icon = true
+
+[node name="DeleteButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Delete Sprite"
+focus_mode = 0
+icon = ExtResource("6_jo6pm")
+expand_icon = true
+
+[node name="AddNormalButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Add NormalMap"
+focus_mode = 0
+icon = ExtResource("7_q36il")
+expand_icon = true
+
+[node name="DelNormalButton" type="Button" parent="ButtonsPanel/LayersButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Delete NormalMap"
+focus_mode = 0
+icon = ExtResource("8_x22hm")
+expand_icon = true
+
+[node name="Layers" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 70)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.989
+offset_top = 60.0
+offset_bottom = 0.0469971
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="LayerViewBG" parent="Layers" instance=ExtResource("9_4x1i6")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LayersPopup" type="PopupMenu" parent="Layers/LayerViewBG"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+size = Vector2i(174, 219)
+item_count = 8
+item_0/text = "Add image"
+item_1/text = "Add folder"
+item_1/id = 1
+item_2/text = "Replace"
+item_2/id = 2
+item_3/text = "Duplicate"
+item_3/id = 3
+item_4/text = "Delete"
+item_4/id = 4
+item_5/text = "Add normal map"
+item_5/id = 5
+item_6/text = "Delete normal map"
+item_6/id = 6
+item_7/text = "Deselect"
+item_7/id = 7
+
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/AddSpriteButton" to="LayersPanelScripts" method="_on_add_sprite_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/FolderButton" to="LayersPanelScripts" method="_on_folder_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/ReplaceButton" to="LayersPanelScripts" method="_on_replace_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/DuplicateButton" to="LayersPanelScripts" method="_on_duplicate_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/DeleteButton" to="LayersPanelScripts" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/AddNormalButton" to="LayersPanelScripts" method="_on_add_normal_button_pressed"]
+[connection signal="pressed" from="ButtonsPanel/LayersButtons/DelNormalButton" to="LayersPanelScripts" method="_on_del_normal_button_pressed"]

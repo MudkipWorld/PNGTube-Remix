@@ -150,7 +150,7 @@ func _process(_delta):
 		position = mpos - of
 		dictmain.position = position
 		save_state(Global.current_state)
-		get_tree().get_root().get_node("Main/%Control/UIInput").update_pos_spins()
+		Global.update_pos_spins.emit()
 	
 	
 	if !Global.static_view:

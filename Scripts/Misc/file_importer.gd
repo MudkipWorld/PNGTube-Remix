@@ -111,3 +111,4 @@ func replace_texture(path):
 		Global.held_sprite.update_wiggle_parts()
 	Global.held_sprite.get_node("%Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 	Global.get_sprite_states(Global.current_state)
+	Global.reinfo.emit()

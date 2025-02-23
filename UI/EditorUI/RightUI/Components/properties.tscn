@@ -1,0 +1,515 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3f86pv0can01"]
+
+[ext_resource type="Script" path="res://Scripts/UI/RightPanel/properties_script.gd" id="1_q3kfe"]
+[ext_resource type="Script" path="res://Scripts/UI/Others/Spinboxes.gd" id="1_tcd20"]
+[ext_resource type="Script" path="res://UI/BetterSlider/BetterToggles.gd" id="2_7ymxr"]
+[ext_resource type="Script" path="res://Scripts/UI/States/AssetStateButton.gd" id="3_wheig"]
+[ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/Assets/DeleteButton.png" id="4_b0hoy"]
+
+[node name="Properties" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_tab_index = 0
+
+[node name="PropertiesScript" type="Node" parent="."]
+script = ExtResource("1_q3kfe")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 55.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.871866, 0.871866)
+focus_mode = 1
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MarginContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="Hbox" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/Hbox"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Color :"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Scroll/MarginContainer/VBoxContainer/Hbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/Hbox"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="ColorLabel2" type="Label" parent="Scroll/MarginContainer/VBoxContainer/Hbox/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Tint :"
+
+[node name="TintPickerButton" type="ColorPickerButton" parent="Scroll/MarginContainer/VBoxContainer/Hbox/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+size_flags_horizontal = 2
+color = Color(1, 1, 1, 1)
+
+[node name="HBox2" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="BlendModeLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Blend:"
+
+[node name="BlendMode" type="MenuButton" parent="Scroll/MarginContainer/VBoxContainer/HBox2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Normal"
+flat = false
+alignment = 0
+item_count = 7
+popup/item_0/text = "Normal"
+popup/item_0/checked = true
+popup/item_1/text = "Add"
+popup/item_1/id = 1
+popup/item_2/text = "Subtract"
+popup/item_2/id = 2
+popup/item_3/text = "Multiply"
+popup/item_3/id = 3
+popup/item_4/text = "Burn"
+popup/item_4/id = 4
+popup/item_5/text = "HardMix"
+popup/item_5/id = 5
+popup/item_6/text = "Cursed"
+popup/item_6/id = 6
+
+[node name="HBox12" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 15
+
+[node name="ZOrderLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox12"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Z Order :"
+
+[node name="ZOrderSpinbox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox12"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -9999.0
+max_value = 9999.0
+script = ExtResource("1_tcd20")
+
+[node name="HBox21" type="GridContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="PosXLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pos-X : "
+
+[node name="PosXSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+min_value = -1e+09
+max_value = 1e+09
+step = 0.1
+script = ExtResource("1_tcd20")
+
+[node name="PosYLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "      Pos-Y : "
+
+[node name="PosYSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+min_value = -1e+09
+max_value = 1e+09
+step = 0.1
+script = ExtResource("1_tcd20")
+
+[node name="RotLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Rotation : "
+
+[node name="RotSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox21"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = -360.0
+max_value = 360.0
+step = 0.05
+script = ExtResource("1_tcd20")
+
+[node name="HBoxOffset" type="GridContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="OffsetXLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBoxOffset"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Offset-X : "
+
+[node name="OffsetXSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBoxOffset"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+min_value = -99999.0
+max_value = 99999.0
+step = 0.1
+script = ExtResource("1_tcd20")
+
+[node name="OffsetYLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBoxOffset"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Offset-Y : "
+
+[node name="OffsetYSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBoxOffset"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+min_value = -99999.0
+max_value = 99999.0
+step = 0.1
+
+[node name="HBox9" type="GridContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="SizeLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox9"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Size-X :       "
+
+[node name="SizeSpinBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox9"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.1
+step = 0.1
+value = 1.0
+script = ExtResource("1_tcd20")
+
+[node name="SizeYLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/HBox9"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "       Size-Y : "
+
+[node name="SizeSpinYBox" type="SpinBox" parent="Scroll/MarginContainer/VBoxContainer/HBox9"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 0.1
+step = 0.1
+value = 1.0
+script = ExtResource("1_tcd20")
+
+[node name="Sp3" type="HSeparator" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Visible" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "Visible"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Should Blink : "
+
+[node name="EyeOption" type="OptionButton" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_1/text = "Eye Open"
+popup/item_1/id = 1
+popup/item_2/text = "Eye Closed"
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+text = "Should Talk : "
+
+[node name="MouthOption" type="OptionButton" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_1/text = "Mouth Open"
+popup/item_1/id = 1
+popup/item_2/text = "Mouth Closed"
+popup/item_2/id = 2
+
+[node name="Sp4" type="HSeparator" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxPhysics" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 12
+
+[node name="IgnoreBounce" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 30)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "Ignore Bounce"
+
+[node name="Physics" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(151, 30)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "Physics"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ClipChildren" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(168, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Clip Children"
+
+[node name="UseMouseVel" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Use Mouse Velocity"
+script = ExtResource("2_7ymxr")
+value_to_update = "follow_mouse_velocity"
+
+[node name="FlipSpriteHBox" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="FlipSpriteH" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(161, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Flip H"
+
+[node name="FlipSpriteV" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(151, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Flip V"
+
+[node name="HBoxAsset" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="IsAssetCheck" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "An Asset is a Sprite you can toggle at any time. I.e glasses, hats, etc.."
+text = "Is a Toggle Asset"
+
+[node name="VSeparator" type="VSeparator" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="IsAssetButton" type="Button" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(151, 30)
+layout_mode = 2
+text = "Bind Key"
+script = ExtResource("3_wheig")
+
+[node name="RemoveAssetButton" type="Button" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+icon = ExtResource("4_b0hoy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="DontHideOnToggleCheck" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Shows Asset only and doesn't hide it even when key is pressed again. "
+text = "Only Show on Toggle"
+
+[node name="ShouldDisappearCheck" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Keys that makes your Sprite Disappear whenever toggled."
+text = "Disappear Key(s)"
+
+[node name="ShouldDisListContainer" type="VBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="ShouldDisLabel" type="Label" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer"]
+visible = false
+layout_mode = 2
+text = "List of Keys for Disappearence.
+(Key must correspond to existing asset's)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ShouldDisAddButton" type="Button" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+focus_mode = 0
+text = "Add Key"
+
+[node name="ShouldDisDelButton" type="Button" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+focus_mode = 0
+disabled = true
+text = "Delete Key"
+
+[node name="ShouldDisRemapButton" type="Button" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+focus_mode = 0
+disabled = true
+toggle_mode = true
+text = "Remap Key"
+
+[node name="ShouldDisList" type="ItemList" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "List of Keys (Must correspond to another asset's Key) that makes The selected Asset disappear."
+focus_mode = 1
+allow_reselect = true
+auto_height = true
+text_overrun_behavior = 2
+max_columns = 3
+fixed_column_width = 122
+
+[connection signal="color_changed" from="Scroll/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="PropertiesScript" method="_on_color_picker_button_color_changed"]
+[connection signal="focus_entered" from="Scroll/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="PropertiesScript" method="_on_color_picker_button_focus_entered"]
+[connection signal="focus_exited" from="Scroll/MarginContainer/VBoxContainer/Hbox/ColorPickerButton" to="PropertiesScript" method="_on_color_picker_button_focus_exited"]
+[connection signal="color_changed" from="Scroll/MarginContainer/VBoxContainer/Hbox/HBoxContainer/TintPickerButton" to="PropertiesScript" method="_on_tint_picker_button_color_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox12/ZOrderSpinbox" to="PropertiesScript" method="_on_z_order_spinbox_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox21/PosXSpinBox" to="PropertiesScript" method="_on_pos_x_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox21/PosYSpinBox" to="PropertiesScript" method="_on_pos_y_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox21/RotSpinBox" to="PropertiesScript" method="_on_rot_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBoxOffset/OffsetXSpinBox" to="PropertiesScript" method="_on_offset_x_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBoxOffset/OffsetYSpinBox" to="PropertiesScript" method="_on_offset_y_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox9/SizeSpinBox" to="PropertiesScript" method="_on_size_spin_box_value_changed"]
+[connection signal="value_changed" from="Scroll/MarginContainer/VBoxContainer/HBox9/SizeSpinYBox" to="PropertiesScript" method="_on_size_spin_y_box_value_changed"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/Visible" to="PropertiesScript" method="_on_visible_toggled"]
+[connection signal="item_selected" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/EyeOption" to="PropertiesScript" method="_on_eye_option_item_selected"]
+[connection signal="item_selected" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/MouthOption" to="PropertiesScript" method="_on_mouth_option_item_selected"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/IgnoreBounce" to="PropertiesScript" method="_on_ignore_bounce_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/Physics" to="PropertiesScript" method="_on_physics_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/ClipChildren" to="PropertiesScript" method="_on_clip_children_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox/FlipSpriteH" to="PropertiesScript" method="_on_flip_sprite_h_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox/FlipSpriteV" to="PropertiesScript" method="_on_flip_sprite_v_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetCheck" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_is_asset_check_toggled"]
+[connection signal="pressed" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/RemoveAssetButton" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_remove_asset_button_pressed"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/DontHideOnToggleCheck" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_dont_hide_on_toggle_check_toggled"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisappearCheck" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_disappear_check_toggled"]
+[connection signal="pressed" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer/ShouldDisAddButton" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_add_button_pressed"]
+[connection signal="pressed" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer/ShouldDisDelButton" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_del_button_pressed"]
+[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/HBoxContainer/ShouldDisRemapButton" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_remap_button_toggled"]
+[connection signal="empty_clicked" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/ShouldDisList" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_list_empty_clicked"]
+[connection signal="focus_exited" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/ShouldDisList" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_list_focus_exited"]
+[connection signal="item_selected" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/ShouldDisListContainer/ShouldDisList" to="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxAsset/IsAssetButton" method="_on_should_dis_list_item_selected"]

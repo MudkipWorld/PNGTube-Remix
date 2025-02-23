@@ -106,7 +106,7 @@ func save_state(id):
 	}
 	Global.settings_dict.states[id] = dict
 	
-	if get_tree().get_root().get_node("Main/%TopUI").has_spoken:
+	if GlobalMicAudio.has_spoken:
 		speaking()
 	else:
 		not_speaking()
@@ -125,7 +125,7 @@ func get_state(state):
 		if Global.settings_dict.bounce_state:
 			state_bounce()
 			
-		if get_tree().get_root().get_node("Main/%TopUI").has_spoken:
+		if GlobalMicAudio.has_spoken:
 			speaking()
 		else:
 			not_speaking()

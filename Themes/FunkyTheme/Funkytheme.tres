@@ -112,7 +112,7 @@ corner_radius_bottom_left = 4
 content_margin_left = 4.0
 content_margin_top = 2.0
 content_margin_right = 4.0
-bg_color = Color(0.423529, 0.313726, 0.478431, 1)
+bg_color = Color(0.231583, 0.575692, 0.700148, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -156,7 +156,7 @@ expand_margin_bottom = 5.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s4pa"]
 content_margin_left = 10.0
 content_margin_right = 10.0
-bg_color = Color(0.423529, 0.313726, 0.478431, 1)
+bg_color = Color(0.24025, 0.521639, 0.407868, 1)
 border_width_left = 2
 border_width_right = 2
 border_width_bottom = 2

@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://bidkgcxxq68n6"]
+
+[ext_resource type="Script" path="res://Scripts/UI/LeftPanel/ViewportControl.gd" id="1_f7gcc"]
+[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/Assets/ZoominButton.png" id="2_ehuh8"]
+[ext_resource type="Texture2D" uid="uid://x1nc07bigmj1" path="res://UI/Assets/ZoomResetButton.png" id="3_00355"]
+[ext_resource type="Texture2D" uid="uid://bxuqwqa2tk5j8" path="res://UI/Assets/ZoomOutButton.png" id="4_h7cy5"]
+[ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/Assets/ZoomResetMainButton.png" id="5_wth8k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcgtm"]
+bg_color = Color(0.227451, 0.580392, 0.431373, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.196078, 0.415686, 0.345098, 1)
+
+[node name="CameraPanel" type="VBoxContainer"]
+
+[node name="VPPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(210, 105)
+layout_mode = 2
+tooltip_text = "Mini-view"
+theme_override_styles/panel = SubResource("StyleBoxFlat_gcgtm")
+metadata/_edit_use_anchors_ = true
+
+[node name="ViewportControl" type="Node" parent="VPPanel"]
+script = ExtResource("1_f7gcc")
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="VPPanel"]
+custom_minimum_size = Vector2(160, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -45.0
+offset_right = 80.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VPPanel/SubViewportContainer2"]
+unique_name_in_owner = true
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(160, 90)
+size_2d_override = Vector2i(1280, 720)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="VPPanel/SubViewportContainer2/SubViewport"]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+
+[node name="ViewportCam" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 20)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ZoomInButton" type="Button" parent="ViewportCam"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+tooltip_text = "Mini-View Zoom In"
+focus_mode = 0
+icon = ExtResource("2_ehuh8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZoomResetButton" type="Button" parent="ViewportCam"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+tooltip_text = "Mini-View Zoom Reset"
+focus_mode = 0
+icon = ExtResource("3_00355")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZoomOutButton" type="Button" parent="ViewportCam"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+tooltip_text = "Mini-View Zoom Out"
+focus_mode = 0
+icon = ExtResource("4_h7cy5")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZoomMainResetButton" type="Button" parent="ViewportCam"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+tooltip_text = "Main-View Zoom Reset"
+focus_mode = 0
+icon = ExtResource("5_wth8k")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="ViewportCam/ZoomInButton" to="VPPanel/ViewportControl" method="_on_zoom_in_button_pressed"]
+[connection signal="pressed" from="ViewportCam/ZoomResetButton" to="VPPanel/ViewportControl" method="_on_zoom_reset_button_pressed"]
+[connection signal="pressed" from="ViewportCam/ZoomOutButton" to="VPPanel/ViewportControl" method="_on_zoom_out_button_pressed"]
+[connection signal="pressed" from="ViewportCam/ZoomMainResetButton" to="VPPanel/ViewportControl" method="_on_zoom_main_reset_button_pressed"]

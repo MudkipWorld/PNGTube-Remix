@@ -1,0 +1,144 @@
+[gd_scene load_steps=2 format=3 uid="uid://qjip1w7hh1ss"]
+
+[ext_resource type="Script" path="res://Scripts/UI/LeftPanel/animation_panel_scripts.gd" id="1_phr78"]
+
+[node name="AnimationPanel" type="Panel"]
+custom_minimum_size = Vector2(210, 196)
+size_flags_vertical = 3
+
+[node name="AnimationPanelScripts" type="Node" parent="."]
+script = ExtResource("1_phr78")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0304348
+anchor_top = 0.0255102
+anchor_right = 0.973913
+anchor_bottom = 0.489796
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Preview" type="PanelContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(87, 87)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CurrentSelected" type="TextureRect" parent="HBoxContainer/Preview"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(79, 79)
+layout_mode = 2
+size_flags_horizontal = 6
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="PreviewNormal" type="PanelContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(87, 87)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CurrentSelectedNormal" type="TextureRect" parent="HBoxContainer/PreviewNormal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(79, 79)
+layout_mode = 2
+size_flags_horizontal = 6
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+anchor_top = 0.481
+anchor_right = 1.0
+anchor_bottom = 0.588
+offset_top = 0.00799561
+offset_bottom = -0.000999451
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Imgprev" type="Label" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Image"
+horizontal_alignment = 1
+
+[node name="NormalMapPrev" type="Label" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "NormalMap"
+horizontal_alignment = 1
+
+[node name="AnimationFramesLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_left = 0.03
+anchor_top = 0.589
+anchor_right = 0.974
+anchor_bottom = 0.594
+offset_left = 0.0999994
+offset_top = 0.920982
+offset_right = -0.0200195
+offset_bottom = 22.994
+theme_override_font_sizes/font_size = 16
+text = "Animation frames :"
+
+[node name="AnimationFramesSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+anchor_left = 0.017
+anchor_top = 0.694
+anchor_right = 0.974
+anchor_bottom = 0.705
+offset_left = 0.0899997
+offset_top = 2.08598
+offset_right = -0.0200043
+offset_bottom = 16.704
+min_value = 1.0
+max_value = 64.0
+value = 1.0
+rounded = true
+
+[node name="AnimationSpeedLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_left = 0.03
+anchor_top = 0.773
+anchor_right = 0.974
+anchor_bottom = 0.783
+offset_left = 0.0999994
+offset_top = 1.98099
+offset_right = -0.0200195
+offset_bottom = 23.083
+theme_override_font_sizes/font_size = 16
+text = "Animation Speed :"
+
+[node name="AnimationSpeedSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+anchor_left = 0.017
+anchor_top = 0.884
+anchor_right = 0.974
+anchor_bottom = 0.895
+offset_left = 0.0899997
+offset_top = 2.08398
+offset_right = -0.0200043
+offset_bottom = 15.928
+min_value = 1.0
+max_value = 60.0
+value = 1.0
+
+[connection signal="value_changed" from="AnimationFramesSlider" to="AnimationPanelScripts" method="_on_animation_frames_slider_value_changed"]
+[connection signal="value_changed" from="AnimationSpeedSlider" to="AnimationPanelScripts" method="_on_animation_speed_slider_value_changed"]

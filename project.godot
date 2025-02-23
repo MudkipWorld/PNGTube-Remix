@@ -34,6 +34,7 @@ SaveAndLoad="*res://Main/Scripts/SaveAndLoad.gd"
 GlobalAudioStreamPlayer="*res://Main/Scripts/AudioStreamPlayer.gd"
 Themes="*res://Scripts/AutoLoads/_Themes_.gd"
 LipSyncGlobals="*res://UI/Lipsync stuff/godot-lip-sync/lip_sync_globals.gd"
+GlobalMicAudio="*res://Main/Scripts/GlobalMicAudio.gd"
 
 [debug]
 

@@ -1,0 +1,235 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccvo3k5t6lis6"]
+
+[ext_resource type="PackedScene" uid="uid://clxl1gighe78l" path="res://UI/BetterSlider/better_slider.tscn" id="1_h5u6y"]
+[ext_resource type="Script" path="res://UI/BetterSlider/BetterToggles.gd" id="2_qiucb"]
+
+[node name="Movement" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+metadata/_tab_index = 1
+
+[node name="ScrollContainer3" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer3"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer3/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 0)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="XAmpBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "X-Amp :"
+mini_value = -300.0
+max_value = 300.0
+step = 0.01
+value_to_update = "xAmp"
+
+[node name="XFBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "X-Freq :"
+mini_value = -10.0
+max_value = 10.0
+step = 0.01
+value_to_update = "xFrq"
+
+[node name="Sp" type="HSeparator" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="YAmpBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Y-Amp :"
+mini_value = -300.0
+max_value = 300.0
+step = 0.01
+value_to_update = "yAmp"
+
+[node name="YFBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Y-Freq :"
+mini_value = -10.0
+max_value = 10.0
+step = 0.01
+value_to_update = "yFrq"
+
+[node name="Sp4" type="HSeparator" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="DragBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Drag : "
+max_value = 100.0
+step = 1.0
+value_to_update = "dragSpeed"
+
+[node name="StretchBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Stretch  : "
+mini_value = -100.0
+max_value = 100.0
+step = 0.01
+value_to_update = "stretchAmount"
+
+[node name="Sp3" type="HSeparator" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="RotationLevelBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rot-Degree :"
+mini_value = -180.0
+max_value = 180.0
+step = 0.01
+value_to_update = "rdragStr"
+
+[node name="RotationFreqBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rot-Freq :"
+mini_value = -100.0
+max_value = 100.0
+step = 0.01
+value_to_update = "rot_frq"
+
+[node name="ShouldRotCheck" type="CheckBox" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 14
+text = "Auto Rotation"
+script = ExtResource("2_qiucb")
+sp_type = ""
+value_to_update = "should_rotate"
+
+[node name="RotationSpeedBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rot-Speed :"
+mini_value = -2.0
+max_value = 2.0
+step = 0.001
+value_to_update = "should_rot_speed"
+
+[node name="MiniRotationLevelBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Minimum Rot :"
+mini_value = -180.0
+step = 0.01
+value_to_update = "rLimitMin"
+
+[node name="MaxRotationLevelBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Maximum Rot :"
+max_value = 180.0
+step = 0.01
+value_to_update = "rLimitMax"
+
+[node name="Sp2" type="HSeparator" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="FMLable" type="Label" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Follow Mouse:"
+
+[node name="FMxBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Range X  : "
+mini_value = -500.0
+max_value = 500.0
+step = 0.01
+value_to_update = "look_at_mouse_pos"
+
+[node name="FMYBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Range  Y : "
+mini_value = -500.0
+max_value = 500.0
+step = 0.01
+value_to_update = "look_at_mouse_pos_y"
+
+[node name="RMBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Rotation amount : "
+mini_value = -1.0
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_rotation"
+
+[node name="SMXBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Scale Squish-x : "
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_scale_x"
+
+[node name="SMYBSlider" parent="ScrollContainer3/MarginContainer/VBoxContainer" instance=ExtResource("1_h5u6y")]
+unique_name_in_owner = true
+layout_mode = 2
+sp_type = ""
+label_text = "Scale Squish-y : "
+max_value = 1.0
+step = 0.001
+value_to_update = "mouse_scale_y"
+
+[node name="Label" type="Label" parent="ScrollContainer3/MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.686275)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Small note
+the scale change depending on mouse
+position still needs some work, it may feel
+or look a little different in later releases."

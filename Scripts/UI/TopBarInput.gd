@@ -64,9 +64,6 @@ func choosing_files(id):
 			main.new_file()
 		1:
 			main.load_file()
-		2:
-			pass
-		#	main.save_file(last_path)
 		3:
 			main.save_as_file()
 		4:
@@ -103,7 +100,6 @@ func choosing_mode(id):
 			get_viewport().transparent_bg = false
 			RenderingServer.set_default_clear_color(Color.SLATE_GRAY)
 			get_tree().get_root().get_node("Main/%Control").show()
-			get_tree().get_root().get_node("Main/%VS").hide()
 			%HideUIButton.button_pressed = true
 			is_editor = true
 			%PreviewModeCheck.show()
@@ -117,7 +113,6 @@ func choosing_mode(id):
 			RenderingServer.set_default_clear_color(Global.settings_dict.bg_color)
 			get_viewport().transparent_bg = Global.settings_dict.is_transparent
 			get_tree().get_root().get_node("Main/%Control").hide()
-			get_tree().get_root().get_node("Main/%VS").hide()
 			is_editor = false
 			light.get_node("Grab").hide()
 			get_tree().get_root().get_node("Main/%Control/%LSShapeVis").button_pressed = false
@@ -133,7 +128,6 @@ func choosing_mode(id):
 			get_viewport().transparent_bg = false
 			RenderingServer.set_default_clear_color(Color.SLATE_GRAY)
 			get_tree().get_root().get_node("Main/%Control").hide()
-			get_tree().get_root().get_node("Main/%VS").show()
 			%HideUIButton.button_pressed = true
 			is_editor = true
 			%PreviewModeCheck.hide()
@@ -215,11 +209,6 @@ func update_bg_color(color, transparency):
 	Global.settings_dict.is_transparent = transparency
 	%BGColorPicker.color = color
 
-
-'''
-func _on_collab_button_pressed():
-	pass # Replace with function body.
-'''
 
 func _on_anti_al_check_toggled(toggled_on):
 	Global.settings_dict.anti_alias = toggled_on
@@ -345,16 +334,16 @@ func _on_auto_save_timer_timeout():
 func _on_record_button_toggled(toggled_on):
 	if toggled_on:
 		%RecordButton.text = "Recording..."
-		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").record()
+		get_tree().get_root().get_node("Main/%Recorder").record()
 	else:
 		%FileDialog.popup()
 		%RecordButton.text = "Record"
 
 func _on_file_dialog_canceled():
-	get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").cancelled()
+	get_tree().get_root().get_node("Main/%Recorder").cancelled()
 
 func _on_file_dialog_close_requested():
-	get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").cancelled()
+	get_tree().get_root().get_node("Main/%Recorder").cancelled()
 	get_window().unresizable = false
 
 func _on_file_dialog_confirmed() -> void:
@@ -362,11 +351,11 @@ func _on_file_dialog_confirmed() -> void:
 
 func _on_file_dialog_file_selected(savpath):
 	
-	get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").output_folder = savpath
+	get_tree().get_root().get_node("Main/%Recorder").output_folder = savpath
 	if Themes.theme_settings.as_apng:
-		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").savea()
+		get_tree().get_root().get_node("Main/%Recorder").savea()
 	else:
-		get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").save()
+		get_tree().get_root().get_node("Main/%Recorder").save()
 
 func _on_file_type_item_selected(index):
 	match index:

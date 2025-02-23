@@ -148,6 +148,8 @@ func _process(_delta):
 		%Ghost.texture = %Sprite2D.texture
 		%Ghost.hframes = %Sprite2D.hframes
 		%Ghost.frame = %Sprite2D.frame
+		%Ghost.flip_h = %Sprite2D.flip_h
+		%Ghost.flip_v = %Sprite2D.flip_v
 		%Ghost.show()
 	
 		if dictmain.wiggle:
@@ -171,7 +173,7 @@ func _process(_delta):
 		position = mpos - of
 		dictmain.position = position
 		save_state(Global.current_state)
-		get_tree().get_root().get_node("Main/%Control/UIInput").update_pos_spins()
+		Global.update_pos_spins.emit()
 		
 	if !Global.static_view:
 		if dictmain.wiggle:

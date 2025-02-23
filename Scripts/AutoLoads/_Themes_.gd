@@ -95,7 +95,6 @@ func _ready():
 			get_tree().get_root().get_node("Main/%Control/%HSplitContainer").split_offset = theme_settings.left
 			get_tree().get_root().get_node("Main/%Control/%HSplit").split_offset = theme_settings.right
 			get_tree().get_root().get_node("Main/%Control/%VSplitContainer").split_offset = theme_settings.properties
-			get_tree().get_root().get_node("Main/%Control/%LayersViewSplit").split_offset = theme_settings.layers
 			
 			get_window().position = theme_settings.screen_pos
 			get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").frames_per_second = theme_settings.fps
@@ -124,7 +123,6 @@ func _ready():
 	get_tree().get_root().get_node("Main/%Control/%HSplitContainer").dragged.connect(_on_h_split_container_dragged)
 	get_tree().get_root().get_node("Main/%Control/%HSplit").dragged.connect(_on_h_split_dragged)
 	get_tree().get_root().get_node("Main/%Control/%VSplitContainer").dragged.connect(_on_v_split_container_dragged)
-	get_tree().get_root().get_node("Main/%Control/%LayersViewSplit").dragged.connect(_on_layers_view_split_dragged)
 	
 	await get_tree().create_timer(0.05).timeout
 	get_window().size = theme_settings.screen_size
@@ -226,7 +224,7 @@ func _on_save_on_exit_check_toggled(toggled_on):
 
 func _on_fps_sping_value_changed(value):
 	theme_settings.fps = value
-	get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").frames_per_second = value
+	get_tree().get_root().get_node("Main/%Recorder").frames_per_second = value
 	top_bar.get_node("%FpsSping").release_focus()
 	top_bar.get_node("%FpsSping").get_line_edit().release_focus()
 	save()
@@ -266,9 +264,4 @@ func _on_h_split_dragged(offset: int) -> void:
 
 func _on_v_split_container_dragged(offset: int) -> void:
 	theme_settings.properties = offset
-	save()
-
-
-func _on_layers_view_split_dragged(offset: int) -> void:
-	theme_settings.layers = offset
 	save()
