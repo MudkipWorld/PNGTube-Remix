@@ -39,7 +39,6 @@ func import_apng_sprite(path : String , spawn) -> CanvasTexture:
 	var text = ImageTexture.create_from_image(cframe.content)
 	var img_can = CanvasTexture.new()
 	img_can.diffuse_texture = text
-	spawn.texture = img_can
 	spawn.is_apng = true
 	spawn.sprite_name = "(Apng) " + path.get_file().get_basename() 
 	return img_can
@@ -50,7 +49,6 @@ func import_png(path : String, spawn) -> CanvasTexture:
 	var texture = ImageTexture.create_from_image(img)
 	var img_can = CanvasTexture.new()
 	img_can.diffuse_texture = texture
-	spawn.texture = img_can
 	spawn.sprite_name = path.get_file().get_basename()
 	return img_can
 

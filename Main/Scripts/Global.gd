@@ -96,7 +96,7 @@ func load_sprite_states(state):
 	current_state = state
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		i.get_state(current_state)
-	if held_sprite != null:
+	if held_sprite != null && is_instance_valid(held_sprite):
 		emit_signal("reinfo")
 		
 	animation_state.emit(current_state)
@@ -111,7 +111,7 @@ func get_sprite_states(state):
 	current_state = state
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		i.get_state(current_state)
-	if held_sprite != null:
+	if held_sprite != null && is_instance_valid(held_sprite):
 		emit_signal("reinfo")
 		
 	animation_state.emit(current_state)
@@ -120,17 +120,7 @@ func get_sprite_states(state):
 	reinfoanim.emit()
 
 func _input(_event : InputEvent):
-	if held_bg_sprite != null:
-		if Input.is_action_pressed("ctrl"):
-			if Input.is_action_pressed("scrollup"):
-				held_bg_sprite.rotation -= 0.05
-				bg_rot()
-
-			elif Input.is_action_pressed("scrolldown"):
-				held_bg_sprite.rotation += 0.05
-				bg_rot()
-	
-	if held_sprite != null:
+	if held_sprite != null && is_instance_valid(held_sprite):
 		if Input.is_action_pressed("ctrl"):
 			if Input.is_action_pressed("scrollup"):
 				held_sprite.dictmain.rotation -= 0.05
@@ -148,10 +138,6 @@ func offset():
 
 	update_offset_spins.emit()
 
-func bg_rot():
-	held_bg_sprite.save_state(current_state)
-	get_tree().get_root().get_node("Main/%Control/BackgroundEdit").update_pos_spins()
-
 func _process(delta):
 	if settings_dict.should_delta:
 		tick = wrap(tick + delta, 0, 922337203685477630)
@@ -163,7 +149,7 @@ func _process(delta):
 		moving_sprite(delta)
 
 func moving_origin(delta):
-	if held_sprite != null:
+	if held_sprite != null && is_instance_valid(held_sprite):
 		if Input.is_action_pressed("ui_up"):
 			held_sprite.get_node("%Sprite2D").global_position.y += 10 * delta
 			held_sprite.position.y -= 10 * delta
@@ -198,7 +184,7 @@ func rot():
 	update_pos_spins.emit()
 
 func moving_sprite(delta):
-	if held_sprite != null:
+	if held_sprite != null && is_instance_valid(held_sprite):
 		if Input.is_action_pressed("w"):
 			held_sprite.position.y -= 10 * delta
 			held_sprite.dictmain.position.y -= 10 * delta

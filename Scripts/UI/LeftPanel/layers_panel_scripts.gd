@@ -26,7 +26,7 @@ func enable():
 		%DelNormalButton.disabled = false
 
 func _on_delete_button_pressed():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
 		Global.held_sprite.treeitem.queue_free()
 		Global.held_sprite.queue_free()
 		Global.held_sprite = null
@@ -34,7 +34,7 @@ func _on_delete_button_pressed():
 		Global.top_ui.get_node("%DeselectButton").hide()
 
 func _on_duplicate_button_pressed():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
 		var obj
 		if Global.held_sprite.sprite_type == "WiggleApp":
 			obj = append_obj.instantiate()
@@ -91,7 +91,7 @@ func _on_add_normal_button_pressed():
 	Global.main.add_normal_sprite()
 
 func _on_del_normal_button_pressed():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
 		if !Global.held_sprite.is_apng:
 			if not Global.held_sprite.dictmain.folder:
 				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = null

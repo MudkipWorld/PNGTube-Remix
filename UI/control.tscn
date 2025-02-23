@@ -101,6 +101,7 @@ current_tab = 0
 layout_mode = 2
 
 [node name="Movement" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("9_fwbkq")]
+visible = false
 layout_mode = 2
 
 [node name="Wiggle" type="Control" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer"]

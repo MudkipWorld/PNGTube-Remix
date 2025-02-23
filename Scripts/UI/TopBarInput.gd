@@ -9,6 +9,8 @@ var is_transparent : bool
 var is_editor : bool = true
 var last_path : String = ""
 
+var tutorial = preload("res://UI/EditorUI/TopUI/tutorial_pop_up.tscn")
+
 @onready var light = get_tree().get_root().get_node("Main/%LightSource")
 var devices : Array = []
 var path = null
@@ -104,9 +106,6 @@ func choosing_mode(id):
 			is_editor = true
 			%PreviewModeCheck.show()
 			saved_id = 0
-			
-			
-				
 		
 		1:
 			get_parent().get_parent().get_parent().get_node("SubViewportContainer").mouse_filter = 1
@@ -173,7 +172,7 @@ func choosing_about(id):
 		1:
 			%CreditPopUp.popup()
 		2:
-			%TutorialPopUp.popup()
+			get_parent().add_child(tutorial.instantiate())
 
 func _notification(what):
 	if not is_editor:
@@ -273,7 +272,7 @@ func _on_deselect_button_pressed():
 
 
 func desel_everything():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		if Global.held_sprite.has_node("%Origin"):
 			Global.held_sprite.get_node("%Origin").hide()
 		#	%LayersTree.get_selected().deselect(0)

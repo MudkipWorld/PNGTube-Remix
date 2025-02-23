@@ -101,6 +101,7 @@ func _on_is_asset_check_toggled(toggled_on):
 
 
 func _on_should_disappear_check_toggled(toggled_on):
+	
 	Global.held_sprite.should_disappear = toggled_on
 	if toggled_on:
 		%ShouldDisListContainer.show()

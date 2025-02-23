@@ -1,8 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=3 uid="uid://b3mqud7u0mbij"]
-
-[ext_resource type="Texture2D" uid="uid://b1g5br1kqebip" path="res://UI/Assets/Collapse1.png" id="1_0rb5k"]
-[ext_resource type="Texture2D" uid="uid://c3enghpddaeg2" path="res://UI/Assets/Collapse2.png" id="2_souq5"]
-[ext_resource type="Texture2D" uid="uid://hi8bi4gdyyrj" path="res://UI/Assets/Collapse3.png" id="3_dxsu5"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://b3mqud7u0mbij"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8m0v"]
 content_margin_left = 4.0
@@ -258,9 +254,9 @@ TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_cqhoq")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_vnwwo")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_rm1ae")
 Tree/colors/font_color = Color(0.866667, 0.866667, 0.87451, 1)
-Tree/icons/arrow = ExtResource("1_0rb5k")
-Tree/icons/arrow_collapsed = ExtResource("2_souq5")
-Tree/icons/arrow_collapsed_mirrored = ExtResource("3_dxsu5")
+Tree/icons/arrow = null
+Tree/icons/arrow_collapsed = null
+Tree/icons/arrow_collapsed_mirrored = null
 Tree/styles/focus = SubResource("StyleBoxEmpty_r4ik5")
 Tree/styles/panel = SubResource("StyleBoxEmpty_3ue2i")
 Window/styles/embedded_border = SubResource("StyleBoxFlat_xtkek")

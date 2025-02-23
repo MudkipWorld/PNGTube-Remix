@@ -52,41 +52,42 @@ func nullfy():
 	%FlipSpriteV.disabled = true
 
 func enable():
-	%TintPickerButton.disabled = false
-	%ColorPickerButton.disabled = false
-	%EyeOption.disabled = false
-	%MouthOption.disabled = false
-	%SizeSpinBox.editable = true
-	%SizeSpinYBox.editable = true
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		%TintPickerButton.disabled = false
+		%ColorPickerButton.disabled = false
+		%EyeOption.disabled = false
+		%MouthOption.disabled = false
+		%SizeSpinBox.editable = true
+		%SizeSpinYBox.editable = true
 
-	%PosXSpinBox.editable = true
-	%PosYSpinBox.editable = true
-	%RotSpinBox.editable = true
-	%RotSpinBox.editable = true
-	%BlendMode.disabled = false
-	%ClipChildren.disabled = false
-	%Visible.disabled = false
-	%ZOrderSpinbox.editable = true
-	%EyeOption.disabled = false
-	%MouthOption.disabled = false
+		%PosXSpinBox.editable = true
+		%PosYSpinBox.editable = true
+		%RotSpinBox.editable = true
+		%RotSpinBox.editable = true
+		%BlendMode.disabled = false
+		%ClipChildren.disabled = false
+		%Visible.disabled = false
+		%ZOrderSpinbox.editable = true
+		%EyeOption.disabled = false
+		%MouthOption.disabled = false
 
-	%IgnoreBounce.disabled = false
-	%Physics.disabled = false
-	
-	%IsAssetCheck.disabled = false
-	%IsAssetButton.disabled = false
-	%RemoveAssetButton.disabled = false
-	%ShouldDisappearCheck.disabled = false
-	%DontHideOnToggleCheck.disabled = false
+		%IgnoreBounce.disabled = false
+		%Physics.disabled = false
+		
+		%IsAssetCheck.disabled = false
+		%IsAssetButton.disabled = false
+		%RemoveAssetButton.disabled = false
+		%ShouldDisappearCheck.disabled = false
+		%DontHideOnToggleCheck.disabled = false
 
-	%IsAssetButton.text = "Null"
-	
-	%OffsetXSpinBox.editable = true
-	%OffsetYSpinBox.editable = true
-	%FlipSpriteH.disabled = false
-	%FlipSpriteV.disabled = false
-	
-	set_data()
+		%IsAssetButton.text = "Null"
+		
+		%OffsetXSpinBox.editable = true
+		%OffsetYSpinBox.editable = true
+		%FlipSpriteH.disabled = false
+		%FlipSpriteV.disabled = false
+		
+		set_data()
 
 func set_data():
 	%ColorPickerButton.color = Global.held_sprite.dictmain.colored

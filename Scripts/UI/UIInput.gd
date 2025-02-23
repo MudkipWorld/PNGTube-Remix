@@ -134,45 +134,46 @@ func _on_mc_anim_state_pressed(id):
 
 func reinfo():
 	held_sprite_is_null()
-	await get_tree().create_timer(0.01).timeout
-	held_sprite_is_true()
-	%Name.text = Global.held_sprite.treeitem.get_node("%NameLabel").text
-	%AdvancedLipSync.button_pressed = Global.held_sprite.dictmain.advanced_lipsync
-	if Global.held_sprite.sprite_type == "Sprite2D":
-		%WiggleStuff.show()
-		%WiggleAppStuff.hide()
-		%WiggleCheck.button_pressed = Global.held_sprite.dictmain.wiggle
-		%WigglePhysicsCheck.button_pressed = Global.held_sprite.dictmain.wiggle_physics
-		%FollowParentEffect.button_pressed = Global.held_sprite.dictmain.follow_parent_effects
-		%XoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.x
-		%YoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.y
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		await get_tree().create_timer(0.01).timeout
+		held_sprite_is_true()
+		%Name.text = Global.held_sprite.treeitem.get_node("%NameLabel").text
+		%AdvancedLipSync.button_pressed = Global.held_sprite.dictmain.advanced_lipsync
+		if Global.held_sprite.sprite_type == "Sprite2D":
+			%WiggleStuff.show()
+			%WiggleAppStuff.hide()
+			%WiggleCheck.button_pressed = Global.held_sprite.dictmain.wiggle
+			%WigglePhysicsCheck.button_pressed = Global.held_sprite.dictmain.wiggle_physics
+			%FollowParentEffect.button_pressed = Global.held_sprite.dictmain.follow_parent_effects
+			%XoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.x
+			%YoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.y
 
-	elif Global.held_sprite.sprite_type == "WiggleApp":
-		%WiggleStuff.hide()
-		%WiggleAppStuff.show()
-		%WiggleWidthSpin.value = Global.held_sprite.dictmain.width
-		%WiggleLengthSpin.value = Global.held_sprite.dictmain.segm_length
-		%WiggleSubDSpin.value = Global.held_sprite.dictmain.subdivision
-		%WAGravityX.value = Global.held_sprite.dictmain.wiggle_gravity.x
-		%WAGravityY.value = Global.held_sprite.dictmain.wiggle_gravity.y
-		%ClosedLoopCheck.button_pressed = Global.held_sprite.dictmain.wiggle_closed_loop
-		%AutoWagCheck.button_pressed = Global.held_sprite.dictmain.auto_wag
+		elif Global.held_sprite.sprite_type == "WiggleApp":
+			%WiggleStuff.hide()
+			%WiggleAppStuff.show()
+			%WiggleWidthSpin.value = Global.held_sprite.dictmain.width
+			%WiggleLengthSpin.value = Global.held_sprite.dictmain.segm_length
+			%WiggleSubDSpin.value = Global.held_sprite.dictmain.subdivision
+			%WAGravityX.value = Global.held_sprite.dictmain.wiggle_gravity.x
+			%WAGravityY.value = Global.held_sprite.dictmain.wiggle_gravity.y
+			%ClosedLoopCheck.button_pressed = Global.held_sprite.dictmain.wiggle_closed_loop
+			%AutoWagCheck.button_pressed = Global.held_sprite.dictmain.auto_wag
 
-	if Global.held_sprite.get_parent() is WigglyAppendage2D:
-		%TipSpin.max_value = Global.held_sprite.get_parent().points.size() -1
+		if Global.held_sprite.get_parent() is WigglyAppendage2D:
+			%TipSpin.max_value = Global.held_sprite.get_parent().points.size() -1
+			
 		
-	
-	%TipSpin.value = Global.held_sprite.dictmain.tip_point
-	
-	
-	%AnimationReset.button_pressed = Global.held_sprite.dictmain.should_reset
-	%AnimationOneShot.button_pressed = Global.held_sprite.dictmain.one_shot
-	
-	%Rainbow.button_pressed = Global.held_sprite.dictmain.rainbow
-	%"Self-Rainbow Only".button_pressed = Global.held_sprite.dictmain.rainbow_self
-	%RSSlider.value = Global.held_sprite.dictmain.rainbow_speed
-	
-	%FollowWiggleAppTip.button_pressed = Global.held_sprite.dictmain.follow_wa_tip
+		%TipSpin.value = Global.held_sprite.dictmain.tip_point
+		
+		
+		%AnimationReset.button_pressed = Global.held_sprite.dictmain.should_reset
+		%AnimationOneShot.button_pressed = Global.held_sprite.dictmain.one_shot
+		
+		%Rainbow.button_pressed = Global.held_sprite.dictmain.rainbow
+		%"Self-Rainbow Only".button_pressed = Global.held_sprite.dictmain.rainbow_self
+		%RSSlider.value = Global.held_sprite.dictmain.rainbow_speed
+		
+		%FollowWiggleAppTip.button_pressed = Global.held_sprite.dictmain.follow_wa_tip
 
 
 
@@ -181,9 +182,7 @@ func reinfoanim():
 	mo_anim.text = contain.current_mo_anim
 	%ShouldSquish.button_pressed = contain.should_squish
 	%SquishAmount.get_node("%SliderValue").value = contain.squish_amount
-#endregion
 
-#region misc
 
 func _on_name_text_submitted(new_text):
 	Global.held_sprite.treeitem.get_node("%NameLabel").text = new_text
@@ -193,37 +192,39 @@ func _on_name_text_submitted(new_text):
 	%Name.release_focus()
 
 func _on_should_rot_check_toggled(toggled_on):
-	Global.held_sprite.dictmain.should_rotate = toggled_on
-	if not toggled_on:
-		Global.held_sprite.get_node("%Wobble").rotation = 0
-	
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.should_rotate = toggled_on
+		if not toggled_on:
+			Global.held_sprite.get_node("%Wobble").rotation = 0
+		
+		Global.held_sprite.save_state(Global.current_state)
 
 
 
 func _on_animation_reset_toggled(toggled_on):
-	Global.held_sprite.dictmain.should_reset = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.should_reset = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_rainbow_toggled(toggled_on):
-	Global.held_sprite.dictmain.rainbow = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.rainbow = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_self_rainbow_only_toggled(toggled_on):
-	Global.held_sprite.dictmain.rainbow_self = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.rainbow_self = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_rs_slider_value_changed(value):
-	Global.held_sprite.dictmain.rainbow_speed = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.rainbow_speed = value
+		Global.held_sprite.save_state(Global.current_state)
 
-#endregion
 
-
-#region Left Panel
 
 func _on_blink_speed_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
@@ -237,87 +238,92 @@ func _on_blink_speed_slider_value_changed(value):
 
 
 
-#endregion
-
-
-#region Wiggle stuff
-
 func _on_wiggle_check_toggled(toggled_on):
-	Global.held_sprite.dictmain.wiggle = toggled_on
-	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("wiggle", toggled_on)
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.wiggle = toggled_on
+		Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("wiggle", toggled_on)
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_wiggle_physics_check_toggled(toggled_on):
-	Global.held_sprite.dictmain.wiggle_physics = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.wiggle_physics = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_xoffset_spin_box_value_changed(value):
-	Global.held_sprite.dictmain.wiggle_rot_offset.x = value
-	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(value, Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").y))
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.wiggle_rot_offset.x = value
+		Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(value, Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").y))
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_yoffset_spin_box_value_changed(value):
-	Global.held_sprite.dictmain.wiggle_rot_offset.y = value
-	Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").x, value))
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.wiggle_rot_offset.y = value
+		Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("rotation_offset", Vector2(Global.held_sprite.get_node("%Sprite2D").material.get_shader_parameter("rotation_offset").x, value))
+		Global.held_sprite.save_state(Global.current_state)
 
 # -------------------------------------------------
 
 func _on_follow_wiggle_app_tip_toggled(toggled_on):
-	Global.held_sprite.dictmain.follow_wa_tip = toggled_on
-	if toggled_on:
-		%HBox34.show()
-		%MiniFWBSlider.show()
-		%MaxFWBSlider.show()
-	if not toggled_on:
-		%HBox34.hide()
-		%MiniFWBSlider.hide()
-		%MaxFWBSlider.hide()
-		Global.held_sprite.get_node("Pos").position = Vector2(0,0)
-	Global.held_sprite.save_state(Global.current_state)
-	
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.follow_wa_tip = toggled_on
+		if toggled_on:
+			%HBox34.show()
+			%MiniFWBSlider.show()
+			%MaxFWBSlider.show()
+		if not toggled_on:
+			%HBox34.hide()
+			%MiniFWBSlider.hide()
+			%MaxFWBSlider.hide()
+			Global.held_sprite.get_node("Pos").position = Vector2(0,0)
+		Global.held_sprite.save_state(Global.current_state)
+		
 
 func _on_wiggle_width_spin_value_changed(value):
-	Global.held_sprite.dictmain.width = value
-	Global.held_sprite.get_node("%Sprite2D").width = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.width = value
+		Global.held_sprite.get_node("%Sprite2D").width = value
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_wiggle_length_spin_value_changed(value):
-	Global.held_sprite.dictmain.segm_length = value
-	Global.held_sprite.get_node("%Sprite2D").segment_length = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.segm_length = value
+		Global.held_sprite.get_node("%Sprite2D").segment_length = value
+		Global.held_sprite.save_state(Global.current_state)
 
 
 func _on_wiggle_sub_d_spin_value_changed(value):
-	Global.held_sprite.dictmain.subdivision = value
-	Global.held_sprite.get_node("%Sprite2D").subdivision = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.subdivision = value
+		Global.held_sprite.get_node("%Sprite2D").subdivision = value
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_follow_parent_effect_toggled(toggled_on):
-	Global.held_sprite.dictmain.follow_parent_effects = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
-	
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.follow_parent_effects = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
+		
 
 
 #endregion
 
 #region Advanced-LipSync
 func _on_advanced_lip_sync_toggled(toggled_on):
-	Global.held_sprite.dictmain.advanced_lipsync = toggled_on
-	if Global.held_sprite.sprite_type == "Sprite2D":
-		Global.held_sprite.dictmain.animation_speed = 1
-		if toggled_on:
-			Global.held_sprite.get_node("%Sprite2D").hframes = 6
-		else:
-			Global.held_sprite.get_node("%Sprite2D").hframes = 1
-		Global.held_sprite.advanced_lipsyc()
-		Global.held_sprite.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
-		Global.held_sprite.save_state(Global.current_state)
-	%AnimationFramesSlider.editable = !toggled_on
-	%AnimationSpeedSlider.editable = !toggled_on
-	
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.advanced_lipsync = toggled_on
+		if Global.held_sprite.sprite_type == "Sprite2D":
+			Global.held_sprite.dictmain.animation_speed = 1
+			if toggled_on:
+				Global.held_sprite.get_node("%Sprite2D").hframes = 6
+			else:
+				Global.held_sprite.get_node("%Sprite2D").hframes = 1
+			Global.held_sprite.advanced_lipsyc()
+			Global.held_sprite.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
+			Global.held_sprite.save_state(Global.current_state)
+		%AnimationFramesSlider.editable = !toggled_on
+		%AnimationSpeedSlider.editable = !toggled_on
+		
 
 func _on_advanced_lip_sync_mouse_entered():
 	%AdvancedLipSyncLabel.show()
@@ -329,66 +335,74 @@ func _on_advanced_lip_sync_mouse_exited():
 
 
 func _on_animation_one_shot_toggled(toggled_on):
-	Global.held_sprite.dictmain.one_shot = toggled_on
-	Global.held_sprite.played_once = false
-	if Global.held_sprite.img_animated:
-		Global.held_sprite.get_node("%Sprite2D").texture.diffuse_texture.one_shot = toggled_on
-		if Global.held_sprite.get_node("%Sprite2D").texture.normal_texture != null:
-			Global.held_sprite.get_node("%Sprite2D").texture.normal_texture.one_shot = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.one_shot = toggled_on
+		Global.held_sprite.played_once = false
+		if Global.held_sprite.img_animated:
+			Global.held_sprite.get_node("%Sprite2D").texture.diffuse_texture.one_shot = toggled_on
+			if Global.held_sprite.get_node("%Sprite2D").texture.normal_texture != null:
+				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture.one_shot = toggled_on
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_mini_rotation_level_value_changed(value):
-	Global.held_sprite.dictmain.rLimitMin = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.rLimitMin = value
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_max_rotation_level_value_changed(value):
-	Global.held_sprite.dictmain.rLimitMax = value
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.rLimitMax = value
+		Global.held_sprite.save_state(Global.current_state)
 
 
 
 func _on_wa_gravity_x_value_changed(value):
-	if Global.held_sprite.sprite_type == "WiggleApp":
-		Global.held_sprite.dictmain.wiggle_gravity.x = value
-		Global.held_sprite.get_node("%Sprite2D").gravity.x = value
-		Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		if Global.held_sprite.sprite_type == "WiggleApp":
+			Global.held_sprite.dictmain.wiggle_gravity.x = value
+			Global.held_sprite.get_node("%Sprite2D").gravity.x = value
+			Global.held_sprite.save_state(Global.current_state)
 
 func _on_wa_gravity_y_value_changed(value):
-	if Global.held_sprite.sprite_type == "WiggleApp":
-		Global.held_sprite.dictmain.wiggle_gravity.y = value
-		Global.held_sprite.get_node("%Sprite2D").gravity.y = value
-		Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		if Global.held_sprite.sprite_type == "WiggleApp":
+			Global.held_sprite.dictmain.wiggle_gravity.y = value
+			Global.held_sprite.get_node("%Sprite2D").gravity.y = value
+			Global.held_sprite.save_state(Global.current_state)
 
 func _on_tip_spin_value_changed(value):
-	Global.held_sprite.dictmain.tip_point = value
-	Global.held_sprite.save_state(Global.current_state)
-
-func _on_closed_loop_check_toggled(toggled_on):
-	if Global.held_sprite.sprite_type == "WiggleApp":
-		Global.held_sprite.dictmain.wiggle_closed_loop = toggled_on
-		Global.held_sprite.get_node("%Sprite2D").closed = toggled_on
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.tip_point = value
 		Global.held_sprite.save_state(Global.current_state)
 
+func _on_closed_loop_check_toggled(toggled_on):
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		if Global.held_sprite.sprite_type == "WiggleApp":
+			Global.held_sprite.dictmain.wiggle_closed_loop = toggled_on
+			Global.held_sprite.get_node("%Sprite2D").closed = toggled_on
+			Global.held_sprite.save_state(Global.current_state)
+
 func on_wag_speed_changed(value):
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
 		Global.held_sprite.dictmain.wag_speed = value
 		Global.held_sprite.save_state(Global.current_state)
 
 func _on_auto_wag_check_toggled(toggled_on):
-	Global.held_sprite.dictmain.auto_wag = toggled_on
-	if toggled_on:
-		%MinimumCurve.show()
-		%MaxmumCurve.show()
-		%WagFreqBSlider.show()
-		%WiggleAppsCurveBSlider.hide()
-	if !toggled_on:
-		Global.held_sprite.get_node("%Sprite2D").curvature = Global.held_sprite.dictmain.wiggle_curve
-		%MinimumCurve.hide()
-		%MaxmumCurve.hide()
-		%WagFreqBSlider.hide()
-		%WiggleAppsCurveBSlider.show()
-		
-	Global.held_sprite.save_state(Global.current_state)
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.dictmain.auto_wag = toggled_on
+		if toggled_on:
+			%MinimumCurve.show()
+			%MaxmumCurve.show()
+			%WagFreqBSlider.show()
+			%WiggleAppsCurveBSlider.hide()
+		if !toggled_on:
+			Global.held_sprite.get_node("%Sprite2D").curvature = Global.held_sprite.dictmain.wiggle_curve
+			%MinimumCurve.hide()
+			%MaxmumCurve.hide()
+			%WagFreqBSlider.hide()
+			%WiggleAppsCurveBSlider.show()
+			
+		Global.held_sprite.save_state(Global.current_state)
 
 func _on_name_focus_entered() -> void:
 	Global.spinbox_held = true

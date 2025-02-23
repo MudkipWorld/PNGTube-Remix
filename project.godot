@@ -38,6 +38,7 @@ GlobalMicAudio="*res://Main/Scripts/GlobalMicAudio.gd"
 
 [debug]
 
+settings/crash_handler/message.editor="Please include this when reporting the bug on:https://github.com/MudkipWorld/PNGTuber-Remix/issues"
 gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
 
@@ -47,11 +48,6 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/transparent=true
 window/per_pixel_transparency/allowed=true
-window/vsync/vsync_mode=2
-
-[dotnet]
-
-project/assembly_name="PNGTube-Remix"
 
 [editor_plugins]
 
@@ -143,6 +139,4 @@ locale/translations=PackedStringArray("res://Localization/RemixV1 Translations -
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/vram_compression/import_s3tc_bptc=true
-textures/vram_compression/import_etc2_astc=true
 viewport/transparent_background=true

@@ -1,15 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://cb6sos2p8qbrr"]
 
-[ext_resource type="Script" path="res://Misc/AppendageObject/Script/append_object.gd" id="1_yuqos"]
+[ext_resource type="Script" path="res://Scripts/Objects/append_object.gd" id="1_yuqos"]
 [ext_resource type="Texture2D" uid="uid://cppqjhaoi70l5" path="res://Misc/EasyBlend/Blends/add.png" id="2_2g5n2"]
-[ext_resource type="Texture2D" uid="uid://t7lg762xsffp" path="res://Misc/FolderObject/origin.png" id="2_sl64r"]
+[ext_resource type="Texture2D" uid="uid://bt5ep2bnr2x76" path="res://Misc/SpriteObject/origin.png" id="2_rjec0"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/SpriteShader.gdshader" id="3_p6byp"]
 [ext_resource type="Script" path="res://addons/wiggly_appendage_2d/wiggly_appendage_2d.gd" id="4_e6x1l"]
 [ext_resource type="Texture2D" uid="uid://dajiyes440dqd" path="res://Misc/TestAssets/tail - Copy.png" id="5_mwqm8"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/SpriteSelectionWA.gdshader" id="8_cwgos"]
-[ext_resource type="Script" path="res://Scripts/ObjectComponents/movements.gd" id="9_sj5r0"]
-[ext_resource type="Texture2D" uid="uid://chuvmi2yancux" path="res://Misc/AppendageObject/origin.png" id="9_u04em"]
-[ext_resource type="Script" path="res://Scripts/ObjectComponents/reaction_config.gd" id="10_ggfxw"]
+[ext_resource type="Script" path="res://Scripts/Objects/ObjectComponents/movements.gd" id="9_sj5r0"]
+[ext_resource type="Script" path="res://Scripts/Objects/ObjectComponents/reaction_config.gd" id="10_ggfxw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1tqhp"]
 resource_local_to_scene = true
@@ -31,7 +30,6 @@ shader_parameter/Blend = ExtResource("2_2g5n2")
 diffuse_texture = ExtResource("5_mwqm8")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dpbe"]
-load_path = "res://.godot/imported/Folder.png-3e2b186b08c07a918653895b22f207e4.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acear"]
 shader = ExtResource("8_cwgos")
@@ -40,6 +38,8 @@ shader_parameter/ant_color_2 = Color(0, 0, 0, 1)
 shader_parameter/ant_width = 5.0
 shader_parameter/ant_length = 10.0
 shader_parameter/ant_speed = 30.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2iktx"]
 
 [node name="AppendageObject" type="Node2D" groups=["Sprites"]]
 script = ExtResource("1_yuqos")
@@ -67,7 +67,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 visible = false
 z_index = 4096
-texture = ExtResource("2_sl64r")
+texture = ExtResource("2_rjec0")
 
 [node name="AppendageFlip" type="Node2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
 unique_name_in_owner = true
@@ -116,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("9_u04em")
+texture = SubResource("CompressedTexture2D_2iktx")
 expand_mode = 1
 
 [node name="Blink" type="Timer" parent="."]

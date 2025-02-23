@@ -17,7 +17,7 @@ func check_data():
 	%AutoSaveCheck.button_pressed = Global.settings_dict.auto_save
 
 func _physics_process(_delta):
-	%VolumeBar.value = lerpf(%VolumeBar.value, GlobalMicAudio.volume, 0.15)
+	%VolumeBar.value = GlobalMicAudio.volume
 	%DelayBar.value = GlobalMicAudio.delay
 
 func sliders_revalue(settings_dict):

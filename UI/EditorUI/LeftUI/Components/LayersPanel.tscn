@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://8rb6kumug0p5" path="res://UI/Assets/DeleteButton.png" id="6_jo6pm"]
 [ext_resource type="Texture2D" uid="uid://diyx30a4yqalc" path="res://UI/Assets/NormalMapButton.png" id="7_q36il"]
 [ext_resource type="Texture2D" uid="uid://cxpsf8uoktwrd" path="res://UI/Assets/NormalMapDelButton.png" id="8_x22hm"]
-[ext_resource type="PackedScene" uid="uid://mldwqrl5tu11" path="res://UI/LayerView/layer_view_bg.tscn" id="9_4x1i6"]
+[ext_resource type="PackedScene" uid="uid://mldwqrl5tu11" path="res://UI/EditorUI/LeftUI/Components/LayerView/layer_view_bg.tscn" id="9_4x1i6"]
 
 [node name="LayersPanel" type="Control"]
 custom_minimum_size = Vector2(258, 150)

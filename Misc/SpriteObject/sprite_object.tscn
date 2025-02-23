@@ -1,14 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://du5v1xpm5fjcm"]
 
-[ext_resource type="Script" path="res://Misc/SpriteObject/Script/sprite_object.gd" id="1_i7wd5"]
-[ext_resource type="Texture2D" uid="uid://t7lg762xsffp" path="res://Misc/FolderObject/origin.png" id="2_lsh2x"]
+[ext_resource type="Script" path="res://Scripts/Objects/sprite_object.gd" id="1_i7wd5"]
+[ext_resource type="Texture2D" uid="uid://bt5ep2bnr2x76" path="res://Misc/SpriteObject/origin.png" id="2_1i6gu"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/SpriteShader.gdshader" id="3_lejuk"]
-[ext_resource type="Texture2D" uid="uid://chuvmi2yancux" path="res://Misc/AppendageObject/origin.png" id="3_n7qih"]
 [ext_resource type="Texture2D" uid="uid://cppqjhaoi70l5" path="res://Misc/EasyBlend/Blends/add.png" id="3_updi2"]
-[ext_resource type="Texture2D" uid="uid://dv27xjbwfkacl" path="res://Misc/LightSource/Lamp.png" id="3_x1bf3"]
+[ext_resource type="Texture2D" uid="uid://dv27xjbwfkacl" path="res://Misc/TestAssets/Lamp.png" id="3_x1bf3"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/SpriteSelection.gdshader" id="6_3ws45"]
-[ext_resource type="Script" path="res://Scripts/ObjectComponents/movements.gd" id="8_aa1sy"]
-[ext_resource type="Script" path="res://Scripts/ObjectComponents/reaction_config.gd" id="9_hkdvl"]
+[ext_resource type="Script" path="res://Scripts/Objects/ObjectComponents/movements.gd" id="8_aa1sy"]
+[ext_resource type="Script" path="res://Scripts/Objects/ObjectComponents/reaction_config.gd" id="9_hkdvl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1tqhp"]
 resource_local_to_scene = true
@@ -42,6 +41,8 @@ shader_parameter/rotation = 0.0
 shader_parameter/rotation_offset = Vector2(0.5, 0.5)
 shader_parameter/add_margins = false
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2iktx"]
+
 [node name="SpriteObject" type="Node2D" groups=["Sprites"]]
 script = ExtResource("1_i7wd5")
 
@@ -73,7 +74,7 @@ unique_name_in_owner = true
 visible = false
 z_index = 4096
 z_as_relative = false
-texture = ExtResource("2_lsh2x")
+texture = ExtResource("2_1i6gu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Pos/Wobble/Squish/Drag/Rotation"]
 unique_name_in_owner = true
@@ -109,7 +110,8 @@ unique_name_in_owner = true
 visible = false
 self_modulate = Color(1, 0, 0, 1)
 z_index = 4096
-texture = ExtResource("3_n7qih")
+z_as_relative = false
+texture = SubResource("CompressedTexture2D_2iktx")
 
 [node name="Blink" type="Timer" parent="."]
 unique_name_in_owner = true

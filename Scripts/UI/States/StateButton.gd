@@ -16,7 +16,7 @@ func initial_update():
 
 
 func _input(event):
-	if input_key != "Null":
+	if input_key != "Null" or input_key != "":
 		if event.is_action_pressed(input_key):
 			Global.get_sprite_states(state)
 

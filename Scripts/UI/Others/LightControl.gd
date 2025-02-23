@@ -1,6 +1,6 @@
 extends Node
 
-@onready var light = get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/Node2D/LightSource")
+@onready var light = get_tree().get_root().get_node("Main/%LightSource")
 
 func _ready():
 	Global.light_info.connect(get_info)

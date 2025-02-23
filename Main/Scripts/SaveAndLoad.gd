@@ -121,11 +121,11 @@ func load_file(path, should_load_path = false):
 	else:
 		Themes.theme_settings.path = path
 		if should_load_path:
-			get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path = path
-			print("t")
+			Global.top_ui.get_node("TopBarInput").path = path
+		#	print("t")
 		
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").delete_all_states()
-		get_tree().get_root().get_node("Main").clear_sprites()
+		Global.main.clear_sprites()
 		
 		get_tree().get_root().get_node("Main/Timer").start()
 		get_tree().get_root().get_node("Main/%Control/StatesStuff").delete_all_states()
@@ -147,14 +147,9 @@ func load_file(path, should_load_path = false):
 					sprite_obj = preload("res://Misc/SpriteObject/sprite_object.tscn").instantiate()
 				elif sprite.sprite_type == "WiggleApp":
 					sprite_obj = preload("res://Misc/AppendageObject/Appendage_object.tscn").instantiate()
-				elif sprite.sprite_type == "Folder":
-					sprite_obj = preload("res://Misc/FolderObject/Folder_object.tscn").instantiate()
 					
 			else:
 				sprite_obj = preload("res://Misc/SpriteObject/sprite_object.tscn").instantiate()
-				
-				
-				
 				
 			var cleaned_array = []
 			
@@ -381,9 +376,6 @@ func load_pngplus_file(path):
 			else:
 				ndict.visible = true
 			sprite_obj.states[l] = ndict
-			
-			
-			
 		Global.sprite_container.add_child(sprite_obj)
 		sprite_obj.get_node("%Sprite2D/Grab").anchors_preset = Control.LayoutPreset.PRESET_FULL_RECT
 		
@@ -393,7 +385,7 @@ func load_pngplus_file(path):
 	Global.load_sprite_states(0)
 	Global.remake_layers.emit()
 #	get_tree().get_root().get_node("Main/Control/BackgroundEdit").loaded_tree(get_tree().get_nodes_in_group("BackgroundStuff"))
-	get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
+	Global.top_ui.sliders_revalue(Global.settings_dict)
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		i.zazaza(get_tree().get_nodes_in_group("Sprites"))
 	

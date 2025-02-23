@@ -11,7 +11,6 @@ enum State {
 	ReplaceSprite,
 	AddNormal,
 	AddAppend,
-	AddBgSprite
 }
 var current_state : State
 var can_scroll : bool = false
@@ -54,7 +53,7 @@ func load_append_sprites():
 	%FileDialog.show()
 
 func replacing_sprite():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		if not Global.held_sprite.dictmain.folder:
 			%FileDialog.filters = ["*.png, *.apng", "*.jpeg", "*.jpg", "*.svg", "*.apng"]
 			$FileDialog.file_mode = 0
@@ -62,7 +61,7 @@ func replacing_sprite():
 			%FileDialog.show()
 
 func add_normal_sprite():
-	if Global.held_sprite != null:
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		if not Global.held_sprite.dictmain.folder:
 			if Global.held_sprite.img_animated:
 				%FileDialog.filters = ["*.gif"]
@@ -125,7 +124,7 @@ func _on_confirmation_dialog_confirmed():
 
 func clear_sprites():
 	Global.held_sprite = null
-	%Control/UIInput.held_sprite_is_null()
+	Global.deselect.emit()
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		if InputMap.has_action(str(i.sprite_id)):
 			InputMap.erase_action(str(i.sprite_id))
@@ -181,17 +180,12 @@ func _on_background_input_capture_bg_key_pressed(_node, keys_pressed):
 			if InputMap.action_get_events(str(l.sprite_id)).size() > 0:
 				costumeKeys.append(InputMap.action_get_events(str(l.sprite_id))[0].as_text())
 		
-		
-		
 		for i in keys_pressed:
 			if keys_pressed[i]:
 				if OS.get_keycode_string(i) not in already_input_keys:
 					keyStrings.append(OS.get_keycode_string(i))
 		
 		already_input_keys = keyStrings
-		
-	#	print(keyStrings)
-		
 		
 		if %FileDialog.visible:
 			return
