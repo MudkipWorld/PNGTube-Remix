@@ -4,6 +4,7 @@ extends Control
 func _ready():
 	sliders_revalue(Global.settings_dict)
 	Global.reinfo.connect(info_held)
+	Global.slider_values.connect(sliders_revalue)
 	%CreditLabel.text = "PNGTuber Remix by TheMime (MudkipWorld)
 	Original PNGTuber+ Code by kaiakairos. Better UI by LeoRson.
 	V" + str(ProjectSettings.get_setting("application/config/version"))

@@ -4,6 +4,7 @@ signal blink
 
 signal reinfo
 signal animation_state
+signal slider_values
 signal light_info
 
 signal speaking
@@ -35,6 +36,7 @@ var settings_dict : Dictionary = {
 	volume_limit = 0.1,
 	volume_delay = 0.5,
 	blink_speed = 1,
+	blink_chance = 10,
 	checkinput = true,
 	bg_color = Color.SLATE_GRAY,
 	is_transparent = false,
@@ -89,7 +91,9 @@ func blinking():
 	blink_timer.wait_time = settings_dict.blink_speed
 	blink_timer.start()
 	await blink_timer.timeout
-	blink.emit()
+	var rand = randi() % int(settings_dict.blink_chance)
+	if rand == 0:
+		blink.emit()
 	blinking()
 
 func load_sprite_states(state):

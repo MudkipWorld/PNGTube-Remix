@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ngta1o5yiqxs"]
+[gd_scene load_steps=10 format=3 uid="uid://ngta1o5yiqxs"]
 
 [ext_resource type="Script" path="res://Scripts/UI/UIInput.gd" id="3_1eur5"]
 [ext_resource type="Script" path="res://Scripts/UI/States/StatesStuff.gd" id="3_pa6sx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Others/LightControl.gd" id="6_5v3ft"]
 [ext_resource type="PackedScene" uid="uid://c3f86pv0can01" path="res://UI/EditorUI/RightUI/Components/properties.tscn" id="8_i4djb"]
 [ext_resource type="PackedScene" uid="uid://ccvo3k5t6lis6" path="res://UI/EditorUI/RightUI/Components/movement.tscn" id="9_fwbkq"]
+[ext_resource type="Script" path="res://UI/BetterSlider/BetterToggles.gd" id="9_n3hq1"]
 [ext_resource type="PackedScene" uid="uid://clxl1gighe78l" path="res://UI/BetterSlider/better_slider.tscn" id="10_m6pfk"]
 [ext_resource type="Script" path="res://Scripts/UI/Others/Spinboxes.gd" id="26_0wx0w"]
 
@@ -201,6 +202,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Wiggle Physics"
+script = ExtResource("9_n3hq1")
+sp_type = "Sprite2D"
+value_to_update = "wiggle_physics"
 
 [node name="FollowParentEffect" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff"]
 unique_name_in_owner = true
@@ -625,6 +629,24 @@ max_value = 12.0
 step = 0.1
 value = 1.0
 
+[node name="HBox" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BlinkChanceLabel" type="Label" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Blink Chance : "
+
+[node name="BlinkChanceSlider" type="HSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 200.0
+value = 9.0
+rounded = true
+
 [node name="Sp6" type="HSeparator" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
@@ -834,6 +856,9 @@ layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "Rainbow"
+script = ExtResource("9_n3hq1")
+sp_type = ""
+value_to_update = "rainbow"
 
 [node name="Self-Rainbow Only" type="CheckBox" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics2"]
 unique_name_in_owner = true
@@ -842,6 +867,9 @@ layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "Self-Rainbow Only   "
+script = ExtResource("9_n3hq1")
+sp_type = ""
+value_to_update = "rainbow_self"
 
 [node name="HBox3" type="HBoxContainer" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -920,7 +948,6 @@ columns = 9
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/FollowWiggleAppTip" to="UIInput" method="_on_follow_wiggle_app_tip_toggled"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/HBox34/TipSpin" to="UIInput" method="_on_tip_spin_value_changed"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff/HBox22/WiggleCheck" to="UIInput" method="_on_wiggle_check_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff/HBox22/WigglePhysicsCheck" to="UIInput" method="_on_wiggle_physics_check_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff/FollowParentEffect" to="UIInput" method="_on_follow_parent_effect_toggled"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff/HBox/XoffsetSpinBox" to="UIInput" method="_on_xoffset_spin_box_value_changed"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleStuff/HBox/YoffsetSpinBox" to="UIInput" method="_on_yoffset_spin_box_value_changed"]
@@ -933,6 +960,7 @@ columns = 9
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Wiggle/ScrollContainer4/MarginContainer/VBoxContainer/WiggleAppStuff/ClosedLoopCheck" to="UIInput" method="_on_closed_loop_check_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/Grid/ShouldSquish" to="UIInput" method="_on_should_squish_toggled"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox15/BlinkSpeedSlider" to="UIInput" method="_on_blink_speed_slider_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox/BlinkChanceSlider" to="UIInput" method="_on_blink_chance_slider_value_changed"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox16/LightSourceVis" to="LightControl" method="_on_light_source_vis_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox16/LSShapeVis" to="LightControl" method="_on_ls_shape_vis_toggled"]
 [connection signal="color_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Misc/ScrollContainer5/MarginContainer/VBoxContainer/HBox17/LightColor" to="LightControl" method="_on_light_color_color_changed"]
@@ -945,8 +973,6 @@ columns = 9
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/HBox22/AdvancedLipSync" to="UIInput" method="_on_advanced_lip_sync_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/AnimationReset" to="UIInput" method="_on_animation_reset_toggled"]
 [connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/AnimationOneShot" to="UIInput" method="_on_animation_one_shot_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics2/Rainbow" to="UIInput" method="_on_rainbow_toggled"]
-[connection signal="toggled" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics2/Self-Rainbow Only" to="UIInput" method="_on_self_rainbow_only_toggled"]
 [connection signal="value_changed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Experimental/ScrollContainer6/MarginContainer/VBoxContainer/VBoxContainer/HBox3/RSSlider" to="UIInput" method="_on_rs_slider_value_changed"]
 [connection signal="pressed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/VBoxContainer/HBoxContainer/AddState" to="StatesStuff" method="_on_add_state_pressed"]
 [connection signal="pressed" from="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/VBoxContainer/HBoxContainer/DeleteState" to="StatesStuff" method="_on_delete_state_pressed"]

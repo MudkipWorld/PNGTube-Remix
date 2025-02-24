@@ -179,7 +179,7 @@ func wiggle_sprite():
 	if dictmain.wiggle_physics:
 		if get_parent() is Sprite2D or get_parent() is WigglyAppendage2D:
 			var c_parent = get_parent().owner
-			var c_parrent_length = (c_parent.glob.y - c_parent.dragger.global_position.y)
+			var c_parrent_length = (c_parent.get_node("Movements").glob.y - c_parent.get_node("%Dragger").global_position.y)
 			wiggle_val = wiggle_val + (c_parrent_length/10)
 		
 	

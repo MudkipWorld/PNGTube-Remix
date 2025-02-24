@@ -335,6 +335,9 @@ layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "Ignore Bounce"
+script = ExtResource("2_7ymxr")
+sp_type = ""
+value_to_update = "ignore_bounce"
 
 [node name="Physics" type="CheckBox" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics"]
 unique_name_in_owner = true
@@ -343,6 +346,9 @@ layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 16
 text = "Physics"
+script = ExtResource("2_7ymxr")
+sp_type = ""
+value_to_update = "physics"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Scroll/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -498,8 +504,6 @@ fixed_column_width = 122
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/Visible" to="PropertiesScript" method="_on_visible_toggled"]
 [connection signal="item_selected" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/EyeOption" to="PropertiesScript" method="_on_eye_option_item_selected"]
 [connection signal="item_selected" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer2/MouthOption" to="PropertiesScript" method="_on_mouth_option_item_selected"]
-[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/IgnoreBounce" to="PropertiesScript" method="_on_ignore_bounce_toggled"]
-[connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxPhysics/Physics" to="PropertiesScript" method="_on_physics_toggled"]
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/ClipChildren" to="PropertiesScript" method="_on_clip_children_toggled"]
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox/FlipSpriteH" to="PropertiesScript" method="_on_flip_sprite_h_toggled"]
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/VBoxContainer/FlipSpriteHBox/FlipSpriteV" to="PropertiesScript" method="_on_flip_sprite_v_toggled"]

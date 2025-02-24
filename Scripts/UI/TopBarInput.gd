@@ -330,43 +330,6 @@ func _on_auto_save_timer_timeout():
 			
 		%AutoSaveTimer.start()
 
-func _on_record_button_toggled(toggled_on):
-	if toggled_on:
-		%RecordButton.text = "Recording..."
-		get_tree().get_root().get_node("Main/%Recorder").record()
-	else:
-		%FileDialog.popup()
-		%RecordButton.text = "Record"
-
-func _on_file_dialog_canceled():
-	get_tree().get_root().get_node("Main/%Recorder").cancelled()
-
-func _on_file_dialog_close_requested():
-	get_tree().get_root().get_node("Main/%Recorder").cancelled()
-	get_window().unresizable = false
-
-func _on_file_dialog_confirmed() -> void:
-	get_window().unresizable = false
-
-func _on_file_dialog_file_selected(savpath):
-	
-	get_tree().get_root().get_node("Main/%Recorder").output_folder = savpath
-	if Themes.theme_settings.as_apng:
-		get_tree().get_root().get_node("Main/%Recorder").savea()
-	else:
-		get_tree().get_root().get_node("Main/%Recorder").save()
-
-func _on_file_type_item_selected(index):
-	match index:
-		0:
-			Themes.theme_settings.as_apng = false
-			%FileDialog.filters = ["*.png"]
-			
-		1:
-			Themes.theme_settings.as_apng = true
-			%FileDialog.filters = ["*.apng"]
-	Themes.save()
-	
 
 func _on_delta_time_check_toggled(toggled_on: bool) -> void:
 	Global.settings_dict.should_delta = toggled_on
@@ -418,22 +381,17 @@ func export_images(images = get_tree().get_nodes_in_group("Sprites")):
 					normimg.save_png(dire +"/" + sprite.sprite_name + "Normal" + str(randi()) + ".png")
 					normimg = null
 
-
 func _on_background_focus_entered() -> void:
 	Global.spinbox_held = true
 
-
 func _on_background_focus_exited() -> void:
 	Global.spinbox_held = false
-
 
 func _on_max_fp_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		%MaxFPSLabel.text = "Max FPS : " + str(%MaxFPSlider.value)
 		Global.settings_dict.max_fps = %MaxFPSlider.value
 		get_parent().update_fps(%MaxFPSlider.value)
-		
-
 
 func _on_max_fp_slider_value_changed(value: float) -> void:
 	%MaxFPSLabel.text = "Max FPS : " + str(value)

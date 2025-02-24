@@ -9,6 +9,8 @@ func _process(delta: float) -> void:
 	if !Global.static_view:
 		if actor.dictmain.should_rotate:
 			auto_rotate()
+		else:
+			%Wobble.rotation = 0
 		rainbow()
 		
 		movements(delta)
@@ -113,7 +115,8 @@ func follow_mouse(delta):
 			last_dist = Vector2(dir.x * min(dist, actor.dictmain.look_at_mouse_pos),dir.y * min(dist, actor.dictmain.look_at_mouse_pos_y))
 		%Pos.position.x = lerp(%Pos.position.x, last_dist.x, 0.1)
 		%Pos.position.y = lerp(%Pos.position.y, last_dist.y, 0.1)
-		%Wobble.rotation = lerp(%Wobble.rotation,clamp(atan2(last_dist.y,last_dist.x)*actor.dictmain.mouse_rotation,deg_to_rad(actor.dictmain.rLimitMin),deg_to_rad(actor.dictmain.rLimitMax)),0.1)
+		var clamping = clamp(last_dist.angle()*actor.dictmain.mouse_rotation,deg_to_rad(actor.dictmain.rLimitMin),deg_to_rad(actor.dictmain.rLimitMax))
+		%Squish.rotation = lerp_angle(%Squish.rotation ,clamping,0.1)
 		var dire = Vector2.ZERO - (last_mouse_position -get_tree().get_root().get_node("Main/%Marker").get_local_mouse_position())
 		var scl_x = abs(dire.x) *actor.dictmain.mouse_scale_x *0.005
 		var scl_y = abs(dire.y) *actor.dictmain.mouse_scale_y *0.005

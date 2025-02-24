@@ -15,26 +15,27 @@ func nullfy():
 	%DelNormalButton.disabled = true
 
 func enable():
-	%ReplaceButton.disabled = false
 	%DuplicateButton.disabled = false
 	%DeleteButton.disabled = false
 	if Global.held_sprite.dictmain.folder:
 		%AddNormalButton.disabled = true
 		%DelNormalButton.disabled = true
+		%ReplaceButton.disabled = true
 	else:
 		%AddNormalButton.disabled = false
 		%DelNormalButton.disabled = false
+		%ReplaceButton.disabled = false
 
 func _on_delete_button_pressed():
-	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
-		Global.held_sprite.treeitem.queue_free()
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
+		Global.held_sprite.treeitem.get_parent().queue_free()
 		Global.held_sprite.queue_free()
 		Global.held_sprite = null
 		Global.deselect.emit()
 		Global.top_ui.get_node("%DeselectButton").hide()
 
 func _on_duplicate_button_pressed():
-	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		var obj
 		if Global.held_sprite.sprite_type == "WiggleApp":
 			obj = append_obj.instantiate()
@@ -76,7 +77,6 @@ func _on_folder_button_pressed():
 	Global.sprite_container.add_child(sprte_obj)
 	var canv = CanvasTexture.new()
 	canv.diffuse_texture = preload("res://Misc/SpriteObject/Folder.png")
-	sprte_obj.texture = canv
 	sprte_obj.get_node("%Sprite2D").texture =  canv
 	sprte_obj.sprite_name = str("Folder")
 	sprte_obj.dictmain.folder = true
@@ -91,7 +91,7 @@ func _on_add_normal_button_pressed():
 	Global.main.add_normal_sprite()
 
 func _on_del_normal_button_pressed():
-	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		if !Global.held_sprite.is_apng:
 			if not Global.held_sprite.dictmain.folder:
 				Global.held_sprite.get_node("%Sprite2D").texture.normal_texture = null

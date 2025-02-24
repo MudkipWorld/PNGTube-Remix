@@ -72,13 +72,6 @@ func _ready():
 			
 			top_bar.get_node("%AutoLoadCheck").button_pressed = theme_settings.auto_load
 			top_bar.get_node("%FpsSping").value = theme_settings.fps
-			if theme_settings.as_apng:
-				top_bar.get_node("%TopBarInput")._on_file_type_item_selected(1)
-				top_bar.get_node("%FileType").select(1)
-			else:
-				top_bar.get_node("%TopBarInput")._on_file_type_item_selected(0)
-				top_bar.get_node("%FileType").select(0)
-			
 			if theme_settings.screen_window == 0:
 				get_window().mode = get_window().MODE_WINDOWED
 			elif theme_settings.screen_window == 1:
@@ -97,7 +90,6 @@ func _ready():
 			get_tree().get_root().get_node("Main/%Control/%VSplitContainer").split_offset = theme_settings.properties
 			
 			get_window().position = theme_settings.screen_pos
-			get_tree().get_root().get_node("Main/SubViewportContainer/SubViewport/RecorderLayer/Recorder").frames_per_second = theme_settings.fps
 			
 			if theme_settings.auto_load:
 				if FileAccess.file_exists(theme_settings.path):

@@ -35,8 +35,6 @@ func nullfy():
 	%Visible.disabled = true
 	%ZOrderSpinbox.editable = false
 
-	%IgnoreBounce.disabled = true
-	%Physics.disabled = true
 	%IsAssetCheck.disabled = true
 	%IsAssetButton.disabled = true
 	%RemoveAssetButton.disabled = true
@@ -71,9 +69,6 @@ func enable():
 		%EyeOption.disabled = false
 		%MouthOption.disabled = false
 
-		%IgnoreBounce.disabled = false
-		%Physics.disabled = false
-		
 		%IsAssetCheck.disabled = false
 		%IsAssetButton.disabled = false
 		%RemoveAssetButton.disabled = false
@@ -96,8 +91,6 @@ func set_data():
 	%ZOrderSpinbox.value = Global.held_sprite.dictmain.z_index
 	%SizeSpinBox.value = Global.held_sprite.dictmain.scale.x
 	%SizeSpinYBox.value = Global.held_sprite.dictmain.scale.y
-	%IgnoreBounce.button_pressed = Global.held_sprite.dictmain.ignore_bounce
-	%Physics.button_pressed = Global.held_sprite.dictmain.physics
 	
 	if Global.held_sprite.get_node("%Sprite2D").get_clip_children_mode() == 0:
 		%ClipChildren.button_pressed = false
@@ -233,13 +226,6 @@ func _on_z_order_spinbox_value_changed(value):
 	Global.held_sprite.get_node("%Wobble").z_index = value
 	Global.held_sprite.save_state(Global.current_state)
 
-func _on_ignore_bounce_toggled(toggled_on):
-	Global.held_sprite.dictmain.ignore_bounce = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
-
-func _on_physics_toggled(toggled_on):
-	Global.held_sprite.dictmain.physics = toggled_on
-	Global.held_sprite.save_state(Global.current_state)
 
 func _on_size_spin_y_box_value_changed(value):
 	Global.held_sprite.dictmain.scale.y = value

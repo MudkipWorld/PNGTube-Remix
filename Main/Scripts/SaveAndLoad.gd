@@ -204,13 +204,12 @@ func load_file(path, should_load_path = false):
 					i.states.append({})
 		Global.load_sprite_states(0)
 		Global.remake_layers.emit()
-		get_tree().get_root().get_node("Main/%TopUI").sliders_revalue(Global.settings_dict)
+		Global.slider_values.emit(Global.settings_dict)
 		Global.load_sprite_states(0)
 		get_tree().get_root().get_node("Main/%Control/UIInput").reinfoanim()
 		Themes.save()
 		file.close()
 		file = null
-
 
 func load_sprite(sprite_obj, sprite):
 	var img_data
@@ -384,8 +383,7 @@ func load_pngplus_file(path):
 	
 	Global.load_sprite_states(0)
 	Global.remake_layers.emit()
-#	get_tree().get_root().get_node("Main/Control/BackgroundEdit").loaded_tree(get_tree().get_nodes_in_group("BackgroundStuff"))
-	Global.top_ui.sliders_revalue(Global.settings_dict)
+	Global.slider_values.emit(Global.settings_dict)
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		i.zazaza(get_tree().get_nodes_in_group("Sprites"))
 	

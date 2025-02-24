@@ -9,7 +9,7 @@ func _ready():
 	%LightColor.get_picker().presets_visible = false
 	%LightColor.get_picker().color_modes_visible = false
 	
-	
+	Global.slider_values.connect(set_slider_data)
 	held_sprite_is_null()
 	Global.connect("reinfo", reinfo)
 	Global.connect("reinfoanim", reinfoanim)
@@ -21,6 +21,13 @@ func _ready():
 	mc_anim.get_popup().connect("id_pressed",_on_mc_anim_state_pressed)
 	%SquishAmount.get_node("%SliderValue").value_changed.connect(_on_squish_amount_changed)
 	%SquishAmount.get_node("%SpinBoxValue").value_changed.connect(_on_squish_amount_changed)
+	
+	%BlinkChanceSlider.value = 10
+
+func set_slider_data(data):
+	%BlinkChanceSlider.value = data.blink_chance
+	%BlinkSpeedSlider.value = data.blink_speed
+	
 
 
 #region Update Slider info
@@ -29,7 +36,6 @@ func held_sprite_is_null():
 	%Name.text = ""
 
 	%WiggleCheck.disabled = true
-	%WigglePhysicsCheck.disabled = true
 	%AutoWagCheck.disabled = true
 
 	%WiggleWidthSpin.editable = false
@@ -44,11 +50,11 @@ func held_sprite_is_null():
 	
 	%TipSpin.editable = false
 	
-	%Rainbow.disabled = true
-	%"Self-Rainbow Only".disabled = true
 	%RSSlider.editable = false
 	%FollowParentEffect.disabled = true
 	%FollowWiggleAppTip.disabled = true
+	%XoffsetSpinBox.editable = false
+	%YoffsetSpinBox.editable = false
 
 
 
@@ -57,7 +63,6 @@ func held_sprite_is_true():
 	%Name.editable = true
 
 	%WiggleCheck.disabled = false
-	%WigglePhysicsCheck.disabled = false
 	%FollowParentEffect.disabled = false
 	%XoffsetSpinBox.editable = true
 	%YoffsetSpinBox.editable = true
@@ -78,8 +83,6 @@ func held_sprite_is_true():
 	
 	%TipSpin.editable = true
 	
-	%Rainbow.disabled = false
-	%"Self-Rainbow Only".disabled = false
 	%RSSlider.editable = true
 	
 	%FollowWiggleAppTip.disabled = false
@@ -143,7 +146,6 @@ func reinfo():
 			%WiggleStuff.show()
 			%WiggleAppStuff.hide()
 			%WiggleCheck.button_pressed = Global.held_sprite.dictmain.wiggle
-			%WigglePhysicsCheck.button_pressed = Global.held_sprite.dictmain.wiggle_physics
 			%FollowParentEffect.button_pressed = Global.held_sprite.dictmain.follow_parent_effects
 			%XoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.x
 			%YoffsetSpinBox.value = Global.held_sprite.dictmain.wiggle_rot_offset.y
@@ -191,31 +193,10 @@ func _on_name_text_submitted(new_text):
 	Global.spinbox_held = false
 	%Name.release_focus()
 
-func _on_should_rot_check_toggled(toggled_on):
-	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
-		Global.held_sprite.dictmain.should_rotate = toggled_on
-		if not toggled_on:
-			Global.held_sprite.get_node("%Wobble").rotation = 0
-		
-		Global.held_sprite.save_state(Global.current_state)
-
-
 
 func _on_animation_reset_toggled(toggled_on):
 	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		Global.held_sprite.dictmain.should_reset = toggled_on
-		Global.held_sprite.save_state(Global.current_state)
-
-
-func _on_rainbow_toggled(toggled_on):
-	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
-		Global.held_sprite.dictmain.rainbow = toggled_on
-		Global.held_sprite.save_state(Global.current_state)
-
-
-func _on_self_rainbow_only_toggled(toggled_on):
-	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
-		Global.held_sprite.dictmain.rainbow_self = toggled_on
 		Global.held_sprite.save_state(Global.current_state)
 
 
@@ -244,11 +225,6 @@ func _on_wiggle_check_toggled(toggled_on):
 		Global.held_sprite.get_node("%Sprite2D").material.set_shader_parameter("wiggle", toggled_on)
 		Global.held_sprite.save_state(Global.current_state)
 
-
-func _on_wiggle_physics_check_toggled(toggled_on):
-	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
-		Global.held_sprite.dictmain.wiggle_physics = toggled_on
-		Global.held_sprite.save_state(Global.current_state)
 
 func _on_xoffset_spin_box_value_changed(value):
 	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
@@ -383,7 +359,7 @@ func _on_closed_loop_check_toggled(toggled_on):
 			Global.held_sprite.save_state(Global.current_state)
 
 func on_wag_speed_changed(value):
-	if Global.held_sprite != null && is_instance_valid(Global.held_spritee):
+	if Global.held_sprite != null && is_instance_valid(Global.held_sprite):
 		Global.held_sprite.dictmain.wag_speed = value
 		Global.held_sprite.save_state(Global.current_state)
 
@@ -410,7 +386,6 @@ func _on_name_focus_entered() -> void:
 func _on_name_focus_exited() -> void:
 	Global.spinbox_held = false
 
-
 func _on_should_squish_toggled(toggled_on: bool) -> void:
 	contain.should_squish = toggled_on
 	contain.save_state(Global.current_state)
@@ -418,3 +393,9 @@ func _on_should_squish_toggled(toggled_on: bool) -> void:
 func _on_squish_amount_changed(value : float):
 	contain.squish_amount = value
 	contain.save_state(Global.current_state)
+
+
+func _on_blink_chance_slider_value_changed(value: float) -> void:
+	%BlinkChanceLabel.text = "Blink Chance : " + str(value)
+	Global.settings_dict.blink_chance = value
+	

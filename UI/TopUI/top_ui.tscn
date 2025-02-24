@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpmlfhv30o08l"]
+[gd_scene load_steps=17 format=3 uid="uid://bpmlfhv30o08l"]
 
 [ext_resource type="Script" path="res://Scripts/UI/top_ui.gd" id="2_fpnkx"]
 [ext_resource type="Script" path="res://Scripts/Misc/OnlineLinks.gd" id="3_tep3f"]
 [ext_resource type="Script" path="res://Scripts/UI/TopBarInput.gd" id="4_r6evh"]
-[ext_resource type="Texture2D" uid="uid://dvxndiuwvsbe7" path="res://UI/Assets/RecordButton.png" id="5_3v45m"]
 [ext_resource type="Texture2D" uid="uid://bq4tg8ia2crwh" path="res://UI/Assets/LinksButtonImages/GithubLogo.png" id="6_0f73e"]
 [ext_resource type="Texture2D" uid="uid://whhnbdvw3i1j" path="res://UI/Assets/LinksButtonImages/TumblrLogo.png" id="7_ja8k8"]
 [ext_resource type="Texture2D" uid="uid://kmyr2ks7oil4" path="res://UI/Assets/LinksButtonImages/RedditLogo.png" id="8_3p41m"]
@@ -169,30 +168,6 @@ popup/item_1/text = "About"
 popup/item_1/id = 1
 popup/item_2/text = "Mini Tutorial (Wip)"
 popup/item_2/id = 2
-
-[node name="RecordButton" type="MenuButton" parent="TopBar/HBox"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "Records Model Only"
-theme_override_colors/icon_pressed_color = Color(0.596078, 0.0627451, 0.0901961, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.596078, 0.0627451, 0.0941176, 1)
-theme_override_font_sizes/font_size = 16
-text = "Record  "
-icon = ExtResource("5_3v45m")
-switch_on_hover = true
-item_count = 1
-popup/item_0/text = "Click again to stop recording. The Images will be exported as image sequence!"
-
-[node name="FileDialog" type="FileDialog" parent="TopBar/HBox/RecordButton"]
-unique_name_in_owner = true
-auto_translate_mode = 1
-initial_position = 2
-size = Vector2i(800, 500)
-transient = false
-ok_button_text = "Save"
-access = 2
-filters = PackedStringArray("*.png")
-use_native_dialog = true
 
 [node name="PreviewModeCheck" type="CheckBox" parent="TopBar/HBox"]
 unique_name_in_owner = true
@@ -515,6 +490,7 @@ unique_name_in_owner = true
 wait_time = 60.0
 
 [node name="HBox3" type="HBoxContainer" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="InputsPopup/SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox3"]
@@ -996,11 +972,6 @@ presets_visible = false
 
 [connection signal="pressed" from="TopBar/HBox/BounceControlButton" to="TopBarInput" method="_on_bounce_control_button_pressed"]
 [connection signal="pressed" from="TopBar/HBox/InputsButton" to="TopBarInput" method="_on_inputs_button_pressed"]
-[connection signal="toggled" from="TopBar/HBox/RecordButton" to="TopBarInput" method="_on_record_button_toggled"]
-[connection signal="canceled" from="TopBar/HBox/RecordButton/FileDialog" to="TopBarInput" method="_on_file_dialog_canceled"]
-[connection signal="close_requested" from="TopBar/HBox/RecordButton/FileDialog" to="TopBarInput" method="_on_file_dialog_close_requested"]
-[connection signal="confirmed" from="TopBar/HBox/RecordButton/FileDialog" to="TopBarInput" method="_on_file_dialog_confirmed"]
-[connection signal="file_selected" from="TopBar/HBox/RecordButton/FileDialog" to="TopBarInput" method="_on_file_dialog_file_selected"]
 [connection signal="toggled" from="TopBar/HBox/PreviewModeCheck" to="TopBarInput" method="_on_preview_mode_check_toggled"]
 [connection signal="toggled" from="TopBar/HBox/HideUIButton" to="TopBarInput" method="_on_hide_ui_button_toggled"]
 [connection signal="pressed" from="TopBar/HBox/DeselectButton" to="TopBarInput" method="_on_deselect_button_pressed"]
