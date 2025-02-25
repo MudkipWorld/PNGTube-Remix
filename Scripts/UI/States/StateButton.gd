@@ -2,9 +2,9 @@ extends Button
 
 @export var state : int 
 @export var input_key : String = str(randi())
+var saved_event : InputEvent
 
 func _ready():
-	
 	get_tree().get_root().get_node("Main").key_pressed.connect(bg_key_pressed)
 
 func _on_pressed():
@@ -25,3 +25,8 @@ func bg_key_pressed(key):
 		var inputs = InputMap.action_get_events(input_key)[0]
 		if key == inputs.as_text():
 			Global.get_sprite_states(state)
+
+func update_stuff():
+	if saved_event != null:
+		InputMap.action_erase_events(input_key)
+		InputMap.action_add_event(input_key, saved_event)

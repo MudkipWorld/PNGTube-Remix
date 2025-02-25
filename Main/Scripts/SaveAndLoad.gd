@@ -187,16 +187,17 @@ func load_file(path, should_load_path = false):
 
 		if !load_dict.input_array.is_empty():
 			for input in len(load_dict.input_array):
-				get_tree().get_nodes_in_group("StateRemapButton")[input].saved_event = load_dict.input_array[input]
+				get_tree().get_nodes_in_group("StateButtons")[input].saved_event = load_dict.input_array[input]
+				get_tree().get_nodes_in_group("StateButtons")[input].update_stuff()
 				Global.settings_dict.saved_inputs = load_dict.input_array
-				get_tree().get_nodes_in_group("StateRemapButton")[input].update_stuff()
+			#	get_tree().get_nodes_in_group("StateRemapButton")[input].update_stuff()
 		else:
 			var idx = 0
 			for input in Global.settings_dict.saved_inputs:
-				get_tree().get_nodes_in_group("StateRemapButton")[idx].saved_event = input
-				get_tree().get_nodes_in_group("StateRemapButton")[idx].update_stuff()
+				get_tree().get_nodes_in_group("StateButtons")[idx].saved_event = input
+				get_tree().get_nodes_in_group("StateButtons")[idx].update_stuff()
 				idx += 1
-		var state_count = get_tree().get_nodes_in_group("StateRemapButton").size()
+		var state_count = get_tree().get_nodes_in_group("StateButtons").size()
 		for i in get_tree().get_nodes_in_group("Sprites"):
 			if i.states.size() != state_count:
 				for l in abs(i.states.size() - state_count):

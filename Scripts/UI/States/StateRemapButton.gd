@@ -2,7 +2,8 @@ extends Button
 class_name RemapButton
 
 @export var action: String 
-var saved_event : InputEvent
+var state_button : Node
+
 
 func _init():
 	toggle_mode = true
@@ -36,7 +37,7 @@ func _unhandled_input(event):
 				Global.settings_dict.saved_inputs[get_parent().get_index()] = event
 			InputMap.action_erase_events(action)
 			InputMap.action_add_event(action, event)
-			saved_event = event
+			state_button.saved_event = event
 			
 			button_pressed = false
 	
@@ -48,9 +49,9 @@ func update_key_text():
 		text = "Null"
 
 func update_stuff():
-	if saved_event != null:
+	if state_button.saved_event != null:
 		InputMap.action_erase_events(action)
-		InputMap.action_add_event(action, saved_event)
+		InputMap.action_add_event(action, state_button.saved_event)
 	update_key_text()
 
 func _on_remove_pressed():

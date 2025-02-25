@@ -120,7 +120,6 @@ func _on_confirmation_dialog_confirmed():
 	clear_sprites()
 	Global.settings_dict.max_fps = 241
 	%TopUI.update_fps(241)
-	%TopUI/%MaxFPSlider.value = 241
 
 func clear_sprites():
 	Global.held_sprite = null

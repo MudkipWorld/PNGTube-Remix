@@ -35,6 +35,8 @@ colors = PackedColorArray(0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vfwff"]
 gradient = SubResource("Gradient_uswo1")
+width = 120
+height = 120
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acear"]
 shader = ExtResource("8_cwgos")

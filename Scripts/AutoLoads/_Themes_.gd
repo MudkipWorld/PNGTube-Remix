@@ -3,6 +3,7 @@ extends Node
 @onready var top_bar = get_tree().get_root().get_node("Main/%TopUI")
 var ui_theme
 var popup = preload("res://UI/TopUI/popup_panel.tscn").instantiate()
+var save_timer : Timer = Timer.new()
 
 @warning_ignore("integer_division")
 @onready var theme_settings : Dictionary = {
@@ -51,15 +52,28 @@ func save():
 	save_file.store_var(theme_settings)
 	save_file.close()
 
+func auto_save():
+	if FileAccess.file_exists(theme_settings.path) && get_tree().get_root().get_node("Main/%TopUI/TopBarInput").path == theme_settings.path:
+		SaveAndLoad.save_file(theme_settings.path)
+	else:
+		DirAccess.make_dir_absolute(os_path + "/AutoSaves")
+		SaveAndLoad.save_file(OS.get_executable_path().get_base_dir() + "/AutoSaves" + "/" + str(randi()))
+	window_size_changed()
+	save()
+	if Global.settings_dict.auto_save:
+		save_timer.start()
+	
+
 func _ready():
+	save_timer.timeout.connect(auto_save)
+	save_timer.one_shot = true
+	add_child(save_timer)
 	if !FileAccess.file_exists(OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres"):
 		ResourceSaver.save(preload("res://UI/Lipsync stuff/PrebuildFile/DefaultTraining.tres"),OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres")
 		LipSyncGlobals.file_data = ResourceLoader.load(OS.get_executable_path().get_base_dir() + "/DefaultTraining.tres")
 	await  get_tree().create_timer(0.1).timeout
-	ui_theme = get_tree().get_root().get_node("Main/%TopUI/%UIThemeButton")
 	top_bar = get_tree().get_root().get_node("Main/%TopUI")
 	
-	ui_theme.item_selected.connect(_on_ui_theme_button_item_selected)
 	var file = FileAccess
 	if file.file_exists(OS.get_executable_path().get_base_dir() + "/Preferences.pRDat"):
 		var load_file = file.open(OS.get_executable_path().get_base_dir() + "/Preferences.pRDat", FileAccess.READ)
@@ -70,8 +84,8 @@ func _ready():
 			theme_settings.theme_id = info.theme_id
 			loaded_UI(theme_settings.theme_id)
 			
-			top_bar.get_node("%AutoLoadCheck").button_pressed = theme_settings.auto_load
-			top_bar.get_node("%FpsSping").value = theme_settings.fps
+		#	top_bar.get_node("%AutoLoadCheck").button_pressed = theme_settings.auto_load
+		#	top_bar.get_node("%FpsSping").value = theme_settings.fps
 			if theme_settings.screen_window == 0:
 				get_window().mode = get_window().MODE_WINDOWED
 			elif theme_settings.screen_window == 1:
@@ -119,7 +133,7 @@ func _ready():
 	await get_tree().create_timer(0.05).timeout
 	get_window().size = theme_settings.screen_size
 	check_ui()
-	top_bar.check_data()
+#	top_bar.check_data()
 	top_bar.sliders_revalue(Global.settings_dict)
 	add_child(popup)
 	popup.hide()
@@ -145,63 +159,40 @@ func check_ui():
 		top_bar.get_node("%TopBarInput").choosing_mode(1)
 
 func loaded_UI(id):
-	match id:
-		0:
-			ui_theme.text = "Purple"
-		1:
-			ui_theme.text = "Blue"
-		2:
-			ui_theme.text = "Orange"
-		3:
-			ui_theme.text = "White"
-		4:
-			ui_theme.text = "Dark"
-		5:
-			ui_theme.text = "Green"
-		6:
-			ui_theme.text = "Funky"
 	_on_ui_theme_button_item_selected(id)
-	
+
 
 func _on_ui_theme_button_item_selected(index):
 	match index:
 		0:
-			ui_theme.text = "Purple"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 			popup.theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 		1:
-			ui_theme.text = "Blue"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
 			popup.theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/BlueTheme/BlueTheme.tres")
 		2:
-			ui_theme.text = "Orange"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
 			popup.theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/OrangeTheme/OrangeTheme.tres")
 		3:
-			ui_theme.text = "White"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
 			popup.theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/WhiteTheme/WhiteTheme.tres")
 		4:
-			ui_theme.text = "Dark"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
 			popup.theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/DarkTheme/DarkTheme.tres")
 		5:
-			ui_theme.text = "Green"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/GreenTheme/Green_theme.tres")
 			popup.theme = preload("res://Themes/GreenTheme/Green_theme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/GreenTheme/Green_theme.tres")
 		6:
-			ui_theme.text = "Funky"
 			get_tree().get_root().get_node("Main/UIHolder").theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
 			popup.theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
 			get_tree().get_root().get_node("Main/%ConfirmationDialog").theme = preload("res://Themes/FunkyTheme/Funkytheme.tres")
 	theme_settings.theme_id = index
-	ui_theme.select(index)
 	Global.theme_update.emit(index)
 	save()
 
@@ -212,13 +203,6 @@ func _on_auto_load_check_toggled(toggled_on):
 
 func _on_save_on_exit_check_toggled(toggled_on):
 	theme_settings.save_on_exit = toggled_on
-	save()
-
-func _on_fps_sping_value_changed(value):
-	theme_settings.fps = value
-	get_tree().get_root().get_node("Main/%Recorder").frames_per_second = value
-	top_bar.get_node("%FpsSping").release_focus()
-	top_bar.get_node("%FpsSping").get_line_edit().release_focus()
 	save()
 
 func toggle_borders():

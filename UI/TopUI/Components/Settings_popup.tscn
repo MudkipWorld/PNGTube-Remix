@@ -1,0 +1,435 @@
+[gd_scene load_steps=6 format=3 uid="uid://5ju7ih768ysd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/TopPanel/Components/settings_script.gd" id="1_ny043"]
+[ext_resource type="Script" path="res://Scripts/UI/Others/Spinboxes.gd" id="1_und61"]
+[ext_resource type="Texture2D" uid="uid://upxotcsbnfdk" path="res://UI/Assets/slider.png" id="2_paytt"]
+[ext_resource type="Texture2D" uid="uid://x1nc07bigmj1" path="res://UI/Assets/ZoomResetButton.png" id="3_bjlgq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6iakd"]
+
+[node name="InputsPopup" type="Window"]
+auto_translate_mode = 1
+transparent_bg = true
+initial_position = 4
+size = Vector2i(500, 600)
+transient = true
+exclusive = true
+
+[node name="SettingsScript" type="Node" parent="."]
+script = ExtResource("1_ny043")
+
+[node name="SettingVbox" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 596.0
+
+[node name="SettingsTab" type="TabContainer" parent="SettingVbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+current_tab = 1
+
+[node name="Model Settings" type="ScrollContainer" parent="SettingVbox/SettingsTab"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingVbox/SettingsTab/Model Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer"]
+custom_minimum_size = Vector2(428, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Sp2" type="HSeparator" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(428, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="InputCheckButton" type="CheckButton" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(262, 27)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+button_pressed = true
+text = "Change States With Inputs : "
+alignment = 1
+
+[node name="AntiAlCheck" type="CheckButton" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(262, 27)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+button_pressed = true
+text = "Anti-Aliasing : "
+alignment = 1
+
+[node name="AutoLoadCheck" type="CheckButton" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(262, 27)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+text = "Auto-Load Model : "
+alignment = 1
+
+[node name="HBox2" type="HBoxContainer" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SaveOnExitCheck" type="CheckButton" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(262, 27)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+text = "Save On Exit  : "
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "(Helps remember toggled assets)"
+vertical_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AutoSaveCheck" type="CheckButton" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Auto-Save"
+alignment = 1
+
+[node name="AutoSaveSpin" type="SpinBox" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+alignment = 1
+suffix = "min"
+script = ExtResource("1_und61")
+
+[node name="DeltaTimeCheck" type="CheckBox" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+tooltip_text = "The movement Ticks uses (Tick + 1 every frame),
+which could lead to very strong movements even with low 
+movement values.
+Using DeltaTime makes it slower ( Tick + 0.016 every frame) 
+and more forgiving to use higher values. 
+This needs to be set for every model to prevent sharing issues."
+text = "Use DeltaTime  "
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MaxFPSLabel" type="Label" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(144, 0)
+layout_mode = 2
+text = "Max FPS : "
+
+[node name="MaxFPSlider" type="HSlider" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 30.0
+max_value = 241.0
+value = 241.0
+
+[node name="Sp3" type="HSeparator" parent="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Audio" type="ScrollContainer" parent="SettingVbox/SettingsTab"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingVbox/SettingsTab/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingVbox/SettingsTab/Audio/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer2" type="GridContainer" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeLabel" type="Label" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeBar" type="ProgressBar" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+max_value = 1.0
+step = 0.0
+
+[node name="VolumeSlider" type="HSlider" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/VolumeBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("2_paytt")
+theme_override_icons/grabber_highlight = ExtResource("2_paytt")
+theme_override_icons/grabber_disabled = ExtResource("2_paytt")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="DelayLabel" type="Label" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Delay"
+horizontal_alignment = 1
+
+[node name="DelayBar" type="ProgressBar" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+max_value = 1.0
+
+[node name="DelaySlider" type="HSlider" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/DelayBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("2_paytt")
+theme_override_icons/grabber_highlight = ExtResource("2_paytt")
+theme_override_icons/grabber_disabled = ExtResource("2_paytt")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="Sp" type="HSeparator" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Sp2" type="HSeparator" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SensitivityLabel" type="Label" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Vol. Sensitivity"
+horizontal_alignment = 1
+
+[node name="SensitivityBar" type="ProgressBar" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="SensitivitySlider" type="HSlider" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/SensitivityBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("2_paytt")
+theme_override_icons/grabber_highlight = ExtResource("2_paytt")
+theme_override_icons/grabber_disabled = ExtResource("2_paytt")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_6iakd")
+min_value = 1.0
+max_value = 10.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 7
+
+[node name="MicLabel" type="Label" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Used Microphone : "
+
+[node name="MicroPhoneMenu" type="OptionButton" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 17
+text_overrun_behavior = 3
+
+[node name="ResetMicButton" type="Button" parent="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Update Mic list"
+button_mask = 7
+icon = ExtResource("3_bjlgq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="States Remap" type="ScrollContainer" parent="SettingVbox/SettingsTab"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingVbox/SettingsTab/States Remap"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SettingVbox/SettingsTab/States Remap/MarginContainer"]
+custom_minimum_size = Vector2(420, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer2" type="Control" parent="SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(415, 210)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2"]
+custom_minimum_size = Vector2(420, 210)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RemapLabel" type="Label" parent="SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2"]
+layout_mode = 2
+anchor_right = 0.991
+offset_left = 2.0
+offset_right = -0.130035
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 17
+text = "Remap States Input :"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 29.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="VBoxContainer" parent="SettingVbox/SettingsTab/States Remap/MarginContainer/VBoxContainer2/VBoxContainer2/Panel2/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Grid2" type="GridContainer" parent="SettingVbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 2
+
+[node name="ThemeLabel" type="Label" parent="SettingVbox/Grid2"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 20
+text = "UI Theme : "
+vertical_alignment = 2
+max_lines_visible = 5
+
+[node name="UIThemeButton" type="OptionButton" parent="SettingVbox/Grid2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+item_count = 7
+popup/item_0/text = "Purple"
+popup/item_1/text = "Blue"
+popup/item_1/id = 1
+popup/item_2/text = "Orange"
+popup/item_2/id = 2
+popup/item_3/text = "White"
+popup/item_3/id = 3
+popup/item_4/text = "Dark"
+popup/item_4/id = 4
+popup/item_5/text = "Green"
+popup/item_5/id = 5
+popup/item_6/text = "Funky"
+popup/item_6/id = 6
+
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/InputCheckButton" to="SettingsScript" method="_on_input_check_button_toggled"]
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/AntiAlCheck" to="SettingsScript" method="_on_anti_al_check_toggled"]
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/AutoLoadCheck" to="SettingsScript" method="_on_auto_load_check_toggled"]
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox2/SaveOnExitCheck" to="SettingsScript" method="_on_save_on_exit_check_toggled"]
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox/AutoSaveCheck" to="SettingsScript" method="_on_auto_save_check_toggled"]
+[connection signal="value_changed" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBox/AutoSaveSpin" to="SettingsScript" method="_on_auto_save_spin_value_changed"]
+[connection signal="toggled" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/DeltaTimeCheck" to="SettingsScript" method="_on_delta_time_check_toggled"]
+[connection signal="drag_ended" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer/MaxFPSlider" to="SettingsScript" method="_on_max_fp_slider_drag_ended"]
+[connection signal="value_changed" from="SettingVbox/SettingsTab/Model Settings/MarginContainer/GridContainer/HBoxContainer/MaxFPSlider" to="SettingsScript" method="_on_max_fp_slider_value_changed"]
+[connection signal="drag_ended" from="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/VolumeBar/VolumeSlider" to="SettingsScript" method="_on_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/DelayBar/DelaySlider" to="SettingsScript" method="_on_delay_slider_drag_ended"]
+[connection signal="drag_ended" from="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/SensitivityBar/SensitivitySlider" to="SettingsScript" method="_on_sensitivity_slider_drag_ended"]
+[connection signal="value_changed" from="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/GridContainer2/SensitivityBar/SensitivitySlider" to="SettingsScript" method="_on_sensitivity_slider_value_changed"]
+[connection signal="pressed" from="SettingVbox/SettingsTab/Audio/MarginContainer/VBoxContainer/HBoxContainer/ResetMicButton" to="SettingsScript" method="_on_reset_mic_button_pressed"]
