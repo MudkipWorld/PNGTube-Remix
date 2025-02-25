@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cb6sos2p8qbrr"]
+[gd_scene load_steps=16 format=3 uid="uid://cb6sos2p8qbrr"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/append_object.gd" id="1_yuqos"]
 [ext_resource type="Texture2D" uid="uid://cppqjhaoi70l5" path="res://Misc/EasyBlend/Blends/add.png" id="2_2g5n2"]
@@ -29,7 +29,12 @@ shader_parameter/Blend = ExtResource("2_2g5n2")
 [sub_resource type="CanvasTexture" id="CanvasTexture_swft8"]
 diffuse_texture = ExtResource("5_mwqm8")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dpbe"]
+[sub_resource type="Gradient" id="Gradient_uswo1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vfwff"]
+gradient = SubResource("Gradient_uswo1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acear"]
 shader = ExtResource("8_cwgos")
@@ -39,7 +44,8 @@ shader_parameter/ant_width = 5.0
 shader_parameter/ant_length = 10.0
 shader_parameter/ant_speed = 30.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2iktx"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pb6tr"]
+gradient = SubResource("Gradient_uswo1")
 
 [node name="AppendageObject" type="Node2D" groups=["Sprites"]]
 script = ExtResource("1_yuqos")
@@ -100,8 +106,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-texture_normal = SubResource("CompressedTexture2D_8dpbe")
-stretch_mode = 0
+texture_normal = SubResource("GradientTexture2D_vfwff")
 
 [node name="Selection" type="TextureRect" parent="Pos/Wobble/Squish/Drag/Rotation/AppendageFlip/Sprite2D/Grab"]
 unique_name_in_owner = true
@@ -116,7 +121,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("CompressedTexture2D_2iktx")
+texture = SubResource("GradientTexture2D_pb6tr")
 expand_mode = 1
 
 [node name="Blink" type="Timer" parent="."]

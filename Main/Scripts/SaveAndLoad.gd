@@ -113,7 +113,6 @@ func save_file(path):
 	Themes.save()
 	file.store_var(save_dict, true)
 	file.close()
-	file = null
 
 func load_file(path, should_load_path = false):
 	if path.get_extension() == "save":
@@ -209,7 +208,7 @@ func load_file(path, should_load_path = false):
 		get_tree().get_root().get_node("Main/%Control/UIInput").reinfoanim()
 		Themes.save()
 		file.close()
-		file = null
+
 
 func load_sprite(sprite_obj, sprite):
 	var img_data

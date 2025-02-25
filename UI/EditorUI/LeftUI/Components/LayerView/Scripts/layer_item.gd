@@ -45,8 +45,6 @@ func _on_mouse_exited() -> void:
 	%Select.hide()
 
 
-
-
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
@@ -54,9 +52,6 @@ func _gui_input(event: InputEvent) -> void:
 			layer_holder.layers_popup.popup_on_parent(Rect2(event.global_position, Vector2.ZERO))
 	else: 
 			pass
-
-
-
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:

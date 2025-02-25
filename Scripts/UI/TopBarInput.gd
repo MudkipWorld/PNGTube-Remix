@@ -13,7 +13,7 @@ var tutorial = preload("res://UI/EditorUI/TopUI/tutorial_pop_up.tscn")
 
 @onready var light = get_tree().get_root().get_node("Main/%LightSource")
 var devices : Array = []
-var path = null
+var path = ""
 
 func _ready():
 	get_viewport().transparent_bg = false
@@ -276,11 +276,7 @@ func desel_everything():
 		if Global.held_sprite.has_node("%Origin"):
 			Global.held_sprite.get_node("%Origin").hide()
 		#	%LayersTree.get_selected().deselect(0)
-	if Global.held_bg_sprite != null:
-		if Global.held_bg_sprite.has_node("%Origin"):
-			Global.held_bg_sprite.get_node("%Origin").hide()
 	Global.held_sprite = null
-	Global.held_bg_sprite = null
 	Global.deselect.emit()
 	%DeselectButton.hide()
 

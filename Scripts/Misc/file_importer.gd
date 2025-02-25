@@ -87,7 +87,6 @@ func replace_texture(path):
 		var text = ImageTexture.create_from_image(cframe.content)
 		var img_can = CanvasTexture.new()
 		img_can.diffuse_texture = text
-		Global.held_sprite.texture = img_can
 		Global.held_sprite.treeitem.get_node("%Icon").texture = Global.held_sprite.texture
 		Global.held_sprite.is_apng = true
 		Global.held_sprite.img_animated = false
@@ -99,7 +98,6 @@ func replace_texture(path):
 		Global.held_sprite.img_animated = false
 		Global.held_sprite.is_apng = false
 		img_can.diffuse_texture = texture
-		Global.held_sprite.texture = img_can
 		Global.held_sprite.get_node("%Sprite2D").texture = img_can
 		Global.held_sprite.save_state(Global.current_state)
 		Global.held_sprite.treeitem.get_node("%Icon").texture = texture

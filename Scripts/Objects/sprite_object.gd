@@ -89,7 +89,7 @@ var is_apng : bool = false
 var is_collapsed : bool = false
 var played_once : bool = false
 
-var dragging_type = "Null"
+
 @onready var og_glob = global_position
 
 var dt = 0.0
@@ -214,11 +214,7 @@ func get_state(id):
 		dictmain.merge(dict, true)
 		
 		if dictmain.should_reset:
-			if img_animated:
-				%Sprite2D.texture.diffuse_texture.current_frame = 0
-				if %Sprite2D.texture.normal_texture != null:
-					%Sprite2D.texture.normal_texture.current_frame = 0
-			elif dictmain.hframes > 1:
+			if dictmain.hframes > 1:
 				%Sprite2D.frame = 0
 				print(%Sprite2D.frame)
 			elif is_apng:
@@ -242,9 +238,7 @@ func get_state(id):
 		
 		%Sprite2D.flip_h = dictmain.flip_sprite_h
 		%Sprite2D.flip_v = dictmain.flip_sprite_v
-		
-		
-		
+
 		if dictmain.advanced_lipsync:
 			%Sprite2D.hframes = 6
 		
@@ -308,13 +302,9 @@ func _on_grab_button_down():
 		if not Input.is_action_pressed("ctrl"):
 			of = get_parent().to_local(get_global_mouse_position()) - position
 			dragging = true
-			dragging_type = "Sprite"
-		else:
-			dragging_type = "Null"
 
 func _on_grab_button_up():
 	if Global.held_sprite == self && dragging:
-		dragging_type = "Null"
 		save_state(Global.current_state)
 		dragging = false
 
@@ -324,8 +314,8 @@ func reparent_obj(parent):
 			#global = global_position
 			reparent(i.get_node("%Sprite2D"))
 
-func zazaza(perent):
-	for i in perent:
+func zazaza(parent):
+	for i in parent:
 		if i.sprite_id == parent_id:
 			if is_plus_first_import:
 				for state in states:

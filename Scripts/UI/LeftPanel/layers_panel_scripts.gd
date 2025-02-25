@@ -47,7 +47,6 @@ func _on_duplicate_button_pressed():
 		obj.dictmain.scale = Global.held_sprite.scale
 		Global.sprite_container.add_child(obj)
 		if obj.sprite_type != "Folder":
-			obj.texture = Global.held_sprite.get_node("%Sprite2D").texture
 			obj.get_node("%Sprite2D").texture = Global.held_sprite.get_node("%Sprite2D").texture
 		obj.sprite_name = "Duplicate" + Global.held_sprite.sprite_name 
 

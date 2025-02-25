@@ -122,7 +122,7 @@ var last_dist : Vector2 = Vector2(0,0)
 func _ready():
 	%Dragger.top_level = true
 	%Dragger.global_position = %Wobble.global_position
-	
+	set_process(true)
 	update_wiggle_parts()
 
 func correct_sprite_size():
@@ -134,10 +134,10 @@ func correct_sprite_size():
 
 func _process(_delta):
 	if Global.held_sprite == self:
-		%Grab.mouse_filter = 1
+		%Grab.mouse_filter = Control.MouseFilter.MOUSE_FILTER_PASS
 		%Selection.show()
 	else:
-		%Grab.mouse_filter = 2
+		%Grab.mouse_filter = Control.MouseFilter.MOUSE_FILTER_IGNORE
 		%Selection.hide()
 	#	%Origin.mouse_filter = 2
 	if dragging:

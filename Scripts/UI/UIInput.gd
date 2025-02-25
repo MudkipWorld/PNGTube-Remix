@@ -59,7 +59,7 @@ func held_sprite_is_null():
 
 
 func held_sprite_is_true():
-	get_parent().get_parent().get_node("TopUI/%DeselectButton").show()
+	Global.top_ui.get_node("%DeselectButton").show()
 	%Name.editable = true
 
 	%WiggleCheck.disabled = false

@@ -27,7 +27,6 @@ signal update_offset_spins
 
 var blink_timer : Timer = Timer.new()
 var held_sprite = null
-var held_bg_sprite = null
 var tick = 0
 var current_state : int = 0
 
